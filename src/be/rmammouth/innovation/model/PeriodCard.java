@@ -8,4 +8,11 @@ public class PeriodCard implements Achievement
   {
     this.period=period;
   }
+
+	public Period getPeriod()
+	{
+		return period;
+	}
+  
+  
 }

@@ -13,5 +13,8 @@ public enum Period
   NINE,
   TEN;
 	
-	
+	public String getLabel()
+	{
+		return Integer.toString(ordinal()+1);
+	}
 }

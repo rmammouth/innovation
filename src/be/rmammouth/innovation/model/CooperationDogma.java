@@ -14,7 +14,7 @@ public abstract class CooperationDogma extends Dogma
   }
 
   @Override
-  public void activate(GameState gs, CardActivationState cas)
+  public void activate(GameModel gs, CardActivationState cas)
   {
   }
 }

@@ -20,7 +20,17 @@ public abstract class Card extends PeriodCard
   	resources.put(ResourceLocation.BOTTOM_RIGHT, bottomRight);
   }
   
-  public void activate(GameState gs)
+  public String getName()
+	{
+		return name;
+	}
+  
+  public String getPeriodName()
+  {
+  	return "["+period.getLabel()+"]"+name;
+  }
+
+	public void activate(GameModel gs)
   {
     CardActivationState cas=buildActivationState();
     for (Dogma dogma : dogmas)
