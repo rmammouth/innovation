@@ -10,8 +10,12 @@ public class Archery extends Card
 				  Resource.TOWER,
 				  Resource.BULB, null, Resource.TOWER);
 		
-		dogmas.add(new Dogma(DogmaType.SUPREMACY, Resource.TOWER, null));
-
-	}
-  
+		dogmas.add(new SupremacyDogma(Resource.TOWER)
+    {
+      @Override
+      public void activateOnPlayer(GameState gs, CardActivationState cas, Player player) 
+      {
+      }		  
+    });
+	}  
 }

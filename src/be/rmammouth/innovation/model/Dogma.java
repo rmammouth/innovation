@@ -1,19 +1,17 @@
 package be.rmammouth.innovation.model;
 
-import be.rmammouth.innovation.model.effects.*;
-
-public class Dogma
+public abstract class Dogma
 {
-  private DogmaType type;
   private Resource resource;
-  private Effect effect;
   
-	public Dogma(DogmaType type, Resource resource, Effect effect)
+	public Dogma(Resource resource)
 	{
-		this.type = type;
 		this.resource = resource;
-		this.effect = effect;
 	}
   
+  public abstract DogmaType getType();
   
+  public abstract void activate(GameState gs, CardActivationState cas);
+  
+  public abstract void activateOnPlayer(GameState gs, CardActivationState cas, Player player);
 }

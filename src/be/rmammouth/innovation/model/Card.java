@@ -19,4 +19,18 @@ public abstract class Card extends PeriodCard
   	resources.put(ResourceLocation.BOTTOM_CENTER, bottomCentre);
   	resources.put(ResourceLocation.BOTTOM_RIGHT, bottomRight);
   }
+  
+  public void activate(GameState gs)
+  {
+    CardActivationState cas=buildActivationState();
+    for (Dogma dogma : dogmas)
+    {
+      dogma.activate(gs, cas);
+    }
+  }
+  
+  protected CardActivationState buildActivationState()
+  {
+    return null;
+  }
 }
