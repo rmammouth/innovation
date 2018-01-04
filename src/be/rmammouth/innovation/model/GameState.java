@@ -7,8 +7,8 @@ public class GameState
 	private final static GameState instance=new GameState();
 	
   private Player[] players;
-  private EnumMap<Period, List<Card>> cards=new EnumMap<>(Period.class);
-  private EnumMap<Period, Card> periodAchievements=new EnumMap<>(Period.class);
+  private Map<Period, List<Card>> cards=new EnumMap<>(Period.class);
+  private Map<Period, Card> periodAchievements=new EnumMap<>(Period.class);
   private List<SpecialAchievement> specialAchievements=new ArrayList<>();
   
   private GameState()
