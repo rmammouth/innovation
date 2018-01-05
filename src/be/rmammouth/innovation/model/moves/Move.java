@@ -1,6 +1,6 @@
 package be.rmammouth.innovation.model.moves;
 
-import be.rmammouth.innovation.*;
+import be.rmammouth.innovation.model.*;
 
 public abstract class Move
 {

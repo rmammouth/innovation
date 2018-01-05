@@ -2,7 +2,6 @@ package be.rmammouth.innovation.model.gamestates;
 
 import java.util.*;
 
-import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.moves.*;
 
@@ -13,7 +12,7 @@ public class ChooseAction extends SinglePlayerGameState
 	public ChooseAction(GameModel model)
 	{
 		super(model);
-		player=model.getCurrentTurn().getPlayer();
+		player=model.getCurrentTurn();
 	}
 
 	@Override
@@ -27,7 +26,7 @@ public class ChooseAction extends SinglePlayerGameState
 	{
 		List<Move> moves=new ArrayList<>();
 		moves.add(new DrawCard(player));
-		moves.addAll(PlayCard.getAllPlayCardsForHand(player.getModel()));
+		moves.addAll(PlayCard.getAllPlayCardsForHand(player));
 		return moves;
 	}
 

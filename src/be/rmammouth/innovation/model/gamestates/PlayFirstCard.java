@@ -2,7 +2,6 @@ package be.rmammouth.innovation.model.gamestates;
 
 import java.util.*;
 
-import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.moves.*;
 
@@ -17,10 +16,10 @@ public class PlayFirstCard extends GameState
 	public Map<Player, List<Move>> getNextPlayers()
 	{
 		Map<Player, List<Move>> map=new HashMap<>();
-		for (PlayerModel playerModel : model.getPlayerModels())
+		for (Player player : model.getPlayers())
 		{
-			List<Move> moves=new ArrayList<>(PlayCard.getAllPlayCardsForHand(playerModel));
-			map.put(playerModel.getPlayer(),moves) ;
+			List<Move> moves=new ArrayList<>(PlayCard.getAllPlayCardsForHand(player));
+			map.put(player,moves) ;
 		}
 		return map;
 	}
@@ -28,7 +27,7 @@ public class PlayFirstCard extends GameState
 	@Override
 	public void movesDone(List<Move> moves)
 	{
-		Player firstPlayer=null;
+	  Player firstPlayer=null;
 		String firstCardName=null;
 		for (Move move : moves)
 		{
@@ -41,7 +40,7 @@ public class PlayFirstCard extends GameState
 		  }
 		}
 		
-		model.setCurrentTurn(firstPlayer.getModel());
+		model.setCurrentTurn(firstPlayer);
 		model.setCurrentState(new ChooseAction(model));
 	}
 }

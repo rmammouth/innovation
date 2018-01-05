@@ -1,6 +1,5 @@
 package be.rmammouth.innovation.model.moves;
 
-import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
 public class DrawCard extends Move
@@ -10,7 +9,7 @@ public class DrawCard extends Move
 	public DrawCard(Player player)
 	{
 		super(player);
-		period=player.getModel().getMaxActivePeriod();
+		period=player.getMaxActivePeriod();
 		if (period==null) period=Period.ONE;
 	}
 	

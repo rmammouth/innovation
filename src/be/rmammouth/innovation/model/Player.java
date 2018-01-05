@@ -2,30 +2,37 @@ package be.rmammouth.innovation.model;
 
 import java.util.*;
 
-import be.rmammouth.innovation.*;
+import be.rmammouth.innovation.controller.*;
 
-public class PlayerModel
+public class Player
 {
-	private Player player;
+  private String name;
+  private PlayerController controller; 
   private List<Achievement> achievements=new ArrayList<>();
   private List<Card> hand=new ArrayList<>();
   private Map<Color, CardsPile> zone=new EnumMap<>(Color.class);
   
-  public PlayerModel(Player player)
+  public Player(String name, PlayerController controller)
 	{
-		this.player=player;
+		this.name=name;
+		this.controller=controller;
 		for (Color color : Color.values())
 		{
 			zone.put(color, new CardsPile());
 		}
 	}
 
-	public Player getPlayer()
+	public String getName()
 	{
-		return player;
-	}
+    return name;
+  }
 
-	public void addToHand(Card card)
+  public PlayerController getController()
+  {
+    return controller;
+  }
+
+  public void addToHand(Card card)
 	{
 		hand.add(card);
 	}

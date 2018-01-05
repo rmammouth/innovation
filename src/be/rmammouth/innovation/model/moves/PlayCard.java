@@ -2,7 +2,6 @@ package be.rmammouth.innovation.model.moves;
 
 import java.util.*;
 
-import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
 public class PlayCard extends Move
@@ -39,12 +38,12 @@ public class PlayCard extends Move
 		return player.getName()+" has played "+card.getPeriodName();
 	}
 	
-	public static List<PlayCard> getAllPlayCardsForHand(PlayerModel playerModel)
+	public static List<PlayCard> getAllPlayCardsForHand(Player player)
 	{
 		List<PlayCard> moves=new ArrayList<>();
-		for (Card card : playerModel.getHand())
+		for (Card card : player.getHand())
 		{
-			moves.add(new PlayCard(playerModel.getPlayer(), card));	
+			moves.add(new PlayCard(player, card));	
 		}
 		return moves;
 	}

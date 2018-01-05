@@ -13,5 +13,5 @@ public abstract class Dogma
   
   public abstract void activate(GameModel gs, CardActivationState cas);
   
-  public abstract void activateOnPlayer(GameModel gs, CardActivationState cas, PlayerModel player);
+  public abstract void activateOnPlayer(GameModel gs, CardActivationState cas, Player player);
 }

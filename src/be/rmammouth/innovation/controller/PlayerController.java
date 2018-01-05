@@ -2,7 +2,7 @@ package be.rmammouth.innovation.controller;
 
 import java.util.*;
 
-import be.rmammouth.innovation.*;
+import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.moves.*;
 
 public abstract class PlayerController

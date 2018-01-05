@@ -2,7 +2,6 @@ package be.rmammouth.innovation.model.gamestates;
 
 import java.util.*;
 
-import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.moves.*;
 

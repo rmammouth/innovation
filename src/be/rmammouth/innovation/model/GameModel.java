@@ -2,7 +2,6 @@ package be.rmammouth.innovation.model;
 
 import java.util.*;
 
-import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.gamestates.*;
 import be.rmammouth.innovation.model.moves.*;
 
@@ -10,12 +9,12 @@ public class GameModel
 {
 	private final static GameModel instance=new GameModel();
 	
-  private PlayerModel[] playerModels;
+  private Player[] players;
   private Map<Period, DrawPile> cardPiles=new EnumMap<>(Period.class);
   private Map<Period, Card> periodAchievements=new EnumMap<>(Period.class);
   private List<SpecialAchievement> specialAchievements=new ArrayList<>();
   
-  private PlayerModel currentTurn=null;
+  private Player currentTurn=null;
   private GameState currentState;
   private int turnNumber;
   
@@ -32,17 +31,17 @@ public class GameModel
   	return instance;
   }
   
-  public PlayerModel[] getPlayerModels()
+  public Player[] getPlayers()
 	{
-		return playerModels;
+		return players;
 	}  
 
-	public PlayerModel getCurrentTurn()
+	public Player getCurrentTurn()
 	{
 		return currentTurn;
 	}
 
-	public void setCurrentTurn(PlayerModel currentTurn)
+	public void setCurrentTurn(Player currentTurn)
 	{
 		this.currentTurn = currentTurn;
 	}
@@ -59,11 +58,7 @@ public class GameModel
 
 	public void init(Player[] players)
   {
-  	playerModels=new PlayerModel[players.length];
-  	for (int i=0;i<players.length;i++)
-  	{
-  		playerModels[i]=players[i].getModel();
-  	}
+  	this.players=players;
   	
   	//init all cards piles
   	for (Card card : Cards.getAll())
@@ -83,7 +78,7 @@ public class GameModel
   	}
   	
   	//deal first hand
-  	for (PlayerModel player : playerModels)
+  	for (Player player : players)
   	{
   		player.addToHand(cardPiles.get(Period.ONE).draw());
   		player.addToHand(cardPiles.get(Period.ONE).draw());

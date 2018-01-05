@@ -13,7 +13,7 @@ public class Archery extends Card
 		dogmas.add(new SupremacyDogma(Resource.TOWER)
     {
       @Override
-      public void activateOnPlayer(GameModel gs, CardActivationState cas, PlayerModel player) 
+      public void activateOnPlayer(GameModel gs, CardActivationState cas, Player player) 
       {
       }		  
     });
