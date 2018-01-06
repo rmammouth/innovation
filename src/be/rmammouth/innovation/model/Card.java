@@ -25,22 +25,57 @@ public abstract class Card extends PeriodCard
 		return name;
 	}
   
-  public String getPeriodName()
+  public String getNamePrefixedWithPeriod()
   {
   	return "["+period.getLabel()+"]"+name;
   }
 
-	public void activate(GameModel gs)
+	public Color getColor()
   {
-    CardActivationState cas=buildActivationState();
+    return color;
+  }
+
+  public void activate(GameModel model, Player activatingPlayer)
+  {
+    CardActivationState cas=buildActivationState(model, activatingPlayer);
     for (Dogma dogma : dogmas)
     {
-      dogma.activate(gs, cas);
+      dogma.activate(cas);
     }
   }
   
-  protected CardActivationState buildActivationState()
+  protected CardActivationState buildActivationState(GameModel model, Player activatingPlayer)
   {
-    return null;
+    return new CardActivationState(model, activatingPlayer);
+  }
+  
+  public void addAllResourcesToCount(ResourcesCount count)
+  {
+    for (Resource resource : resources.values())
+    {
+      if (resource!=null)
+      {
+        count.increment(resource);
+      }
+    }
+  }
+  
+  public void addSplayedResourcesToCount(ResourcesCount count, Splaying splay)
+  {
+    ResourceLocation[] revealedLocations=splay.getRevealedLocations();
+    for (ResourceLocation location : revealedLocations)
+    {
+      Resource resource=resources.get(location);
+      if (resource!=null)
+      {
+        count.increment(resource);
+      }
+    }
+  }
+
+  @Override
+  public String toString()
+  {
+    return name;
   }
 }

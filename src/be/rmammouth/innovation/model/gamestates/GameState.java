@@ -1,9 +1,6 @@
 package be.rmammouth.innovation.model.gamestates;
 
-import java.util.*;
-
 import be.rmammouth.innovation.model.*;
-import be.rmammouth.innovation.model.moves.*;
 
 public abstract class GameState
 {
@@ -14,8 +11,5 @@ public abstract class GameState
 		this.model = model;
 	}
 
-	public abstract Map<Player, List<Move>> getNextPlayers();
-
-	public abstract void movesDone(List<Move> moves);
-
+	public abstract void nextStep();
 }

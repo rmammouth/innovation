@@ -1,5 +1,6 @@
 package be.rmammouth.innovation.model.moves;
 
+import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
 public abstract class Move
@@ -18,7 +19,21 @@ public abstract class Move
 
 	public abstract String getLabel();
 	
+	public final void resolveAndLog()
+	{
+	  resolve();
+	  Innovation.getViewer().moveResolved(this);
+	}
+	
 	public abstract void resolve();
 	
 	public abstract String getResolvedLabel();
+
+  @Override
+  public String toString()
+  {
+    return getLabel();
+  }
+	
+	
 }

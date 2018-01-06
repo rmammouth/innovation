@@ -2,20 +2,20 @@ package be.rmammouth.innovation.model.moves;
 
 import be.rmammouth.innovation.model.*;
 
-public class DrawCard extends Move
+public class DrawCard extends CardMove
 {
 	private Period period;  //null if best pile available for player
 	
 	public DrawCard(Player player)
 	{
-		super(player);
-		period=player.getMaxActivePeriod();
+		super(player,null);
+		period=player.getHighestActivePeriod();
 		if (period==null) period=Period.ONE;
 	}
 	
 	public DrawCard(Player player, Period period)
 	{
-		super(player);
+		super(player,null);
 		this.period=period;
 	}
 
@@ -28,12 +28,14 @@ public class DrawCard extends Move
 	@Override
 	public void resolve()
 	{
-		
+		card=player.getGameModel().drawCardFromPile(period);
+		player.addToHand(card);
 	}
 
 	@Override
 	public String getResolvedLabel()
 	{
-		return player.getName()+" has drawn a card";
+		return player.getName()+" has drawn "+card.getNamePrefixedWithPeriod();
 	}
+	
 }

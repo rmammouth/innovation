@@ -14,7 +14,10 @@ public class Cards
   	register(new Archery());
   	register(new Clothing());
   	register(new CodeOfLaws());
+  	register(new Domestication());
+  	register(new Metalworking());
   	register(new Pottery());
+  	register(new Sailing());
   }
   
   private static void register(Card card)

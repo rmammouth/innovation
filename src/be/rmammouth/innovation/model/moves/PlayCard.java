@@ -4,41 +4,32 @@ import java.util.*;
 
 import be.rmammouth.innovation.model.*;
 
-public class PlayCard extends Move
+public class PlayCard extends CardMove
 {
-	private Card card;
-	
   public PlayCard(Player player, Card card)
   {
-  	super(player);
-  	this.card=card;
+  	super(player,card);
   }
   
 	@Override
 	public String getLabel()
 	{
-		return "Play "+card.getPeriodName();
-	}
-
-	public Card getCard()
-	{
-		return card;
+		return "Play "+card.getNamePrefixedWithPeriod();
 	}
 
 	@Override
 	public void resolve()
 	{
-		// TODO Auto-generated method stub
-
+		player.putCardInPlay(card);
 	}
 
 	@Override
 	public String getResolvedLabel()
 	{
-		return player.getName()+" has played "+card.getPeriodName();
+		return player.getName()+" has played "+card.getNamePrefixedWithPeriod();
 	}
 	
-	public static List<PlayCard> getAllPlayCardsForHand(Player player)
+	public static List<PlayCard> getAllPlayableCardMoves(Player player)
 	{
 		List<PlayCard> moves=new ArrayList<>();
 		for (Card card : player.getHand())

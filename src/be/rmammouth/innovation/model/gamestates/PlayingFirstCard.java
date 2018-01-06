@@ -5,28 +5,27 @@ import java.util.*;
 import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.moves.*;
 
-public class PlayFirstCard extends GameState
+public class PlayingFirstCard extends MultiPlayerGameState
 {
-	public PlayFirstCard(GameModel model)
+	public PlayingFirstCard(GameModel model)
 	{
 		super(model);
 	}
-
-	@Override
-	public Map<Player, List<Move>> getNextPlayers()
+	
+	public List<Player> getActivePlayers()
 	{
-		Map<Player, List<Move>> map=new HashMap<>();
-		for (Player player : model.getPlayers())
-		{
-			List<Move> moves=new ArrayList<>(PlayCard.getAllPlayCardsForHand(player));
-			map.put(player,moves) ;
-		}
-		return map;
+	  return Arrays.asList(model.getPlayers());
+	}
+	  
+	public List<Move> getAvailableMoves(Player player)
+	{
+	  return new ArrayList<>(PlayCard.getAllPlayableCardMoves(player));
 	}
 
 	@Override
-	public void movesDone(List<Move> moves)
+	public void movesResolved(List<Move> moves)
 	{
+	  //the player who played the first card in alpha order will play the first turn
 	  Player firstPlayer=null;
 		String firstCardName=null;
 		for (Move move : moves)
@@ -40,7 +39,8 @@ public class PlayFirstCard extends GameState
 		  }
 		}
 		
+		model.setFirstPlayer(firstPlayer);
 		model.setCurrentTurn(firstPlayer);
-		model.setCurrentState(new ChooseAction(model));
+		model.setCurrentState(new ChoosingAction(model));
 	}
 }

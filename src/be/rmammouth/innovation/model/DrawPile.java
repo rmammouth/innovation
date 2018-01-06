@@ -29,4 +29,9 @@ public class DrawPile
   {
   	return cards.removeLast();
   }
+
+  public void returnCard(Card card)
+  {
+    cards.addFirst(card);    
+  }
 }
