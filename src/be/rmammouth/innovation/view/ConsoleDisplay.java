@@ -12,7 +12,7 @@ public class ConsoleDisplay implements GameViewer
   }
   
   @Override
-  public void init()
+  public void init(GameModel model)
   {
   }
   

@@ -1,6 +1,7 @@
 package be.rmammouth.innovation.view;
 
 import java.awt.*;
+import java.util.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -10,9 +11,12 @@ import be.rmammouth.innovation.model.moves.*;
 
 public class GUIViewer extends JFrame implements GameViewer
 {
-
+  private GameModel model;
   private JPanel contentPane;
   private DefaultListModel<String> logListModel=new DefaultListModel<>();
+  private JPanel inputPanel;
+  private JTabbedPane playersTabPane;
+  private Map<Player, PlayerPanel> playerPanels=new HashMap<>();
 
   /**
    * Launch the application.
@@ -36,8 +40,15 @@ public class GUIViewer extends JFrame implements GameViewer
     });
   }
   
-  public void init()
+  public void init(GameModel model)
   {
+    this.model=model;
+    for (Player player : model.getPlayers())
+    {
+      PlayerPanel panel=new PlayerPanel(player);
+      playersTabPane.add(player.getName(), panel);
+      playerPanels.put(player, panel);
+    }
     setVisible(true);
   }
 
@@ -48,7 +59,7 @@ public class GUIViewer extends JFrame implements GameViewer
   {
     setTitle("Innovation");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setBounds(100, 100, 852, 551);
+    setBounds(100, 100, 992, 669);
     contentPane = new JPanel();
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     contentPane.setLayout(new BorderLayout(0, 0));
@@ -65,22 +76,30 @@ public class GUIViewer extends JFrame implements GameViewer
     topSplitPane.setDividerSize(3);
     mainSplitPane.setLeftComponent(topSplitPane);
     
-    JTabbedPane playersTabPane = new JTabbedPane(JTabbedPane.TOP);
+    playersTabPane = new JTabbedPane(JTabbedPane.TOP);
     topSplitPane.setLeftComponent(playersTabPane);
     
     JPanel infoPanel = new JPanel();
     topSplitPane.setRightComponent(infoPanel);
     topSplitPane.setDividerLocation(600);
     
+    JPanel bottomPanel = new JPanel();
+    mainSplitPane.setRightComponent(bottomPanel);
+    mainSplitPane.setDividerLocation(400);
+    bottomPanel.setLayout(new BorderLayout(0, 0));
+    
+    inputPanel = new JPanel();
+    bottomPanel.add(inputPanel, BorderLayout.NORTH);
+    
     JScrollPane logScrollPane = new JScrollPane();
     logScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     logScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-    mainSplitPane.setRightComponent(logScrollPane);    
-    
     JList<String> logList = new JList<String>((ListModel) logListModel);
     logList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     logScrollPane.setViewportView(logList);
-    mainSplitPane.setDividerLocation(350);
+    bottomPanel.add(logScrollPane);
+    
+    
   }
 
   @Override
@@ -93,6 +112,10 @@ public class GUIViewer extends JFrame implements GameViewer
   @Override
   public void moveResolved(Move move)
   {
+    for (PlayerPanel panel : playerPanels.values())
+    {
+      panel.fireDataChanged();
+    }
   }
 
   @Override
@@ -108,8 +131,10 @@ public class GUIViewer extends JFrame implements GameViewer
         
       }
     });
-    
-    
   }
 
+  public JPanel getInputPanel() 
+  {
+    return inputPanel;
+  }
 }

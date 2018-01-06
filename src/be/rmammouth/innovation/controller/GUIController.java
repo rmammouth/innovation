@@ -1,16 +1,93 @@
 package be.rmammouth.innovation.controller;
 
+import java.awt.*;
+import java.awt.event.*;
 import java.util.*;
+
+import javax.swing.*;
 
 import be.rmammouth.innovation.model.moves.*;
 
 public class GUIController extends PlayerController
 {
-  @Override
-  public Move getNextMove(List<Move> availableMoves)
+  private JPanel inputPanel;
+  
+  public GUIController(JPanel inputPanel)
   {
-    // TODO Auto-generated method stub
-    return null;
+    super();
+    this.inputPanel=inputPanel;
   }
 
+  @Override
+  public Move getNextMove(java.util.List<Move> availableMoves)
+  {
+    GUIInteraction guiInteraction=new GUIInteraction(inputPanel);
+    
+    EventQueue.invokeLater(new Runnable()
+    {      
+      @Override
+      public void run()
+      {
+        guiInteraction.showAvailableMoves(availableMoves);        
+      }
+    });
+    
+    synchronized(guiInteraction)
+    {
+      try
+      {
+        guiInteraction.wait();
+      }
+      catch (InterruptedException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    
+    return guiInteraction.getChosenMove();
+  }  
+}
+
+class GUIInteraction
+{
+  private JPanel inputPanel;
+  private Move chosenMove;
+  
+  public GUIInteraction(JPanel inputPanel)
+  {
+    super();
+    this.inputPanel = inputPanel;
+  }
+  
+  void showAvailableMoves(java.util.List<Move> availableMoves)
+  {
+    inputPanel.removeAll();
+    inputPanel.setLayout(new FlowLayout());
+    for (final Move move : availableMoves)
+    {
+      JButton button=new JButton(move.getLabel());
+      button.addActionListener(new ActionListener()
+      {        
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+          chosenMove=move;
+          synchronized(GUIInteraction.this)
+          {
+            GUIInteraction.this.notify();
+          }
+        }
+      });
+      inputPanel.add(button);
+    }
+    inputPanel.revalidate();
+    inputPanel.repaint();    
+  }
+
+  public Move getChosenMove()
+  {
+    return chosenMove;
+  }
+  
+  
 }

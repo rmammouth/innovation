@@ -13,7 +13,7 @@ public class Agriculture extends Card
 			  null,
 			  Resource.LEAF, Resource.LEAF, Resource.LEAF);
 		
-		dogmas.add(new CooperationDogma(Resource.LEAF)
+		addDogma(new CooperationDogma(Resource.LEAF)
     {
       @Override
       public boolean activateOnPlayer(CardActivationState cas, Player player)

@@ -7,7 +7,7 @@ public abstract class Card extends PeriodCard
   private String name;
   private Color color;
   private Map<ResourceLocation, Resource> resources=new EnumMap<>(ResourceLocation.class);
-  protected List<Dogma> dogmas=new ArrayList<>();
+  private List<Dogma> dogmas=new ArrayList<>();
   
   protected Card(String name, Period period, Color color, Resource topLeft, Resource bottomLeft, Resource bottomCentre, Resource bottomRight)
   {
@@ -34,6 +34,12 @@ public abstract class Card extends PeriodCard
   {
     return color;
   }
+	
+	protected void addDogma(Dogma dogma)
+	{
+	  dogma.card=this;
+	  dogmas.add(dogma);
+	}
 
   public void activate(GameModel model, Player activatingPlayer)
   {
