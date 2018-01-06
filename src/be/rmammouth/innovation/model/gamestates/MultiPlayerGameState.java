@@ -24,7 +24,7 @@ public abstract class MultiPlayerGameState extends GameState
     }
     for (Move chosenMove : chosenMoves)
     {
-      chosenMove.resolveAndLog();
+      chosenMove.resolve();
     }
     movesResolved(chosenMoves);
   }

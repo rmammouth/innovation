@@ -19,15 +19,13 @@ public abstract class Move
 
 	public abstract String getLabel();
 	
-	public final void resolveAndLog()
+	public final void resolve()
 	{
-	  resolve();
+	  doResolve();
 	  Innovation.getViewer().moveResolved(this);
 	}
 	
-	public abstract void resolve();
-	
-	public abstract String getResolvedLabel();
+	protected abstract void doResolve();
 
   @Override
   public String toString()

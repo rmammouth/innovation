@@ -1,5 +1,6 @@
 package be.rmammouth.innovation.model.moves;
 
+import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
 public class DrawCard extends CardMove
@@ -26,16 +27,11 @@ public class DrawCard extends CardMove
 	}
 	
 	@Override
-	public void resolve()
+	public void doResolve()
 	{
+	  Innovation.getViewer().log(player.getName()+" draws a card from pile "+period);
 		card=player.getGameModel().drawCardFromPile(period);
 		player.addToHand(card);
-	}
-
-	@Override
-	public String getResolvedLabel()
-	{
-		return player.getName()+" has drawn "+card.getNamePrefixedWithPeriod();
-	}
-	
+		Innovation.getViewer().log(player.getName()+" has drawn "+card.getNamePrefixedWithPeriod());
+	}	
 }

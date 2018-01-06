@@ -7,7 +7,8 @@ import be.rmammouth.innovation.view.*;
 
 public class Innovation
 {
-  private static GameViewer viewer=new ConsoleDisplay();
+  //private static GameViewer viewer=new ConsoleDisplay();
+  private static GameViewer viewer=new GUIViewer();
   private static GameModel model=new GameModel();
 
 	public static void main(String[] args)
@@ -16,6 +17,7 @@ public class Innovation
 		Player p2=new Player("Ordi", new AIController());
 		Player[] players=new Player[]{p1, p2};
 		model.startNewGame(players);
+		viewer.init();
 		
 		try
 		{

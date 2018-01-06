@@ -19,16 +19,11 @@ public class ActivateCard extends CardMove
   }
 
   @Override
-  public void resolve()
+  public void doResolve()
   {
     Innovation.getViewer().log(player.getName()+" has activated "+card.getNamePrefixedWithPeriod());
     card.activate(player.getGameModel(), player);
-  }
-
-  @Override
-  public String getResolvedLabel()
-  {
-    return player.getName()+" has finished resolving "+card.getNamePrefixedWithPeriod();
+    Innovation.getViewer().log(player.getName()+" has finished resolving "+card.getNamePrefixedWithPeriod());
   }
   
   public static List<ActivateCard> getAllActivableCardMoves(Player player)

@@ -36,7 +36,7 @@ public abstract class CooperationDogma extends Dogma
     //the free draw action
     if (stateChanged)
     {
-      new DrawCard(cas.getActivatingPlayer()).resolveAndLog();
+      new DrawCard(cas.getActivatingPlayer()).resolve();
     }
   }
   

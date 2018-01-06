@@ -1,5 +1,6 @@
 package be.rmammouth.innovation.model.moves;
 
+import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
 public class ScoreCard extends CardMove
@@ -16,16 +17,10 @@ public class ScoreCard extends CardMove
   }
 
   @Override
-  public void resolve()
+  public void doResolve()
   {
+    Innovation.getViewer().log(player.getName()+" scores "+card.getNamePrefixedWithPeriod());
     player.removeFromHand(card);
     player.addToScorePile(card);
   }
-
-  @Override
-  public String getResolvedLabel()
-  {
-    return player.getName()+" has scored "+card.getNamePrefixedWithPeriod();
-  }
-
 }

@@ -2,6 +2,7 @@ package be.rmammouth.innovation.model.moves;
 
 import java.util.*;
 
+import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
 /**
@@ -30,15 +31,10 @@ public class TransferCard extends CardMove
   }
 
   @Override
-  public void resolve()
+  public void doResolve()
   {
+    Innovation.getViewer().log(player+" transfers "+card.getNamePrefixedWithPeriod()+" from his "+fromLocation.getLabel()+" to "+toLocation.getLabel(toPlayer));
     player.transferCard(card, fromLocation, toPlayer, toLocation);
-  }
-
-  @Override
-  public String getResolvedLabel()
-  {
-    return player+" has transferred "+card.getNamePrefixedWithPeriod()+" from his "+fromLocation.getLabel()+" to "+toLocation.getLabel(toPlayer);
   }
 
   public static List<Move> getAllTransferCardMoves(List<Card> cards, Player fromPlayer, CardLocation fromLocation, Player toPlayer, CardLocation toLocation)

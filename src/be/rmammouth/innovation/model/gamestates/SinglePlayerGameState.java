@@ -16,7 +16,7 @@ public abstract class SinglePlayerGameState extends GameState
   {
     List<Move> availableMoves=getAvailableMoves();
     Move chosenMove=getActivePlayer().getController().getNextMove(availableMoves);
-    chosenMove.resolveAndLog();
+    chosenMove.resolve();
     moveResolved(chosenMove);
   }
 	

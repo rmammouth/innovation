@@ -11,10 +11,14 @@ public class ConsoleDisplay implements GameViewer
     System.out.println("It's "+player.getName()+"'s turn");    
   }
   
+  @Override
+  public void init()
+  {
+  }
+  
 	@Override
 	public void moveResolved(Move move)
-	{
-		System.out.println(move.getResolvedLabel());
+	{		
 	}
 
   @Override
@@ -22,4 +26,5 @@ public class ConsoleDisplay implements GameViewer
   {
     System.out.println(message);
   }
+
 }

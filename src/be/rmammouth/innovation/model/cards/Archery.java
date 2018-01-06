@@ -18,7 +18,7 @@ public class Archery extends Card
       @Override
       public void activateOnPlayer(CardActivationState cas, Player affectedPlayer)
       {
-        new DrawCard(affectedPlayer, Period.ONE).resolveAndLog();
+        new DrawCard(affectedPlayer, Period.ONE).resolve();
         Period maxPeriodInHand=affectedPlayer.getHighestPeriodInHand();
         List<Card> maxPeriodCardsInHand=affectedPlayer.getFilteredHand(new CardPeriodFilter(maxPeriodInHand));
         if (maxPeriodCardsInHand.isEmpty()) return;

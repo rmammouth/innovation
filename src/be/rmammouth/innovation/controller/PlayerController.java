@@ -28,7 +28,7 @@ public abstract class PlayerController
   public final Move getAndResolveNextMove(List<Move> availableMoves)
   {
     Move nextMove=getNextMove(availableMoves);
-    nextMove.resolveAndLog();
+    nextMove.resolve();
     return nextMove;
   }
 }

@@ -22,17 +22,10 @@ public class TuckCard extends CardMove
   }
 
   @Override
-  public void resolve()
+  public void doResolve()
   {
     // TODO Auto-generated method stub
 
-  }
-
-  @Override
-  public String getResolvedLabel()
-  {
-    // TODO Auto-generated method stub
-    return null;
   }
 
 }

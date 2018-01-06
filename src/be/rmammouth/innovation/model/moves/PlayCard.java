@@ -2,6 +2,7 @@ package be.rmammouth.innovation.model.moves;
 
 import java.util.*;
 
+import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
 public class PlayCard extends CardMove
@@ -18,15 +19,10 @@ public class PlayCard extends CardMove
 	}
 
 	@Override
-	public void resolve()
+	public void doResolve()
 	{
-		player.putCardInPlay(card);
-	}
-
-	@Override
-	public String getResolvedLabel()
-	{
-		return player.getName()+" has played "+card.getNamePrefixedWithPeriod();
+	  Innovation.getViewer().log(player.getName()+" puts "+card.getNamePrefixedWithPeriod()+" into play");
+		player.putCardInPlay(card);		
 	}
 	
 	public static List<PlayCard> getAllPlayableCardMoves(Player player)

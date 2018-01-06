@@ -1,5 +1,6 @@
 package be.rmammouth.innovation.model.moves;
 
+import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
 /**
@@ -21,14 +22,8 @@ public class Pass extends Move
   }
 
   @Override
-  public void resolve()
+  public void doResolve()
   {
+    Innovation.getViewer().log(player.getName()+" pass");
   }
-
-  @Override
-  public String getResolvedLabel()
-  {
-    return player.getName()+" doesn't do anything";
-  }
-
 }

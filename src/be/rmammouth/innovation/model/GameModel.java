@@ -207,7 +207,7 @@ public class GameModel
   	  for (int i=0;i<2;i++)
   	  {
     	  DrawCard drawCard=new DrawCard(player);
-    	  drawCard.resolveAndLog();
+    	  drawCard.resolve();
   	  }
   	}
   	

@@ -2,6 +2,7 @@ package be.rmammouth.innovation.model.moves;
 
 import java.util.*;
 
+import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
 /**
@@ -26,15 +27,10 @@ public class ReturnCard extends CardMove
   }
 
   @Override
-  public void resolve()
+  public void doResolve()
   {
+    Innovation.getViewer().log(player.getName()+" returns "+card.getNamePrefixedWithPeriod()+" from his "+location.getLabel());
     player.returnCard(card, location);
-  }
-
-  @Override
-  public String getResolvedLabel()
-  {
-    return player.getName()+" has returned "+card.getNamePrefixedWithPeriod()+" from his "+location.getLabel();
   }
 
   public static List<Move> getAllReturnCardMoves(Player player, CardLocation location)

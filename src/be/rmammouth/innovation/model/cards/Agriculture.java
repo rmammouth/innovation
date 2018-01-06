@@ -29,9 +29,9 @@ public class Agriculture extends Card
           {
             Card returnedCard=((ReturnCard)chosenMove).getCard();
             DrawCard drawCard=new DrawCard(player, returnedCard.getPeriod().next());
-            drawCard.resolveAndLog();
+            drawCard.resolve();
             ScoreCard scoreCard=new ScoreCard(player, drawCard.getCard());
-            scoreCard.resolveAndLog();            
+            scoreCard.resolve();            
             return true;
           }
         }
