@@ -2,6 +2,8 @@ package be.rmammouth.innovation.model;
 
 import java.util.*;
 
+import be.rmammouth.innovation.model.moves.*;
+
 public abstract class Card extends PeriodCard
 {
   private String name;
@@ -35,6 +37,11 @@ public abstract class Card extends PeriodCard
     return color;
   }
 	
+	public Resource getResource(ResourceLocation loc)
+	{
+	  return resources.get(loc);
+	}
+	
 	protected void addDogma(Dogma dogma)
 	{
 	  dogma.card=this;
@@ -44,9 +51,15 @@ public abstract class Card extends PeriodCard
   public void activate(GameModel model, Player activatingPlayer)
   {
     CardActivationState cas=buildActivationState(model, activatingPlayer);
+    boolean freeDraw=false;
     for (Dogma dogma : dogmas)
     {
-      dogma.activate(cas);
+      freeDraw|=dogma.activate(cas);
+    }
+    
+    if (freeDraw)
+    {
+      new DrawCard(activatingPlayer).resolve();
     }
   }
   

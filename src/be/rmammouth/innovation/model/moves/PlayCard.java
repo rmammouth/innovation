@@ -25,13 +25,18 @@ public class PlayCard extends CardMove
 		player.putCardInPlay(card);		
 	}
 	
-	public static List<PlayCard> getAllPlayableCardMoves(Player player)
+	public static List<Move> getAllPlayableCardMoves(Player player)
 	{
-		List<PlayCard> moves=new ArrayList<>();
-		for (Card card : player.getHand())
-		{
-			moves.add(new PlayCard(player, card));	
-		}
-		return moves;
+		return getPlayCardMoves(player, player.getHand());
 	}
+	
+	public static List<Move> getPlayCardMoves(Player player, List<Card> cards)
+  {
+	  List<Move> moves=new ArrayList<>();
+    for (Card card : cards)
+    {
+      moves.add(new PlayCard(player, card));  
+    }
+    return moves;
+  }
 }

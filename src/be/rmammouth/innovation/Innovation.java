@@ -1,9 +1,11 @@
 package be.rmammouth.innovation;
 
 import be.rmammouth.innovation.controller.*;
+import be.rmammouth.innovation.controller.swing.*;
 import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.gamestates.*;
 import be.rmammouth.innovation.view.*;
+import be.rmammouth.innovation.view.swing.*;
 
 public class Innovation
 {

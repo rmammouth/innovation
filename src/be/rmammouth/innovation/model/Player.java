@@ -79,6 +79,11 @@ public class Player
   	return Collections.unmodifiableList(hand);
   }
   
+  public CardsPile getCardsPile(Color color)
+  {
+    return board.get(color);
+  }
+  
   public List<Card> getFilteredHand(CardFilter filter)
   {
     List<Card> filteredHand=new ArrayList<>();
@@ -120,6 +125,19 @@ public class Player
       }
     }
     return topCards;
+  }
+  
+  public Set<Color> getColorsOnBoard()
+  {
+    Set<Color> colors=new HashSet<>();
+    for (Color color : Color.values())
+    {
+      if (!board.get(color).isEmpty())
+      {
+        colors.add(color);
+      }
+    }
+    return colors;
   }
   
   public void putCardInPlay(Card card)

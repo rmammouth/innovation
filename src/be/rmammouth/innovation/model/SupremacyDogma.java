@@ -12,7 +12,7 @@ public abstract class SupremacyDogma extends Dogma
   }
 
   @Override
-  public final void activate(CardActivationState cas)
+  public final boolean activate(CardActivationState cas)
   {
     Iterator<Player> itr=cas.getModel().getOtherPlayersIterator(cas.getActivatingPlayer());
     while (itr.hasNext())
@@ -28,6 +28,8 @@ public abstract class SupremacyDogma extends Dogma
         Innovation.getViewer().log(otherPlayer.getName()+" has more "+resource+" and is not affected by "+card.getName()+" supremacy dogma");
       }
     }
+    
+    return false;  //supremacy dogmas never trigger free draw action
   }
   
   public abstract void activateOnPlayer(CardActivationState cas, Player player);

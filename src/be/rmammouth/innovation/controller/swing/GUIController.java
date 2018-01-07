@@ -1,4 +1,4 @@
-package be.rmammouth.innovation.controller;
+package be.rmammouth.innovation.controller.swing;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -6,6 +6,7 @@ import java.util.*;
 
 import javax.swing.*;
 
+import be.rmammouth.innovation.controller.*;
 import be.rmammouth.innovation.model.moves.*;
 
 public class GUIController extends PlayerController

@@ -33,4 +33,16 @@ public class CardsPile
       itr.next().addSplayedResourcesToCount(count, splaying);
     }
   }
+
+  public Splaying getSplaying()
+  {
+    return splaying;
+  }
+  
+  public List<Card> getCards()
+  {
+    return Collections.unmodifiableList(cards);
+  }
+  
+  
 }

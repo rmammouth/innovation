@@ -10,5 +10,10 @@ public abstract class Dogma
 		this.resource = resource;
 	}
 
-  public abstract void activate(CardActivationState cas);
+	/**
+	 * Actovate the dogma
+	 * @param cas
+	 * @return True if this triggers the free draw action
+	 */
+  public abstract boolean activate(CardActivationState cas);
 }

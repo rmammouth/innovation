@@ -1,4 +1,4 @@
-package be.rmammouth.innovation.view;
+package be.rmammouth.innovation.view.swing;
 
 import java.awt.*;
 import java.util.*;
@@ -8,6 +8,7 @@ import javax.swing.border.*;
 
 import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.moves.*;
+import be.rmammouth.innovation.view.*;
 
 public class GUIViewer extends JFrame implements GameViewer
 {

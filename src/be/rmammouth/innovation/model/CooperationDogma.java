@@ -13,9 +13,9 @@ public abstract class CooperationDogma extends Dogma
   }
 
   @Override
-  public final void activate(CardActivationState cas)
+  public final boolean activate(CardActivationState cas)
   {    
-    boolean stateChanged=false;  //if true, the activating player will get a free draw action
+    boolean freeDraw=false;  //if true, the activating player will get a free draw action
     
     //activate dogma on other players
     Iterator<Player> itr=cas.getModel().getOtherPlayersIterator(cas.getActivatingPlayer());
@@ -25,19 +25,16 @@ public abstract class CooperationDogma extends Dogma
       if (cas.getResourceCount(cas.getActivatingPlayer(),resource) <= cas.getResourceCount(otherPlayer,resource))
       {
         Innovation.getViewer().log("Activating "+card.getName()+" cooperation dogma on "+otherPlayer.getName());
-        stateChanged|=activateOnPlayer(cas, otherPlayer);
+        freeDraw|=activateOnPlayer(cas, otherPlayer);
       }
     }
     
     //activate dogma on the player who played the card
     Innovation.getViewer().log("Activating "+card.getName()+" cooperation dogma on "+cas.getActivatingPlayer().getName());
-    stateChanged|=activateOnPlayer(cas, cas.getActivatingPlayer());
+    activateOnPlayer(cas, cas.getActivatingPlayer());
     
     //the free draw action
-    if (stateChanged)
-    {
-      new DrawCard(cas.getActivatingPlayer()).resolve();
-    }
+    return freeDraw;    
   }
   
   /**

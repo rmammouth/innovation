@@ -13,11 +13,18 @@ public class Cards
   	register(new Agriculture());
   	register(new Archery());
   	register(new Clothing());
+  	register(new CityStates());
   	register(new CodeOfLaws());
   	register(new Domestication());
+  	register(new Masonry());
   	register(new Metalworking());
+  	register(new Mysticism());
+  	register(new Oars());
   	register(new Pottery());
   	register(new Sailing());
+  	register(new TheWheel());
+  	register(new Tools());
+  	register(new Writing());
   }
   
   private static void register(Card card)
