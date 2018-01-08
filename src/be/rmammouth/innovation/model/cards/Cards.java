@@ -1,8 +1,10 @@
-package be.rmammouth.innovation.model;
+package be.rmammouth.innovation.model.cards;
 
 import java.util.*;
 
-import be.rmammouth.innovation.model.cards.*;
+import be.rmammouth.innovation.model.*;
+import be.rmammouth.innovation.model.cards.p1.*;
+import be.rmammouth.innovation.model.cards.p2.*;
 
 public class Cards
 {
@@ -10,6 +12,7 @@ public class Cards
   
   static
   {
+    //period 1
   	register(new Agriculture());
   	register(new Archery());
   	register(new Clothing());
@@ -25,6 +28,12 @@ public class Cards
   	register(new TheWheel());
   	register(new Tools());
   	register(new Writing());
+  	
+  	//period 2
+  	register(new CanalBuilding());
+  	register(new Construction());
+  	register(new Fermenting());
+  	register(new RoadBuilding());
   }
   
   private static void register(Card card)

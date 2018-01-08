@@ -1,4 +1,4 @@
-package be.rmammouth.innovation.model.cards;
+package be.rmammouth.innovation.model.cards.p1;
 
 import java.util.*;
 

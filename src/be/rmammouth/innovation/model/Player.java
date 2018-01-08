@@ -11,7 +11,7 @@ public class Player
   private PlayerController controller; 
   private List<Achievement> achievements=new ArrayList<>();
   private List<Card> hand=new ArrayList<>();
-  private List<Card> scorePile=new ArrayList<>();
+  private ScorePile scorePile=new ScorePile();
   private Map<Color, CardsPile> board=new EnumMap<>(Color.class);
   private int turnOrderIndex;
   
@@ -71,7 +71,12 @@ public class Player
   
   public void addToScorePile(Card card)
   {
-    scorePile.add(card);
+    scorePile.addCard(card);
+  }
+  
+  public ScorePile getScorePile()
+  {
+    return scorePile;
   }
   
   public List<Card> getHand()

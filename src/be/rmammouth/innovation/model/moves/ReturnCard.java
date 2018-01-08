@@ -39,7 +39,7 @@ public class ReturnCard extends CardMove
     List<Card> cards=player.getCards(location);
     for (Card card : cards)
     {
-      moves.add(new ReturnCard(player, card, CardLocation.HAND));  
+      moves.add(new ReturnCard(player, card, location));  
     }
     return moves;
   }

@@ -23,7 +23,7 @@ public class DrawCard extends CardMove
 	@Override
 	public String getLabel()
 	{
-		return "Draw a ["+period.getLabel()+"]";
+		return "Draw a ["+period.asString()+"]";
 	}
 	
 	@Override

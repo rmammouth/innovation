@@ -29,7 +29,7 @@ public abstract class Card extends PeriodCard
   
   public String getNamePrefixedWithPeriod()
   {
-  	return "["+period.getLabel()+"]"+name;
+  	return "["+period.asString()+"]"+name;
   }
 
 	public Color getColor()

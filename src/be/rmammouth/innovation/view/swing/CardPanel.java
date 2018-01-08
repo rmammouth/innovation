@@ -107,7 +107,7 @@ public class CardPanel extends JPanel
   private String getResourceText(ResourceLocation loc)
   {
     Resource resource=card.getResource(loc);
-    if (resource==null) return card.getPeriod().getLabel();
+    if (resource==null) return card.getPeriod().asString();
     else return resource.toString();
   }
 }

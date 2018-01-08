@@ -4,10 +4,12 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 import be.rmammouth.innovation.model.*;
+import be.rmammouth.innovation.model.cards.*;
 
 import java.awt.BorderLayout;
 import java.util.*;
 import java.awt.FlowLayout;
+import javax.swing.border.BevelBorder;
 
 public class PlayerPanel extends JPanel
 {
@@ -19,6 +21,8 @@ public class PlayerPanel extends JPanel
   private JPanel handPanel;
   private JPanel boardPanel;
   private Map<Color,CardsPilePanel> cardsPilePanels=new EnumMap<>(Color.class);
+  private JLabel scoreLabel;
+  private JLabel dominationLabel;
   
   static
   {
@@ -53,9 +57,18 @@ public class PlayerPanel extends JPanel
     southEastPanel.setLayout(new BorderLayout(0, 0));
     
     JPanel inflDomPanel = new JPanel();
+    inflDomPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
     southEastPanel.add(inflDomPanel, BorderLayout.CENTER);
+    inflDomPanel.setLayout(new BoxLayout(inflDomPanel, BoxLayout.Y_AXIS));
+    
+    scoreLabel = new JLabel("Score");
+    inflDomPanel.add(scoreLabel);
+    
+    dominationLabel = new JLabel("Dominations");
+    inflDomPanel.add(dominationLabel);
     
     resourcesTable = new JTable(resourcesTableModel);
+    resourcesTable.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
     southEastPanel.add(resourcesTable, BorderLayout.EAST);
     
     JScrollPane handScrollPane = new JScrollPane();
@@ -99,6 +112,24 @@ public class PlayerPanel extends JPanel
       }
       panel.repaint();
     }
+    
+    //score
+    String scoreTxt="";  
+    if (player.getScorePile().getCards().size()<=1)
+    {
+      scoreTxt="Score : "+player.getScorePile().getScore();
+    }
+    else
+    {
+      for (Card card : player.getScorePile().getCards())
+      {
+        if (scoreTxt.length()==0) scoreTxt="Score : ";
+        else scoreTxt+="+";
+        scoreTxt+=card.getPeriod().asInt();
+      }
+      scoreTxt+="="+player.getScorePile().getScore();
+    }
+    scoreLabel.setText(scoreTxt);
   }
   
   class ResourceTableModel extends AbstractTableModel

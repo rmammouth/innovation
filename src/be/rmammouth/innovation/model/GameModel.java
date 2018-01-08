@@ -3,6 +3,7 @@ package be.rmammouth.innovation.model;
 import java.util.*;
 
 import be.rmammouth.innovation.*;
+import be.rmammouth.innovation.model.cards.*;
 import be.rmammouth.innovation.model.gamestates.*;
 import be.rmammouth.innovation.model.moves.*;
 

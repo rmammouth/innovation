@@ -12,10 +12,20 @@ public enum Period
   EIGHT,
   NINE,
   TEN;
+  
+  public static Period fromInt(int n)
+  {
+    return values()[n-1];
+  }
 	
-	public String getLabel()
+  public int asInt()
+  {
+    return ordinal()+1;
+  }
+  
+	public String asString()
 	{
-		return Integer.toString(ordinal()+1);
+		return Integer.toString(asInt());
 	}
 	
 	public Period next()
