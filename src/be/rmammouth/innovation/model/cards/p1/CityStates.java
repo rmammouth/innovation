@@ -12,34 +12,19 @@ public class CityStates extends Card
   {
     super("City States", Period.ONE, Color.PURPLE,
         null,
-        Resource.CROWN, Resource.CROWN, Resource.TOWER);
+        Resource.CROWN, Resource.CROWN, Resource.TOWER);   
     
-    addDogma(new CooperationDogma(Resource.CROWN) 
-    {      
+    addDogma(new SupremacyDogma(Resource.CROWN)
+    {
       @Override
-      public boolean activateOnPlayer(CardActivationState cas, Player player) 
+      public void activateOnPlayer(CardActivationState cas, Player affectedPlayer)
       {
-        List<Card> archivableCards=player.getFilteredHand(new CardFilter()
-        {          
-          @Override
-          public boolean isFiltered(Card card) 
-          {
-            return !player.getColorsOnBoard().contains(card.getColor());
-          }
-        });
-        List<Move> archiveMoves=ArchiveCard.getArchiveCardMoves(player, archivableCards);
-        Pass passArchive=new Pass(player);
-        archiveMoves.add(passArchive);
-        Move chosenArchiveMove=player.getController().getAndResolveNextMove(archiveMoves);
-        if (chosenArchiveMove==passArchive) return false;
-        else
-        {          
-          SplayPile splayMove=new SplayPile(player, ((ArchiveCard)chosenArchiveMove).getCard().getColor(), Splaying.LEFT);
-          Pass passSplay=new Pass(player);
-          List<Move> splayMoves=Arrays.asList(splayMove, passSplay);
-          player.getController().getAndResolveNextMove(splayMoves);          
-          return true;
-        }
+        if (cas.getResourceCount(affectedPlayer, Resource.TOWER)<4) return;
+        List<Card> topCardsWithTower=Card.getFilteredList(affectedPlayer.getActiveCardsOnBoard(), new CardResourceFilter(Resource.TOWER));
+        if (topCardsWithTower.isEmpty()) return;
+        List<Move> transferMoves=TransferCard.getAllTransferCardMoves(topCardsWithTower, affectedPlayer, CardLocation.BOARD, cas.getActivatingPlayer(), CardLocation.BOARD);
+        affectedPlayer.getController().getAndResolveNextMove(transferMoves);
+        new DrawCard(affectedPlayer, Period.ONE).resolve();        
       }
     });
   }

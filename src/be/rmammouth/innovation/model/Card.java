@@ -96,6 +96,19 @@ public abstract class Card extends PeriodCard
       }
     }
   }
+  
+  public static List<Card> getFilteredList(List<Card> cards, CardFilter filter)
+  {
+    List<Card> newList=new ArrayList<>();
+    for (Card card : cards)
+    {
+      if (!filter.isFiltered(card))
+      {
+        newList.add(card);
+      }
+    }
+    return cards;
+  }
 
   @Override
   public String toString()

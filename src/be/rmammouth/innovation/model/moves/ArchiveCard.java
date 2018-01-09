@@ -27,6 +27,7 @@ public class ArchiveCard extends CardMove
   public void doResolve()
   {
     Innovation.getViewer().log(player.getName()+" has archived "+card.getNamePrefixedWithPeriod());
+    player.removeFromHand(card);
     player.getCardsPile(card.getColor()).archive(card);
   }
   

@@ -35,8 +35,12 @@ public class RecycleCard extends CardMove
 
   public static List<Move> getAllRecycleCardMoves(Player player, CardLocation location)
   {
+    return getRecycleCardMoves(player, player.getCards(location), location);
+  }
+  
+  public static List<Move> getRecycleCardMoves(Player player, List<Card> cards, CardLocation location)
+  {
     List<Move> moves=new ArrayList<>();
-    List<Card> cards=player.getCards(location);
     for (Card card : cards)
     {
       moves.add(new RecycleCard(player, card, location));  

@@ -32,5 +32,5 @@ public abstract class SupremacyDogma extends Dogma
     return false;  //supremacy dogmas never trigger free draw action
   }
   
-  public abstract void activateOnPlayer(CardActivationState cas, Player player);
+  public abstract void activateOnPlayer(CardActivationState cas, Player affectedPlayer);
 }
