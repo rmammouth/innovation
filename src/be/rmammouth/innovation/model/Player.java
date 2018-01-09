@@ -119,6 +119,23 @@ public class Player
     return highest;
   }
   
+  public Period getLowestPeriodInHand()
+  {
+    Period lowest=null;
+    for (Card card : hand)
+    {
+      if (lowest==null) lowest=card.getPeriod();
+      else
+      {
+        if (lowest.isHigher(card.getPeriod()))
+        {
+          lowest=card.getPeriod();
+        }
+      }
+    }
+    return lowest;
+  }
+  
   public List<Card> getActiveCardsOnBoard()
   {
     List<Card> topCards=new ArrayList<>();

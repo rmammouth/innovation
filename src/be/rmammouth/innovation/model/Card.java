@@ -40,7 +40,12 @@ public abstract class Card extends PeriodCard
 	public Resource getResource(ResourceLocation loc)
 	{
 	  return resources.get(loc);
-	}
+	}	
+
+  public boolean containsResource(Resource resource) 
+  {
+    return resources.values().contains(resource);
+  }
 	
 	protected void addDogma(Dogma dogma)
 	{
@@ -97,4 +102,5 @@ public abstract class Card extends PeriodCard
   {
     return name;
   }
+
 }
