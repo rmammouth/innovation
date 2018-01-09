@@ -6,15 +6,15 @@ import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
 /**
- * Recycle
+ * Recycle (return)
  * @author Seb
  *
  */
-public class ReturnCard extends CardMove
+public class RecycleCard extends CardMove
 {
   private CardLocation location;
   
-  public ReturnCard(Player player, Card card, CardLocation location)
+  public RecycleCard(Player player, Card card, CardLocation location)
   {
     super(player,card);
     this.location=location;
@@ -23,23 +23,23 @@ public class ReturnCard extends CardMove
   @Override
   public String getLabel()
   {
-    return "Return "+card.getNamePrefixedWithPeriod()+" from "+location.getLabel(player);
+    return "Recycle "+card.getNamePrefixedWithPeriod()+" from "+location.getLabel(player);
   }
 
   @Override
   public void doResolve()
   {
-    Innovation.getViewer().log(player.getName()+" returns "+card.getNamePrefixedWithPeriod()+" from his "+location.getLabel());
+    Innovation.getViewer().log(player.getName()+" recycles "+card.getNamePrefixedWithPeriod()+" from his "+location.getLabel());
     player.returnCard(card, location);
   }
 
-  public static List<Move> getAllReturnCardMoves(Player player, CardLocation location)
+  public static List<Move> getAllRecycleCardMoves(Player player, CardLocation location)
   {
     List<Move> moves=new ArrayList<>();
     List<Card> cards=player.getCards(location);
     for (Card card : cards)
     {
-      moves.add(new ReturnCard(player, card, location));  
+      moves.add(new RecycleCard(player, card, location));  
     }
     return moves;
   }

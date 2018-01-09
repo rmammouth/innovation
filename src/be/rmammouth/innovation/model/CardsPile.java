@@ -18,9 +18,28 @@ public class CardsPile
     cards.add(card);
   }
   
+  public void archive(Card card)
+  {
+    cards.add(0, card);
+  }
+  
+  public void remove(Card card)
+  {
+    cards.remove(card);
+    if (cards.size()<=1)
+    {
+      splaying=Splaying.NONE;
+    }
+  }
+  
   public boolean isEmpty()
   {
     return cards.isEmpty();
+  }
+  
+  public int getSize()
+  {
+    return cards.size();
   }
   
   public void addResourcesToCount(ResourcesCount count)
@@ -39,10 +58,13 @@ public class CardsPile
     return splaying;
   }
   
+  public void setSplaying(Splaying splaying) 
+  {
+    this.splaying = splaying;
+  }
+
   public List<Card> getCards()
   {
     return Collections.unmodifiableList(cards);
   }
-  
-  
 }

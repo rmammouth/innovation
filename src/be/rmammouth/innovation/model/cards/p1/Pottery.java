@@ -24,7 +24,7 @@ public class Pottery extends Card
           if (player.getHand().isEmpty()) break;
           else
           {
-            List<Move> moves=ReturnCard.getAllReturnCardMoves(player, CardLocation.HAND);
+            List<Move> moves=RecycleCard.getAllRecycleCardMoves(player, CardLocation.HAND);
             Pass pass=new Pass(player);
             moves.add(pass);
             Move chosenMove=player.getController().getAndResolveNextMove(moves);

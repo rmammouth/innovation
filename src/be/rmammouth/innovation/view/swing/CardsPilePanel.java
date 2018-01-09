@@ -38,19 +38,18 @@ public class CardsPilePanel extends JPanel
     {
       int cardsCount=parent.getComponentCount();
       
+      if (cardsCount==0) return new Dimension(0,0);
+      
+      Dimension cardSize=parent.getComponent(0).getPreferredSize();
+      if (cardsCount==1) return cardSize;
+      
       switch (pile.getSplaying())
       {
       case LEFT:
-        throw new UnsupportedOperationException();
-      case NONE:
-        if (cardsCount>0)
-        {
-          Dimension cardSize=parent.getComponent(0).getPreferredSize();
-          return new Dimension(cardSize.width+((cardsCount-1)*stackGap), cardSize.height+((cardsCount-1)*stackGap));
-        }
-        else return new Dimension(0,0);
       case RIGHT:
-        throw new UnsupportedOperationException();
+        return new Dimension(cardSize.width+((cardsCount-1)*(cardSize.width/3)), cardSize.height);
+      case NONE:
+        return new Dimension(cardSize.width+((cardsCount-1)*stackGap), cardSize.height+((cardsCount-1)*stackGap));
       case UP:
         throw new UnsupportedOperationException();
       default:
@@ -67,19 +66,52 @@ public class CardsPilePanel extends JPanel
     @Override
     public void layoutContainer(Container parent)
     {
-      int x=0, y=0;     
-      //top card is at the end
-      for (int i=parent.getComponentCount()-1;i>=0;i--)
+      int cardCount=parent.getComponentCount();
+      if (cardCount==0) return;
+
+      int x=0, y=0, deltaX=0, deltaY=0;
+      Dimension cardSize=parent.getComponent(0).getPreferredSize();
+      
+      switch (pile.getSplaying())
+      {
+      case LEFT:
+        x=0;
+        y=0;
+        deltaX=cardSize.width/3;
+        deltaY=0;
+        break;
+      case NONE:
+        x=(cardCount-1)*stackGap;
+        y=(cardCount-1)*stackGap;
+        deltaX=-stackGap;
+        deltaY=-stackGap;
+        break;
+      case RIGHT:
+        x=(cardCount-1)*(cardSize.width/3);
+        y=0;
+        deltaX=-(cardSize.width/3);
+        deltaY=0;
+        break;
+      case UP:
+        x=0;
+        y=0;
+        deltaX=0;
+        deltaY=cardSize.height/2;
+        break;
+      default:
+        break;        
+      }
+      
+      //top card is at the start
+      for (int i=0;i<parent.getComponentCount();i++)
       {
         Component comp=parent.getComponent(i);
         comp.setSize(comp.getPreferredSize());
         comp.setBounds(x, y, comp.getPreferredSize().width, comp.getPreferredSize().height);
-        x+=stackGap;
-        y+=stackGap;
+        x+=deltaX;
+        y+=deltaY;
       }
     }
-    
-    
   }
 }
 

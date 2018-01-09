@@ -20,14 +20,14 @@ public class Agriculture extends Card
       {
         if (!player.getHand().isEmpty())
         {
-          List<Move> moves=new ArrayList<>(ReturnCard.getAllReturnCardMoves(player, CardLocation.HAND));
+          List<Move> moves=new ArrayList<>(RecycleCard.getAllRecycleCardMoves(player, CardLocation.HAND));
           Pass passMove=new Pass(player);
           moves.add(passMove);
           Move chosenMove=player.getController().getAndResolveNextMove(moves);
           if (chosenMove==passMove) return false;
           else
           {
-            Card returnedCard=((ReturnCard)chosenMove).getCard();
+            Card returnedCard=((RecycleCard)chosenMove).getCard();
             DrawCard drawCard=new DrawCard(player, returnedCard.getPeriod().next());
             drawCard.resolve();
             ScoreCard scoreCard=new ScoreCard(player, drawCard.getCard());

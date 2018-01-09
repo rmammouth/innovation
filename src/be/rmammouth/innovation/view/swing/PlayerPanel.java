@@ -108,6 +108,7 @@ public class PlayerPanel extends JPanel
       panel.removeAll();
       for (Card card : player.getCardsPile(color).getCards())
       {
+        //must add cards in reverse order so the z order is correct
         panel.add(cardsPanels.get(card),0);
       }
       panel.repaint();
