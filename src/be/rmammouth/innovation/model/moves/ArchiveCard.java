@@ -24,7 +24,7 @@ public class ArchiveCard extends CardMove
   }
 
   @Override
-  public void doResolve()
+  protected void doResolve()
   {
     Innovation.getViewer().log(player.getName()+" has archived "+card.getNamePrefixedWithPeriod());
     player.removeFromHand(card);

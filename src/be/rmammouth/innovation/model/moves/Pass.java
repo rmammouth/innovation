@@ -22,7 +22,7 @@ public class Pass extends Move
   }
 
   @Override
-  public void doResolve()
+  protected void doResolve()
   {
     Innovation.getViewer().log(player.getName()+" pass");
   }

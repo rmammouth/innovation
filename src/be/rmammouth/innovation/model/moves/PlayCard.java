@@ -19,7 +19,7 @@ public class PlayCard extends CardMove
 	}
 
 	@Override
-	public void doResolve()
+	protected void doResolve()
 	{
 	  Innovation.getViewer().log(player.getName()+" puts "+card.getNamePrefixedWithPeriod()+" into play");
 		player.putCardInPlay(card);		

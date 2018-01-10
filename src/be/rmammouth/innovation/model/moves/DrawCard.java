@@ -27,7 +27,7 @@ public class DrawCard extends CardMove
 	}
 	
 	@Override
-	public void doResolve()
+	protected void doResolve()
 	{
 	  Innovation.getViewer().log(player.getName()+" draws a card from pile "+period);
 		card=player.getGameModel().drawCardFromPile(period);

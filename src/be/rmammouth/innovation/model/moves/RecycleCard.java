@@ -27,7 +27,7 @@ public class RecycleCard extends CardMove
   }
 
   @Override
-  public void doResolve()
+  protected void doResolve()
   {
     Innovation.getViewer().log(player.getName()+" recycles "+card.getNamePrefixedWithPeriod()+" from his "+location.getLabel());
     player.returnCard(card, location);

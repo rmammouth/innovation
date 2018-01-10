@@ -17,7 +17,7 @@ public class ScoreCard extends CardMove
   }
 
   @Override
-  public void doResolve()
+  protected void doResolve()
   {
     Innovation.getViewer().log(player.getName()+" scores "+card.getNamePrefixedWithPeriod());
     player.removeFromHand(card);

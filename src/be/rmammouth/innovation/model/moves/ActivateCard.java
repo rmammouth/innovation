@@ -19,7 +19,7 @@ public class ActivateCard extends CardMove
   }
 
   @Override
-  public void doResolve()
+  protected void doResolve()
   {
     Innovation.getViewer().log(player.getName()+" has activated "+card.getNamePrefixedWithPeriod());
     card.activate(player.getGameModel(), player);
