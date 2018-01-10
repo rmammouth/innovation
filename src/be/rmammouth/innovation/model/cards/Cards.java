@@ -1,6 +1,8 @@
 package be.rmammouth.innovation.model.cards;
 
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collection;
 
 import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.cards.p1.*;
@@ -30,9 +32,15 @@ public class Cards
   	register(new Writing());
   	
   	//period 2
+  	register(new Calendar());
   	register(new CanalBuilding());
   	register(new Construction());
+  	register(new Currency());  	
   	register(new Fermenting());
+  	register(new MapMaking());
+  	register(new Mathematics());
+  	register(new Monotheism());
+  	register(new Philosophy());
   	register(new RoadBuilding());
   }
   

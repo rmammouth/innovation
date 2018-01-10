@@ -34,4 +34,9 @@ public class DrawPile
   {
     cards.addFirst(card);    
   }
+  
+  public int size()
+  {
+    return cards.size();
+  }
 }

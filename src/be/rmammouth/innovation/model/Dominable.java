@@ -1,0 +1,6 @@
+package be.rmammouth.innovation.model;
+
+public interface Dominable
+{
+
+}

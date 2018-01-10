@@ -3,6 +3,7 @@ package be.rmammouth.innovation.model;
 import java.util.*;
 
 import be.rmammouth.innovation.*;
+import be.rmammouth.innovation.model.achievements.*;
 import be.rmammouth.innovation.model.cards.*;
 import be.rmammouth.innovation.model.gamestates.*;
 import be.rmammouth.innovation.model.moves.*;
@@ -10,9 +11,9 @@ import be.rmammouth.innovation.model.moves.*;
 public class GameModel
 {
   private Player[] players;
-  private Map<Period, DrawPile> cardPiles=new EnumMap<>(Period.class);
-  private Map<Period, Card> periodAchievements=new EnumMap<>(Period.class);
-  private List<SpecialAchievement> specialAchievements=new ArrayList<>();
+  private Map<Period, DrawPile> drawPiles=new EnumMap<>(Period.class);
+  private Map<Period, PeriodCard> periodAchievements=new EnumMap<>(Period.class);
+  private Set<SpecialAchievement> specialAchievements=new HashSet<>();
   
   /**
    * Player playing the current turn (or null if opening)
@@ -182,25 +183,28 @@ public class GameModel
   	
   	for (Period period : Period.values())
     {
-      cardPiles.put(period, new DrawPile());
+      drawPiles.put(period, new DrawPile());
     }
   	
   	//init all cards piles
   	for (Card card : Cards.getAll())
   	{
-  		cardPiles.get(card.getPeriod()).add(card);
+  		drawPiles.get(card.getPeriod()).add(card);
   	}
   	
   	//shuffle them, and take out the period achievement
   	for (Period period : Period.values())
   	{
-  		DrawPile cardPile=cardPiles.get(period);
+  		DrawPile cardPile=drawPiles.get(period);
   		cardPile.shuffle();
   		if ((period!=Period.TEN) && !cardPile.isEmpty())
   		{
   			periodAchievements.put(period, cardPile.draw());
   		}
   	}
+  	
+  	//special achievements
+  	specialAchievements.addAll(Achievements.getAll());
   	
   	//deal first hand
   	for (Player player : players)
@@ -218,7 +222,7 @@ public class GameModel
 	
 	public Card drawCardFromPile(Period period)
 	{
-	  if (cardPiles.get(period).isEmpty())
+	  if (drawPiles.get(period).isEmpty())
 	  {
 	    if (period==Period.TEN)
 	    {
@@ -226,12 +230,17 @@ public class GameModel
 	    }
 	    return drawCardFromPile(period.next());
 	  }
-	  else return cardPiles.get(period).draw();
+	  else return drawPiles.get(period).draw();
 	}
 	
 	public void returnCardToPile(Card card)
 	{
-	  cardPiles.get(card.getPeriod()).returnCard(card);	  
+	  drawPiles.get(card.getPeriod()).returnCard(card);	  
+	}
+	
+	public DrawPile getDrawPile(Period period)
+	{
+	  return drawPiles.get(period);
 	}
   
   public void nextPlayerTurn()
@@ -243,5 +252,30 @@ public class GameModel
       turnNumber++;
     }    
     setCurrentTurn(players[i]);    
+  }
+  
+  public void removeAchievement(SpecialAchievement achievement)
+  {
+    specialAchievements.remove(achievement);    
+  }
+  
+  public PeriodCard getPeriodAchievement(Period period)
+  {
+    return periodAchievements.get(period);
+  }
+  
+  public void removePeriodAchievement(Period period)
+  {
+    periodAchievements.remove(period);
+  }
+  
+  public boolean isPeriodAchievementAvailable(Period period)
+  {
+    return periodAchievements.containsKey(period);
+  }
+  
+  public int getDominationsCountNeededToWin()
+  {
+    return 8-players.length;
   }
 }

@@ -3,7 +3,6 @@ package be.rmammouth.innovation.model;
 import java.util.*;
 
 import be.rmammouth.innovation.*;
-import be.rmammouth.innovation.model.moves.*;
 
 public abstract class CooperationDogma extends Dogma 
 {

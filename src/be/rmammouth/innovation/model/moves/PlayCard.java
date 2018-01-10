@@ -5,6 +5,11 @@ import java.util.*;
 import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
+/**
+ * Put a card into play (meld)
+ * @author Seb
+ *
+ */
 public class PlayCard extends CardMove
 {
   public PlayCard(Player player, Card card)

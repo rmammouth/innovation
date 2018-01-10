@@ -18,6 +18,7 @@ public class GUIViewer extends JFrame implements GameViewer
   private JPanel inputPanel;
   private JTabbedPane playersTabPane;
   private Map<Player, PlayerPanel> playerPanels=new HashMap<>();
+  private GameModelPanel gameModelPanel;
 
   /**
    * Launch the application.
@@ -44,6 +45,7 @@ public class GUIViewer extends JFrame implements GameViewer
   public void init(GameModel model)
   {
     this.model=model;
+    gameModelPanel.setModel(model);
     for (Player player : model.getPlayers())
     {
       PlayerPanel panel=new PlayerPanel(player);
@@ -80,8 +82,8 @@ public class GUIViewer extends JFrame implements GameViewer
     playersTabPane = new JTabbedPane(JTabbedPane.TOP);
     topSplitPane.setLeftComponent(playersTabPane);
     
-    JPanel infoPanel = new JPanel();
-    topSplitPane.setRightComponent(infoPanel);
+    gameModelPanel = new GameModelPanel();
+    topSplitPane.setRightComponent(gameModelPanel);
     topSplitPane.setDividerLocation(600);
     
     JPanel bottomPanel = new JPanel();
@@ -113,6 +115,7 @@ public class GUIViewer extends JFrame implements GameViewer
   @Override
   public void moveResolved(Move move)
   {
+    gameModelPanel.fireDataChanged();
     for (PlayerPanel panel : playerPanels.values())
     {
       panel.fireDataChanged();

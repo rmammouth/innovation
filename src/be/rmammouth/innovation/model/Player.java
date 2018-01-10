@@ -3,13 +3,14 @@ package be.rmammouth.innovation.model;
 import java.util.*;
 
 import be.rmammouth.innovation.controller.*;
+import be.rmammouth.innovation.model.gamestates.*;
 
 public class Player
 {
   private String name;
   private GameModel gameModel;
   private PlayerController controller; 
-  private List<Achievement> achievements=new ArrayList<>();
+  private List<Dominable> dominations=new ArrayList<>();
   private List<Card> hand=new ArrayList<>();
   private ScorePile scorePile=new ScorePile();
   private Map<Color, CardsPile> board=new EnumMap<>(Color.class);
@@ -57,6 +58,33 @@ public class Player
   public void setTurnOrderIndex(int turnOrderIndex)
   {
     this.turnOrderIndex = turnOrderIndex;
+  }
+  
+  public void dominate(SpecialAchievement achievement)
+  {
+    gameModel.removeAchievement(achievement);
+    dominations.add(achievement);
+    checkForDominationsWin();
+  }
+  
+  public void dominate(PeriodCard card)
+  {
+    gameModel.removePeriodAchievement(card.getPeriod());
+    dominations.add(card);
+    checkForDominationsWin();
+  }
+  
+  private void checkForDominationsWin()
+  {
+    if (dominations.size()>=gameModel.getDominationsCountNeededToWin())
+    {
+      throw new GameOverException(name+" has won with "+dominations.size()+" dominations");
+    }
+  }
+  
+  public List<Dominable> getDominations()
+  {
+    return Collections.unmodifiableList(dominations);
   }
 
   public void addToHand(Card card)

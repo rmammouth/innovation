@@ -34,6 +34,7 @@ public class ChoosingAction extends SinglePlayerGameState
 		moves.add(new DrawCard(player));
 		moves.addAll(PlayCard.getAllPlayableCardMoves(player));
 		moves.addAll(ActivateCard.getAllActivableCardMoves(player));
+		moves.addAll(DominatePeriod.getAllDominablePeriodMoves(player));
 		return moves;
 	}
 

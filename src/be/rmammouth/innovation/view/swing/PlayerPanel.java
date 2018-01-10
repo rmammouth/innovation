@@ -131,6 +131,9 @@ public class PlayerPanel extends JPanel
       scoreTxt+="="+player.getScorePile().getScore();
     }
     scoreLabel.setText(scoreTxt);
+    
+    //dominations
+    dominationLabel.setText("Dominations : "+player.getDominations().size());
   }
   
   class ResourceTableModel extends AbstractTableModel

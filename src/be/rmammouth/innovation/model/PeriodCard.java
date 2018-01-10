@@ -1,6 +1,6 @@
 package be.rmammouth.innovation.model;
 
-public class PeriodCard implements Achievement 
+public class PeriodCard implements Dominable 
 {
   protected Period period;
   
