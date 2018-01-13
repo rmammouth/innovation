@@ -20,7 +20,7 @@ public abstract class SupremacyDogma extends Dogma
       Player otherPlayer=itr.next();
       if (cas.getResourceCount(cas.getActivatingPlayer(),resource) > cas.getResourceCount(otherPlayer,resource))
       {
-        Innovation.getViewer().log("Activating "+card.getName()+" supremacy dogma on "+otherPlayer.getName());
+        Innovation.getViewer().log("Activating "+card.getName()+" supremacy dogma "+index+" on "+otherPlayer.getName());
         activateOnPlayer(cas, otherPlayer);
       }
       else

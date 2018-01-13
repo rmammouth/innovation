@@ -9,7 +9,8 @@ public class Achievements
   private static Map<String, SpecialAchievement> directory=new HashMap<>();
   
   static
-  {   
+  { 
+    register(new Empire());
     register(new Monument());
   }
   

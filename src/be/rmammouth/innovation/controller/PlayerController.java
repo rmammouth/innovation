@@ -23,9 +23,9 @@ public abstract class PlayerController
 		this.player = player;
 	}
   
-  public abstract Move getNextMove(List<Move> availableMoves);
+  public abstract Move getNextMove(List<? extends Move> availableMoves);
   
-  public final Move getAndResolveNextMove(List<Move> availableMoves)
+  public final Move getAndResolveNextMove(List<? extends Move> availableMoves)
   {
     Move nextMove=getNextMove(availableMoves);
     nextMove.resolve();

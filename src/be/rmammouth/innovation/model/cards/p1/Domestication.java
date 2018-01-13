@@ -18,7 +18,7 @@ public class Domestication extends Card
       @Override
       public boolean activateOnPlayer(CardActivationState cas, Player player) 
       {
-        Period lowestPeriod=player.getLowestPeriodInHand();
+        Period lowestPeriod=player.getLowestPeriod(CardLocation.HAND);
         if (lowestPeriod!=null)
         {
           List<Card> lowestCards=player.getFilteredHand(new CardPeriodFilter(lowestPeriod));

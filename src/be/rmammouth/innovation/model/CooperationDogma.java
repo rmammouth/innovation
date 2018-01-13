@@ -23,13 +23,13 @@ public abstract class CooperationDogma extends Dogma
       Player otherPlayer=itr.next();
       if (cas.getResourceCount(cas.getActivatingPlayer(),resource) <= cas.getResourceCount(otherPlayer,resource))
       {
-        Innovation.getViewer().log("Activating "+card.getName()+" cooperation dogma on "+otherPlayer.getName());
+        Innovation.getViewer().log("Activating "+card.getName()+" cooperation dogma "+index+" on "+otherPlayer.getName());
         freeDraw|=activateOnPlayer(cas, otherPlayer);
       }
     }
     
     //activate dogma on the player who played the card
-    Innovation.getViewer().log("Activating "+card.getName()+" cooperation dogma on "+cas.getActivatingPlayer().getName());
+    Innovation.getViewer().log("Activating "+card.getName()+" cooperation dogma "+index+" on "+cas.getActivatingPlayer().getName());
     activateOnPlayer(cas, cas.getActivatingPlayer());
     
     //the free draw action

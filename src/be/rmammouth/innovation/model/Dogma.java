@@ -4,6 +4,8 @@ public abstract class Dogma
 {
   protected Resource resource;
   protected Card card;
+  protected int index;
+  protected String text;
   
 	public Dogma(Resource resource)
 	{
@@ -11,9 +13,19 @@ public abstract class Dogma
 	}
 
 	/**
-	 * Actovate the dogma
+	 * Activate the dogma
 	 * @param cas
 	 * @return True if this triggers the free draw action
 	 */
   public abstract boolean activate(CardActivationState cas);
+
+  public int getIndex()
+  {
+    return index;
+  }
+
+  public String getText()
+  {
+    return text;
+  }
 }

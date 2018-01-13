@@ -7,6 +7,7 @@ import java.util.Collection;
 import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.cards.p1.*;
 import be.rmammouth.innovation.model.cards.p2.*;
+import be.rmammouth.innovation.model.cards.p3.*;
 
 public class Cards
 {
@@ -42,6 +43,12 @@ public class Cards
   	register(new Monotheism());
   	register(new Philosophy());
   	register(new RoadBuilding());
+  	
+  	//period 3
+  	register(new Engineering());
+  	register(new Machinery());
+  	register(new Medicine());
+  	register(new Optics());
   }
   
   private static void register(Card card)

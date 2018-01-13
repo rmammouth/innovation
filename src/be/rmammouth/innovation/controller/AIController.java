@@ -14,7 +14,7 @@ public class AIController extends PlayerController
 	}
 
 	@Override
-	public Move getNextMove(List<Move> availableMoves)
+	public Move getNextMove(List<? extends Move> availableMoves)
 	{
 		return availableMoves.get(random.nextInt(availableMoves.size()));
 	}

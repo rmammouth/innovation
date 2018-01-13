@@ -39,6 +39,16 @@ public class ScorePile
     return score>=(period.asInt()*5);
   }
   
+  public boolean isEmpty()
+  {
+    return cards.isEmpty();
+  }
+  
+  public int getSize()
+  {
+    return cards.size();
+  }
+  
   private void sortCards()
   {
     Collections.sort(cards, new Comparator<Card>()

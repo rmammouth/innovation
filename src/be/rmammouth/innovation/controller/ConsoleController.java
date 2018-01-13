@@ -10,7 +10,7 @@ public class ConsoleController extends PlayerController
 	private BufferedReader console=new BufferedReader(new InputStreamReader(System.in));
 
 	@Override
-	public Move getNextMove(List<Move> availableMoves)
+	public Move getNextMove(List<? extends Move> availableMoves)
 	{
 		int n=1;
 		for (Move move : availableMoves)

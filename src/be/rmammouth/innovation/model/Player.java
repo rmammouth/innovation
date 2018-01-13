@@ -119,49 +119,21 @@ public class Player
   
   public List<Card> getFilteredHand(CardFilter filter)
   {
-    List<Card> filteredHand=new ArrayList<>();
-    for (Card card : hand)
+    return getFilteredCards(CardLocation.HAND, filter);
+  }
+  
+  public List<Card> getFilteredCards(CardLocation location, CardFilter filter)
+  {
+    List<Card> filteredCards=new ArrayList<>();
+    List<Card> cards=getCards(location);
+    for (Card card : cards)
     {
       if (!filter.isFiltered(card))
       {
-        filteredHand.add(card);
+        filteredCards.add(card);
       }
     }
-    return filteredHand;
-  }
-  
-  public Period getHighestPeriodInHand()
-  {
-    Period highest=null;
-    for (Card card : hand)
-    {
-      if (highest==null) highest=card.getPeriod();
-      else
-      {
-        if (highest.isLower(card.getPeriod()))
-        {
-          highest=card.getPeriod();
-        }
-      }
-    }
-    return highest;
-  }
-  
-  public Period getLowestPeriodInHand()
-  {
-    Period lowest=null;
-    for (Card card : hand)
-    {
-      if (lowest==null) lowest=card.getPeriod();
-      else
-      {
-        if (lowest.isHigher(card.getPeriod()))
-        {
-          lowest=card.getPeriod();
-        }
-      }
-    }
-    return lowest;
+    return filteredCards;
   }
   
   public List<Card> getActiveCardsOnBoard()
@@ -242,16 +214,26 @@ public class Player
     gameModel.returnCardToPile(card);
   }
   
+  public Period getHighestPeriod(CardLocation location)
+  {
+    return PeriodCard.getHighestPeriod(getCards(location));
+  }
+  
+  public Period getLowestPeriod(CardLocation location)
+  {
+    return PeriodCard.getLowestPeriod(getCards(location));
+  }
+  
   public List<Card> getCards(CardLocation location)
   {
     switch (location)
     {
     case BOARD:
-      throw new UnsupportedOperationException();
+      return getActiveCardsOnBoard();
     case HAND:
-      return hand;
+      return getHand();
     case SCORE_PILE:
-      throw new UnsupportedOperationException();
+      return getScorePile().getCards();
     }
     return null;
   }
@@ -264,11 +246,10 @@ public class Player
       addToHand(card);
       break;
     case BOARD:
-      break;
+      throw new UnsupportedOperationException();
     case SCORE_PILE:
+      getScorePile().addCard(card);
       break;
-    default:
-      break;      
     }   
   }
 
@@ -280,11 +261,10 @@ public class Player
       removeFromHand(card);
       break;
     case BOARD:
-      break;
+      throw new UnsupportedOperationException();
     case SCORE_PILE:
+      getScorePile().removeCard(card);
       break;
-    default:
-      break;      
     }    
   }
 

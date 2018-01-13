@@ -18,7 +18,7 @@ public class GUIController extends PlayerController
   }
 
   @Override
-  public Move getNextMove(java.util.List<Move> availableMoves)
+  public Move getNextMove(java.util.List<? extends Move> availableMoves)
   {
     GUIInteraction guiInteraction=new GUIInteraction(inputPanel);
     
@@ -58,7 +58,7 @@ class GUIInteraction
     this.inputPanel = inputPanel;
   }
   
-  void showAvailableMoves(java.util.List<Move> availableMoves)
+  void showAvailableMoves(java.util.List<? extends Move> availableMoves)
   {
     inputPanel.removeAll();
     inputPanel.setLayout(new FlowLayout());

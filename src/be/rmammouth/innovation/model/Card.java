@@ -48,9 +48,10 @@ public abstract class Card extends PeriodCard
   }
 	
 	protected void addDogma(Dogma dogma)
-	{
+	{	  
+	  dogma.index=dogmas.size();
 	  dogma.card=this;
-	  dogmas.add(dogma);
+	  dogmas.add(dogma);	  
 	}
 
   public void activate(GameModel model, Player activatingPlayer)
