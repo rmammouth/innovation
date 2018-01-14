@@ -6,15 +6,16 @@ import be.rmammouth.innovation.model.moves.*;
 
 public abstract class Card extends PeriodCard
 {
+  private String id;
   private String name;
   private Color color;
   private Map<ResourceLocation, Resource> resources=new EnumMap<>(ResourceLocation.class);
   private List<Dogma> dogmas=new ArrayList<>();
   
-  protected Card(String name, Period period, Color color, Resource topLeft, Resource bottomLeft, Resource bottomCentre, Resource bottomRight)
+  protected Card(String id, Period period, Color color, Resource topLeft, Resource bottomLeft, Resource bottomCentre, Resource bottomRight)
   {
     super(period);
-  	this.name=name;
+  	this.id=id;
   	this.color=color;
   	resources.put(ResourceLocation.TOP_LEFT, topLeft);
   	resources.put(ResourceLocation.BOTTOM_LEFT, bottomLeft);
@@ -22,11 +23,21 @@ public abstract class Card extends PeriodCard
   	resources.put(ResourceLocation.BOTTOM_RIGHT, bottomRight);
   }
   
-  public String getName()
+  public String getId()
 	{
-		return name;
+		return id;
 	}
   
+  public String getName()
+  {
+    return name;
+  }
+
+  public void setName(String name)
+  {
+    this.name = name;
+  }
+
   public String getNamePrefixedWithPeriod()
   {
   	return "["+period.asString()+"]"+name;
@@ -52,6 +63,11 @@ public abstract class Card extends PeriodCard
 	  dogma.index=dogmas.size();
 	  dogma.card=this;
 	  dogmas.add(dogma);	  
+	}
+	
+	public List<Dogma> getDogmas()
+	{
+	  return Collections.unmodifiableList(dogmas);
 	}
 
   public void activate(GameModel model, Player activatingPlayer)
@@ -114,7 +130,7 @@ public abstract class Card extends PeriodCard
   @Override
   public String toString()
   {
-    return name;
+    return id;
   }
 
 }

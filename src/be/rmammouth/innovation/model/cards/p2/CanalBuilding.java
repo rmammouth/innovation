@@ -9,7 +9,7 @@ public class CanalBuilding extends Card
 {
   public CanalBuilding()
   {
-    super("Canal Building", Period.TWO, Color.YELLOW,
+    super("CanalBuilding", Period.TWO, Color.YELLOW,
         null,
         Resource.CROWN, Resource.LEAF, Resource.CROWN);
     

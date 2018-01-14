@@ -28,4 +28,14 @@ public abstract class Dogma
   {
     return text;
   }
+
+  public void setText(String text)
+  {
+    this.text = text;
+  }
+
+  public Resource getResource()
+  {
+    return resource;
+  }
 }

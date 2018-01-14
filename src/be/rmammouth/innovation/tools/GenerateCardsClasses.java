@@ -4,6 +4,9 @@ import java.io.*;
 import java.net.*;
 
 import javax.xml.parsers.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.*;
+import javax.xml.transform.stream.*;
 
 import org.w3c.dom.*;
 
@@ -18,9 +21,12 @@ public class GenerateCardsClasses
     if (genDir.exists()) delete(genDir);
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
+    Document docText=builder.newDocument();
+    Element rootElm=docText.createElement("cards");
+    docText.appendChild(rootElm);
     File file = new File("db/cards.xml");
-    Document doc = builder.parse(file);    
-    NodeList cards=doc.getDocumentElement().getChildNodes();
+    Document docCards = builder.parse(file);    
+    NodeList cards=docCards.getDocumentElement().getChildNodes();
     for (int i=0;i<cards.getLength();i++)
     {
       Node node=cards.item(i);
@@ -29,14 +35,20 @@ public class GenerateCardsClasses
         Element card=(Element) cards.item(i);        
         NodeList set=card.getElementsByTagName("set");
         if ((set.getLength()>0) && set.item(0).getTextContent().equals("0"))
-        {
+        {          
           String id=card.getAttribute("id");
           String name=card.getElementsByTagName("name").item(0).getTextContent();
           String cleanUpName=name.replaceAll(" of ", " Of ").replaceAll("[ .]", "");
           String period=card.getElementsByTagName("age").item(0).getTextContent();
           String color=card.getElementsByTagName("color").item(0).getTextContent();
           NodeList nlResources=card.getElementsByTagName("icons");
-          System.err.println(id+" : "+name);
+          System.err.println("    register(new "+cleanUpName+"());");
+          
+          Element elmCard=docText.createElement("card");
+          elmCard.setAttribute("id", cleanUpName);
+          elmCard.setAttribute("name", name);
+          rootElm.appendChild(elmCard);
+          
           File directory=new File("generated/p"+period);
           directory.mkdirs();
           PrintWriter pw=new PrintWriter(new FileWriter("generated/p"+period+"/"+cleanUpName+".java"));
@@ -57,7 +69,11 @@ public class GenerateCardsClasses
           NodeList nlDogmas=card.getElementsByTagName("dogmas");
           for (int d=0;d<nlDogmas.getLength();d++)
           {
-            addDogma(pw, nlDogmas.item(d));
+            String text=addDogma(pw, nlDogmas.item(d));
+            Element elmDogma=docText.createElement("dogma");
+            elmDogma.setTextContent(text);
+            elmDogma.setAttribute("id", Integer.toString(d));
+            elmCard.appendChild(elmDogma);
           }
           pw.write("  }\n");          
           pw.write("}\n");
@@ -67,9 +83,17 @@ public class GenerateCardsClasses
         }
       }
     }
+    
+    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+    Transformer transformer = transformerFactory.newTransformer();
+    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+    transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+    DOMSource source = new DOMSource(docText);
+    StreamResult result = new StreamResult(new File("generated/text_EN.xml"));
+    transformer.transform(source, result);
   }
     
-  private static void addDogma(PrintWriter pw, Node item)
+  private static String addDogma(PrintWriter pw, Node item)
   {
     String text=item.getTextContent();
     text=text.replaceAll("\t", "");
@@ -95,7 +119,7 @@ public class GenerateCardsClasses
     text=text.replaceAll("<img src=\"/static/icons/inline-lightbulb.png\">", "[BULB]");
     text=text.replaceAll("<img src=\"/static/icons/inline-factory.png\">", "[FACTORY]");
     text=text.replaceAll("<img src=\"/static/icons/inline-leaf.png\">", "[LEAF]");
-    System.err.println(text);
+  //  System.err.println(text);
     boolean supremacy=text.startsWith("I demand");
     
     pw.write("\n");
@@ -105,8 +129,14 @@ public class GenerateCardsClasses
     if (supremacy) pw.write("      public void activateOnPlayer(CardActivationState cas, Player affectedPlayer)\n");
     else pw.write("      public boolean activateOnPlayer(CardActivationState cas, Player player)\n");
     pw.write("      {\n");
+    if (!supremacy)
+    {
+      pw.write("        return false;\n");
+    }
     pw.write("      }\n");
     pw.write("    });\n");
+    
+    return text;
     
   }
 

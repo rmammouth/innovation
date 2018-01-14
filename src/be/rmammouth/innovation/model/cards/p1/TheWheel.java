@@ -7,7 +7,7 @@ public class TheWheel extends Card
 {
   public TheWheel()
   {
-    super("The Wheel", Period.ONE, Color.GREEN,
+    super("TheWheel", Period.ONE, Color.GREEN,
         null,
         Resource.TOWER, Resource.TOWER, Resource.TOWER);
     

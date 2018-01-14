@@ -83,6 +83,8 @@ public class CardPanel extends JPanel
     add(bottomCentreResource, gbc_bottomCentreResource);
 
     setBackground(getCardColor());
+    
+    setToolTipText(buildToolTipText());
   }
 
   private Color getCardColor()
@@ -109,5 +111,16 @@ public class CardPanel extends JPanel
     Resource resource=card.getResource(loc);
     if (resource==null) return card.getPeriod().asString();
     else return resource.toString();
+  }
+  
+  private String buildToolTipText()
+  {
+    String text="<html>";
+    for (Dogma dogma : card.getDogmas())
+    {
+      text+="<b>"+dogma.getResource()+"</b> : "+dogma.getText()+"<br/>";
+    }
+    text+="</html>";
+    return text;
   }
 }

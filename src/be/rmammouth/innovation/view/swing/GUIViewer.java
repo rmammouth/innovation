@@ -20,27 +20,6 @@ public class GUIViewer extends JFrame implements GameViewer
   private Map<Player, PlayerPanel> playerPanels=new HashMap<>();
   private GameModelPanel gameModelPanel;
 
-  /**
-   * Launch the application.
-   */
-  public static void main(String[] args)
-  {
-    EventQueue.invokeLater(new Runnable()
-    {
-      public void run()
-      {
-        try
-        {
-          GUIViewer frame = new GUIViewer();
-          frame.setVisible(true);
-        } 
-        catch (Exception e)
-        {
-          e.printStackTrace();
-        }
-      }
-    });
-  }
   
   public void init(GameModel model)
   {
@@ -102,7 +81,7 @@ public class GUIViewer extends JFrame implements GameViewer
     logScrollPane.setViewportView(logList);
     bottomPanel.add(logScrollPane);
     
-    
+    ToolTipManager.sharedInstance().setDismissDelay(30000);
   }
 
   @Override
@@ -126,8 +105,7 @@ public class GUIViewer extends JFrame implements GameViewer
   public void log(String message)
   {
     EventQueue.invokeLater(new Runnable()
-    {
-      
+    {      
       @Override
       public void run()
       {

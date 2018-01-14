@@ -10,7 +10,7 @@ public class CityStates extends Card
 {
   public CityStates()
   {
-    super("City States", Period.ONE, Color.PURPLE,
+    super("CityStates", Period.ONE, Color.PURPLE,
         null,
         Resource.CROWN, Resource.CROWN, Resource.TOWER);   
     

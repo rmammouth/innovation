@@ -9,7 +9,7 @@ public class CodeOfLaws extends Card
 {
 	public CodeOfLaws()
 	{
-		super("Code of Laws", Period.ONE, Color.PURPLE,
+		super("CodeOfLaws", Period.ONE, Color.PURPLE,
 			  null,
 			  Resource.CROWN, Resource.CROWN, Resource.LEAF);
 		
