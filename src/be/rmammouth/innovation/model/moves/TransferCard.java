@@ -46,4 +46,21 @@ public class TransferCard extends CardMove
     }
     return moves;
   }
+
+  public Player getToPlayer()
+  {
+    return toPlayer;
+  }
+
+  public CardLocation getFromLocation()
+  {
+    return fromLocation;
+  }
+
+  public CardLocation getToLocation()
+  {
+    return toLocation;
+  }
+  
+  
 }
