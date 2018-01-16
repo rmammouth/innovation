@@ -18,7 +18,13 @@ public class Fermenting extends Card
       @Override
       public boolean activateOnPlayer(CardActivationState cas, Player player)
       {
-        return false;
+        int cardsToDraw=cas.getResourceCount(player, Resource.LEAF)/2;
+        if (cardsToDraw==0) return false;
+        for (int i=0;i<cardsToDraw;i++)
+        {
+          new DrawCard(player, Period.TWO).resolve();
+        }
+        return true;
       }
     });
   }

@@ -62,6 +62,11 @@ public class CardsPile
   {
     this.splaying = splaying;
   }
+  
+  public boolean isSplayable(Splaying newSplaying)
+  {
+    return (cards.size()>=2) && (newSplaying!=splaying);
+  }
 
   public List<Card> getCards()
   {

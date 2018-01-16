@@ -2,6 +2,7 @@ package be.rmammouth.innovation.model.gamestates;
 
 import java.util.*;
 
+import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.moves.*;
 
@@ -29,6 +30,8 @@ public class ChoosingAction extends SinglePlayerGameState
 	  {
 	    actionsLeft=getAvailableActionsCount();
 	  }
+	  
+	  Innovation.getViewer().log(player.getName()+" has "+actionsLeft+" action(s) left to play");
 	  
 		List<Move> moves=new ArrayList<>();
 		moves.add(new DrawCard(player));

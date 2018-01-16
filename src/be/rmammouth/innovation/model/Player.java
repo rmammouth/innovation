@@ -117,6 +117,20 @@ public class Player
     return board.get(color);
   }
   
+  public List<Color> getSplayableColors(Splaying splaying)
+  {
+    List<Color> colors=new ArrayList<>();
+    for (Color color : Color.values())
+    {
+      CardsPile pile=getCardsPile(color);
+      if (pile.isSplayable(splaying))
+      {
+        colors.add(color);
+      }
+    }
+    return colors;
+  }
+  
   public List<Card> getFilteredHand(CardFilter filter)
   {
     return getFilteredCards(CardLocation.HAND, filter);
@@ -246,7 +260,7 @@ public class Player
       addToHand(card);
       break;
     case BOARD:
-      throw new UnsupportedOperationException();
+      getCardsPile(card.getColor()).addCardOnTop(card);
     case SCORE_PILE:
       getScorePile().addCard(card);
       break;
@@ -261,7 +275,7 @@ public class Player
       removeFromHand(card);
       break;
     case BOARD:
-      throw new UnsupportedOperationException();
+      getCardsPile(card.getColor()).remove(card);
     case SCORE_PILE:
       getScorePile().removeCard(card);
       break;

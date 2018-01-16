@@ -37,7 +37,7 @@ public class CodeOfLaws extends Card
           else
           {
             ArchiveCard archiveCard=(ArchiveCard)chosenMove;
-            if (player.getCardsPile(archiveCard.getCard().getColor()).getSplaying()!=Splaying.LEFT)
+            if (player.getCardsPile(archiveCard.getCard().getColor()).isSplayable(Splaying.LEFT))
             {
               SplayPile splayMove=new SplayPile(player, archiveCard.getCard().getColor(), Splaying.LEFT);
               Pass passSplay=new Pass(player);

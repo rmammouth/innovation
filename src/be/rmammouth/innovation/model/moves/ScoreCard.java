@@ -1,5 +1,7 @@
 package be.rmammouth.innovation.model.moves;
 
+import java.util.*;
+
 import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
@@ -22,5 +24,15 @@ public class ScoreCard extends CardMove
     Innovation.getViewer().log(player.getName()+" scores "+card.getNamePrefixedWithPeriod());
     player.removeFromHand(card);
     player.addToScorePile(card);
+  }
+  
+  public static List<Move> getAllScoreCardMoves(Player player)
+  {
+    List<Move> moves=new ArrayList<>();
+    for (Card card : player.getHand())
+    {
+      moves.add(new ScoreCard(player, card));  
+    }
+    return moves;
   }
 }
