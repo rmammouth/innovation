@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cards>
+  <card id="Agriculture" name="Agriculture">
+    <dogma id="0">You may return a card from your hand. If you do, draw and score a card of value one higher than the card you returned.</dogma>
+  </card>
+  <card id="Archery" name="Archery">
+    <dogma id="0">I demand you draw a [1], then transfer the highest card in your hand to my hand!</dogma>
+  </card>
+  <card id="Clothing" name="Clothing">
+    <dogma id="0">Meld a card from your hand of different color from any card on your board.</dogma>
+    <dogma id="1">Draw and score a [1] for each color present on your board not present on any other player's board.</dogma>
+  </card>
+  <card id="CodeOfLaws" name="Code of Laws">
+    <dogma id="0">You may tuck a card from your hand of the same color as any card on your board. If you do, you may splay that color of your cards left.</dogma>
+  </card>
+  <card id="CityStates" name="City States">
+    <dogma id="0">I demand you transfer a top card with a [TOWER] from your board to my board if you have at least four [TOWER] on your board! If you do, draw a [1]!</dogma>
+  </card>
+  <card id="Domestication" name="Domestication">
+    <dogma id="0">Meld the lowest card in your hand. Draw a [1].</dogma>
+  </card>
+  <card id="Masonry" name="Masonry">
+    <dogma id="0">You may meld any number of cards from your hand, each with a [TOWER]. If you melded four or more cards, claim the Monument achievement.</dogma>
+  </card>
+  <card id="Metalworking" name="Metalworking">
+    <dogma id="0">Draw and reveal a [1]. If it has a [TOWER], score it and repeat this dogma effect. Otherwise, keep it.</dogma>
+  </card>
+  <card id="Mysticism" name="Mysticism">
+    <dogma id="0">Draw a [1]. If it is the same color as any card on your board, meld it and draw a [1].</dogma>
+  </card>
+  <card id="Oars" name="Oars">
+    <dogma id="0">I demand you transfer a card with a [CROWN] from your hand to my score pile! If you do, draw a [1].</dogma>
+    <dogma id="1">If no cards were transferred due to this demand, draw a [1].</dogma>
+  </card>
+  <card id="Pottery" name="Pottery">
+    <dogma id="0">You may return up to three cards from your hand. If you returned any cards, draw and score a card of value equal to the number of cards you returned.</dogma>
+    <dogma id="1">Draw a [1].</dogma>
+  </card>
+  <card id="Sailing" name="Sailing">
+    <dogma id="0">Draw and meld a [1].</dogma>
+  </card>
+  <card id="TheWheel" name="The Wheel">
+    <dogma id="0">Draw two [1].</dogma>
+  </card>
+  <card id="Tools" name="Tools">
+    <dogma id="0">You may return three cards from your hand. If you do, draw and meld a [3].</dogma>
+    <dogma id="1">You may return a [3] from your hand. If you do, draw three [1].</dogma>
+  </card>
+  <card id="Writing" name="Writing">
+    <dogma id="0">Draw a [2].</dogma>
+  </card>
+  <card id="Calendar" name="Calendar">
+    <dogma id="0">If you have more cards in your score pile than in your hand, draw two [3].</dogma>
+  </card>
+  <card id="CanalBuilding" name="Canal Building">
+    <dogma id="0">You may exchange all the highest cards in your hand with all the highest cards in your score pile.</dogma>
+  </card>
+  <card id="Currency" name="Currency">
+    <dogma id="0">You may return any number of cards from your hand. If you do, draw and score a [2] for every different value of card you returned.</dogma>
+  </card>
+  <card id="Construction" name="Construction">
+    <dogma id="0">I demand you transfer two cards from your hand to my hand, then draw a [2]!</dogma>
+    <dogma id="1">If you are the only player with five top cards, claim the Empire achievement.</dogma>
+  </card>
+  <card id="Fermenting" name="Fermenting">
+    <dogma id="0">Draw a [2] for every two [LEAF] icons on your board.</dogma>
+  </card>
+  <card id="Mapmaking" name="Mapmaking">
+    <dogma id="0">I demand you transfer a [1] from your score pile to my score pile.</dogma>
+    <dogma id="1">If any card was transferred due to the demand, draw and score a [1].</dogma>
+  </card>
+  <card id="Mathematics" name="Mathematics">
+    <dogma id="0">You may return a card from your hand. If you do, draw and meld a card of value one higher than the card you returned.</dogma>
+  </card>
+  <card id="Monotheism" name="Monotheism">
+    <dogma id="0">I demand you transfer a top card on your board of a different color from any card on my board to my score pile! If you do, draw and tuck a [1]!</dogma>
+    <dogma id="1">Draw and tuck a [1].</dogma>
+  </card>
+  <card id="Philosophy" name="Philosophy">
+    <dogma id="0">You may splay left any one color of your cards.</dogma>
+    <dogma id="1">You may score a card from your hand.</dogma>
+  </card>
+  <card id="RoadBuilding" name="Road Building">
+    <dogma id="0">Meld one or two cards from your hand. If you melded two, you may transfer your top red card to another player's board. In exchange, transfer that player's top green card to your board.</dogma>
+  </card>
+  <card id="Alchemy" name="Alchemy">
+    <dogma id="0">Draw and reveal a [4] for every 3 [TOWER] icons on your board. If any of the drawn cards are red, return the cards drawn and all cards in your hand. Otherwise, keep them.</dogma>
+    <dogma id="1">Meld a card from your hand, then score a card from your hand.</dogma>
+  </card>
+  <card id="Education" name="Education">
+    <dogma id="0">You may return the highest card from your score pile. If you do, draw a card of value two higher than the highest card remaining in your score pile.</dogma>
+  </card>
+  <card id="Compass" name="Compass">
+    <dogma id="0">I demand you transfer a top non-green card with a [LEAF] from your board to my board, and then transfer a top card without a [LEAF] from my board to your board.</dogma>
+  </card>
+  <card id="Engineering" name="Engineering">
+    <dogma id="0">I demand you transfer all top cards with a [TOWER] from your board to my score pile!</dogma>
+    <dogma id="1">You may splay your red cards left.</dogma>
+  </card>
+  <card id="Feudalism" name="Feudalism">
+    <dogma id="0">I demand you transfer a card with a [TOWER] from your hand to my hand!</dogma>
+    <dogma id="1">You may splay your yellow or purple cards left.</dogma>
+  </card>
+  <card id="Machinery" name="Machinery">
+    <dogma id="0">I demand you exchange all cards in your hand with all the highest cards in my hand!</dogma>
+    <dogma id="1">Score a card from your hand with a [TOWER]. You may splay your red cards left.</dogma>
+  </card>
+  <card id="Medicine" name="Medicine">
+    <dogma id="0">I demand you exchange the highest card in your score pile with the lowest card in my score pile.</dogma>
+  </card>
+  <card id="Optics" name="Optics">
+    <dogma id="0">Draw and meld a [3]. If it has a [CROWN], draw and score a [4]. Otherwise, transfer a card from your score pile to the score pile of an opponent with fewer points than you.</dogma>
+  </card>
+  <card id="Paper" name="Paper">
+    <dogma id="0">You may splay your green or blue cards left.</dogma>
+    <dogma id="1">Draw a [4] for every color you have splayed left.</dogma>
+  </card>
+  <card id="Translation" name="Translation">
+    <dogma id="0">You may meld all the cards in your score pile. If you meld one, you must meld them all.</dogma>
+    <dogma id="1">If each top card on your board has a [CROWN], claim the World achievement.</dogma>
+  </card>
+  <card id="Anatomy" name="Anatomy">
+    <dogma id="0">I demand you return a card from your score pile! If you do, return a top card of equal value from your board!</dogma>
+  </card>
+  <card id="Colonialism" name="Colonialism">
+    <dogma id="0">Draw and tuck a [3]. If it has a [CROWN], repeat this dogma effect.</dogma>
+  </card>
+  <card id="Enterprise" name="Enterprise">
+    <dogma id="0">I demand you transfer a top non-purple card with a [CROWN] from your board to my board! If you do, draw and meld a [4]!</dogma>
+    <dogma id="1">You may splay your green cards right.</dogma>
+  </card>
+  <card id="Experimentation" name="Experimentation">
+    <dogma id="0">Draw and meld a [5].</dogma>
+  </card>
+  <card id="Gunpowder" name="Gunpowder">
+    <dogma id="0">I demand you transfer a top card with a [TOWER] from your board to my score pile!</dogma>
+    <dogma id="1">If any card was transferred due to the demand, draw and score a [2].</dogma>
+  </card>
+  <card id="Invention" name="Invention">
+    <dogma id="0">You may splay right any one color of your cards currently splayed left. If you do, draw and score a [4].</dogma>
+    <dogma id="1">If you have five colors splayed, each in any direction, claim the Wonder achievement.</dogma>
+  </card>
+  <card id="Navigation" name="Navigation">
+    <dogma id="0">I demand you transfer a [2] or [3] from your score pile to my score pile!</dogma>
+  </card>
+  <card id="Perspective" name="Perspective">
+    <dogma id="0">You may return a card from your hand. If you do, score a card from your hand for every two [BULB] icons on your board.</dogma>
+  </card>
+  <card id="PrintingPress" name="Printing Press">
+    <dogma id="0">You may return a card from your score pile. If you do, draw a card of value two higher than the top purple card on your board.</dogma>
+    <dogma id="1">You may splay your blue cards right.</dogma>
+  </card>
+  <card id="Reformation" name="Reformation">
+    <dogma id="0">You may tuck a card from your hand for every two [LEAF] icons on your board.</dogma>
+    <dogma id="1">You may splay your yellow or purple cards right.</dogma>
+  </card>
+  <card id="Astronomy" name="Astronomy">
+    <dogma id="0">Draw and reveal a [6]. If the card is green or blue, meld it and repeat this dogma effect.</dogma>
+    <dogma id="1">If all non-purple top cards on your board are value [6] or higher, claim the Universe achievement.</dogma>
+  </card>
+  <card id="Banking" name="Banking">
+    <dogma id="0">I demand you transfer a top non-green card with a [FACTORY] from your board to my board! If you do, draw and score a [5].</dogma>
+    <dogma id="1">You may splay your green cards right.</dogma>
+  </card>
+  <card id="Chemistry" name="Chemistry">
+    <dogma id="0">You may splay your blue cards right.</dogma>
+    <dogma id="1">Draw and score a card of value one higher than the highest top card on your board and then return a card from your score pile.</dogma>
+  </card>
+  <card id="Coal" name="Coal">
+    <dogma id="0">Draw and tuck a [5].</dogma>
+    <dogma id="1">You may splay your red cards right.</dogma>
+    <dogma id="2">You may score any one of your top cards. If you do, also score the card beneath it.</dogma>
+  </card>
+  <card id="Measurement" name="Measurement">
+    <dogma id="0">You may return a card from your hand. If you do, splay any one color of your cards right, and draw a card of value equal to the number of cards of that color on your board.</dogma>
+  </card>
+  <card id="Physics" name="Physics">
+    <dogma id="0">Draw three [6] and reveal them. If two or more of the drawn cards are of the same color, return the drawn cards and all the cards in your hand. Otherwise, keep them.</dogma>
+  </card>
+  <card id="Societies" name="Societies">
+    <dogma id="0">I demand you transfer a top non-purple card with a [BULB] from your board to my board! If you do, draw a [5]!</dogma>
+  </card>
+  <card id="Statistics" name="Statistics">
+    <dogma id="0">I demand you transfer the highest card in your score pile to your hand! If you do, and have only one card in your hand afterwards, repeat this demand!</dogma>
+    <dogma id="1">You may splay your yellow cards right.</dogma>
+  </card>
+  <card id="SteamEngine" name="Steam Engine">
+    <dogma id="0">Draw and tuck two [4], then score your bottom yellow card.</dogma>
+  </card>
+  <card id="ThePirateCode" name="The Pirate Code">
+    <dogma id="0">I demand you transfer two cards of value [4] or less from your score pile to my score pile!</dogma>
+    <dogma id="1">If any card was transferred due to the demand, score the lowest top card with a [CROWN] from your board.</dogma>
+  </card>
+  <card id="AtomicTheory" name="Atomic Theory">
+    <dogma id="0">You may splay your blue cards right.</dogma>
+    <dogma id="1">Draw and meld a [7].</dogma>
+  </card>
+  <card id="Canning" name="Canning">
+    <dogma id="0">You may draw and tuck a [6]. If you do, score all your top cards without a [FACTORY].</dogma>
+    <dogma id="1">You may splay your yellow cards right.</dogma>
+  </card>
+  <card id="Classification" name="Classification">
+    <dogma id="0">Reveal the color of a card from your hand. Take into your hand all cards of that color from all other players' hands. Then, meld all cards of that color from your hand.</dogma>
+  </card>
+  <card id="Democracy" name="Democracy">
+    <dogma id="0">You may return any number of cards from your hand. If you have returned more cards than any other player due to Democracy this phase, draw and score an [8].</dogma>
+  </card>
+  <card id="Emancipation" name="Emancipation">
+    <dogma id="0">I demand you transfer a card from your hand to my score pile! If you do, draw a [6]!</dogma>
+    <dogma id="1">You may splay your red or purple cards right.</dogma>
+  </card>
+  <card id="Encyclopedia" name="Encyclopedia">
+    <dogma id="0">You may meld all the highest cards in your score pile. If you meld one of the highest, you must meld all of the highest.</dogma>
+  </card>
+  <card id="Industrialization" name="Industrialization">
+    <dogma id="0">Draw and tuck a [6] for every two [FACTORY] icons on your board.</dogma>
+    <dogma id="1">You may splay your red or purple cards right.</dogma>
+  </card>
+  <card id="MachineTools" name="Machine Tools">
+    <dogma id="0">Draw and score a card of value equal to the highest card in your score pile.</dogma>
+  </card>
+  <card id="MetricSystem" name="Metric System">
+    <dogma id="0">If your green cards are splayed right, you may splay any color of your cards right.</dogma>
+    <dogma id="1">You may splay your green cards right.</dogma>
+  </card>
+  <card id="Vaccination" name="Vaccination">
+    <dogma id="0">I demand you return all the lowest cards in your score pile! If you returned any, draw and meld a [6]!</dogma>
+    <dogma id="1">If any card was returned as a result of the demand, draw and meld a [7].</dogma>
+  </card>
+  <card id="Bicycle" name="Bicycle">
+    <dogma id="0">You may exchange all the cards in your hand with all the cards in your score pile. If you exchange one, you must exchange them all.</dogma>
+  </card>
+  <card id="Combustion" name="Combustion">
+    <dogma id="0">I demand you transfer two cards from your score pile to my score pile!</dogma>
+  </card>
+  <card id="Electricity" name="Electricity">
+    <dogma id="0">Return all your top cards without a [FACTORY], then draw an [8] for each card you returned.</dogma>
+  </card>
+  <card id="Evolution" name="Evolution">
+    <dogma id="0">You may choose to either draw and score an [8] and then return a card from your score pile, or draw a card of value one higher than the highest card in your score pile.</dogma>
+  </card>
+  <card id="Explosives" name="Explosives">
+    <dogma id="0">I demand you transfer your three highest cards from your hand to my hand! If you do, and then have no cards in hand, draw a [7]!</dogma>
+  </card>
+  <card id="Lighting" name="Lighting">
+    <dogma id="0">You may tuck up to three cards from your hand. If you do, draw and score a [7] for every different value of card you tucked.</dogma>
+  </card>
+  <card id="Publications" name="Publications">
+    <dogma id="0">You may rearrange the order of one color of cards on your board.</dogma>
+    <dogma id="1">You may splay your yellow or blue cards up.</dogma>
+  </card>
+  <card id="Railroad" name="Railroad">
+    <dogma id="0">Return all cards from your hand, then draw three [6].</dogma>
+    <dogma id="1">You may splay up any one color of your cards currently splayed right.</dogma>
+  </card>
+  <card id="Refrigeration" name="Refrigeration">
+    <dogma id="0">I demand you return half (rounded down) of the cards in your hand.</dogma>
+    <dogma id="1">You may score a card from your hand.</dogma>
+  </card>
+  <card id="Sanitation" name="Sanitation">
+    <dogma id="0">I demand you exchange the two highest cards in your hand with the lowest card in my hand!</dogma>
+  </card>
+  <card id="Antibiotics" name="Antibiotics">
+    <dogma id="0">You may return up to three cards from your hand. For every different value of card that you returned, draw two [8].</dogma>
+  </card>
+  <card id="Corporations" name="Corporations">
+    <dogma id="0">I demand you transfer a top non-green card with a [FACTORY] from your board to my score pile! If you do, draw and meld an [8]!</dogma>
+    <dogma id="1">Draw and meld an [8].</dogma>
+  </card>
+  <card id="Empiricism" name="Empiricism">
+    <dogma id="0">Choose two colors, then draw and reveal a [9]. If it is either of the colors you chose, meld it and you may splay your cards of that color up.</dogma>
+    <dogma id="1">If you have twenty or more [BULB] icons on your board, you win.</dogma>
+  </card>
+  <card id="Flight" name="Flight">
+    <dogma id="0">If your red cards are splayed up, you may splay any color of your cards up.</dogma>
+    <dogma id="1">You may splay your red cards up.</dogma>
+  </card>
+  <card id="MassMedia" name="Mass Media">
+    <dogma id="0">You may return a card from your hand. If you do, choose a value, and return all cards of that value from all score piles.</dogma>
+    <dogma id="1">You may splay your purple cards up.</dogma>
+  </card>
+  <card id="Mobility" name="Mobility">
+    <dogma id="0">I demand you transfer your two highest non-red cards without a [FACTORY] from your board to my score pile! If you transferred any cards, draw an [8]!</dogma>
+  </card>
+  <card id="QuantumTheory" name="Quantum Theory">
+    <dogma id="0">You may return up to two cards from your hand. If you return two, draw a [10] and then draw and score a [10].</dogma>
+  </card>
+  <card id="Rocketry" name="Rocketry">
+    <dogma id="0">Return a card in any other player's score pile for every two [CLOCK] icons on your board.</dogma>
+  </card>
+  <card id="Skyscrapers" name="Skyscrapers">
+    <dogma id="0">I demand you transfer a top non-yellow card with a [CLOCK] from your board to my board! If you do, score the card beneath it, and return all other cards from that pile!</dogma>
+  </card>
+  <card id="Socialism" name="Socialism">
+    <dogma id="0">You may tuck all cards from your hand. If you tuck one, you must tuck them all. If you tucked at least one purple card, take all the lowest cards in each other player's hand into your hand.</dogma>
+  </card>
+  <card id="Collaboration" name="Collaboration">
+    <dogma id="0">I demand you draw two [9] and reveal them. Transfer the card of my choice to my board, and meld the other.</dogma>
+    <dogma id="1">If you have ten or more green cards on your board, you win.</dogma>
+  </card>
+  <card id="Composites" name="Composites">
+    <dogma id="0">I demand you transfer all but one card from your hand to my hand! Also, transfer the highest card from your score pile to my score pile!</dogma>
+  </card>
+  <card id="Computers" name="Computers">
+    <dogma id="0">You may splay your red cards or your green cards up.</dogma>
+    <dogma id="1">Draw and meld a [10], then execute its non-demand dogma effects for yourself only.</dogma>
+  </card>
+  <card id="Ecology" name="Ecology">
+    <dogma id="0">You may return a card from your hand. If you do, score a card from your hand and draw two [10].</dogma>
+  </card>
+  <card id="Fission" name="Fission">
+    <dogma id="0">I demand you draw a [10]! If it is red, remove all hands, boards, and score piles from the game! If this occurs, the dogma action is complete.</dogma>
+    <dogma id="1">Return a top card other than Fission from any player's board.</dogma>
+  </card>
+  <card id="Genetics" name="Genetics">
+    <dogma id="0">Draw and meld a [10]. Score all cards beneath it.</dogma>
+  </card>
+  <card id="Satellites" name="Satellites">
+    <dogma id="0">Return all cards from your hand, and draw three [8].</dogma>
+    <dogma id="1">You may splay your purple cards up.</dogma>
+    <dogma id="2">Meld a card from your hand and then execute each of its non-demand dogma effects for yourself only.</dogma>
+  </card>
+  <card id="Services" name="Services">
+    <dogma id="0">I demand you transfer all the highest cards from your score pile to my hand! If you transferred any cards, then transfer a top card from my board without a [LEAF] to your hand!</dogma>
+  </card>
+  <card id="Specialization" name="Specialization">
+    <dogma id="0">Reveal a card from your hand. Take into your hand the top card of that color from all other players' boards.</dogma>
+    <dogma id="1">You may splay your yellow or blue cards up.</dogma>
+  </card>
+  <card id="Suburbia" name="Suburbia">
+    <dogma id="0">You may tuck any number of cards from your hand. Draw and score a [1] for each card you tucked.</dogma>
+  </card>
+  <card id="AI" name="A.I.">
+    <dogma id="0">Draw and score a [10].</dogma>
+    <dogma id="1">If Robotics and Software are top cards on any board, the single player with the lowest score wins.</dogma>
+  </card>
+  <card id="Bioengineering" name="Bioengineering">
+    <dogma id="0">Transfer a top card with a [LEAF] from any other player's board to your score pile.</dogma>
+    <dogma id="1">If any player has fewer than three [LEAF] icons on their board, the single player with the most [LEAF] icons on their board wins.</dogma>
+  </card>
+  <card id="Databases" name="Databases">
+    <dogma id="0">I demand you return half (rounded up) of the cards in your score pile!</dogma>
+  </card>
+  <card id="Globalization" name="Globalization">
+    <dogma id="0">I demand you return a top card with a [LEAF] on your board!</dogma>
+    <dogma id="1">Draw and score a [6]. If no player has more [LEAF] icons than [FACTORY] icons on their board, the single player with the most points wins.</dogma>
+  </card>
+  <card id="Miniaturization" name="Miniaturization">
+    <dogma id="0">You may return a card from your hand. If you returned a [10], draw a [10] for every different value of card in your score pile.</dogma>
+  </card>
+  <card id="Robotics" name="Robotics">
+    <dogma id="0">Score your top green card. Draw and meld a [10], then execute its non-demand dogma effects for yourself only.</dogma>
+  </card>
+  <card id="SelfService" name="Self Service">
+    <dogma id="0">Execute the non-demand dogma effects of any other top card on your board for yourself only.</dogma>
+    <dogma id="1">If you have more achievements than each other player, you win.</dogma>
+  </card>
+  <card id="Software" name="Software">
+    <dogma id="0">Draw and score a [10].</dogma>
+    <dogma id="1">Draw and meld two [10], then execute the second card's non-demand dogma effects for yourself only.</dogma>
+  </card>
+  <card id="StemCells" name="Stem Cells">
+    <dogma id="0">You may score all cards from your hand. If you score one, you must score them all.</dogma>
+  </card>
+  <card id="TheInternet" name="The Internet">
+    <dogma id="0">You may splay your green cards up.</dogma>
+    <dogma id="1">Draw and score a [10].</dogma>
+    <dogma id="2">Draw and meld a [10] for every two [CLOCK] icons on your board.</dogma>
+  </card>
+</cards>
