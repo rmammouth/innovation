@@ -7,8 +7,6 @@ import be.rmammouth.innovation.model.gamestates.*;
 
 public class ActivateCard extends ActionMove
 {
-  private CardActivationStatus cardActivationStatus;
-  
   public ActivateCard(Player player, Card card)
   {
     super(player,card);
@@ -21,28 +19,17 @@ public class ActivateCard extends ActionMove
   }
 
   @Override
-  protected void doResolve()
+  protected boolean doResolveAction()
   {    
-    cardActivationStatus=card.activate(player);
-    PlayerInteraction playerInteraction=cardActivationStatus.getNextInteraction();
-    if (playerInteraction!=null)
-    {
-      player.getGameModel().setCurrentState(new ActivatingCard(player.getGameModel(),cardActivationStatus));
-    }
-  }
-  
-  @Override
-  public boolean isActionCompleted()
-  {
+    CardActivationStatus cardActivationStatus=card.activate(player);
     PlayerInteraction playerInteraction=cardActivationStatus.getNextInteraction();
     if (playerInteraction==null)
     {
-      //card activation completely resolved (no further player interaction needed)      
-      return true;
+      return true;      
     }
     else
     {
-      //player interaction still needed
+      player.getGameModel().setCurrentState(new ActivatingCard(player.getGameModel(), cardActivationStatus));
       return false;
     }
   }

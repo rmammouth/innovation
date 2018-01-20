@@ -22,10 +22,11 @@ public class DominatePeriod extends ActionMove
   }
 
   @Override
-  protected void doResolve()
+  protected boolean doResolveAction()
   {    
     player.dominate(card);
     Innovation.getViewManager().log(player.getName()+" dominates period "+period.asString()+" and has now "+player.getDominations().size()+" dominations");
+    return true;
   }
   
   public static List<DominatePeriod> getAllDominablePeriodMoves(Player player)

@@ -10,17 +10,32 @@ import be.rmammouth.innovation.model.gamestates.*;
  */
 public abstract class ActionMove extends CardMove
 {
+  private boolean turnAction;
+  
   public ActionMove(Player player, Card card)
   {
     super(player, card);
   }
 
-  /**
-   * Return true if action totally completed (or false if further interaction needed)
-   * @return
-   */
-  public boolean isActionCompleted()
+  @Override
+  protected final void doResolve()
   {
-    return true;
+    boolean resolutionComplete=doResolveAction();
+    if (turnAction && resolutionComplete)
+    {
+      player.getGameModel().decreaseActionCount();
+    }    
   }
+  
+  
+  public void setTurnAction(boolean turnAction)
+  {
+    this.turnAction = turnAction;
+  }
+
+  /**
+   * Resolve the action
+   * @return True if the action is completely resolved
+   */
+  protected abstract boolean doResolveAction();
 }

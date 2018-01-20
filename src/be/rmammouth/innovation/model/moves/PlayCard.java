@@ -24,10 +24,11 @@ public class PlayCard extends ActionMove
 	}
 
 	@Override
-	protected void doResolve()
+	protected boolean doResolveAction()
 	{
 	  Innovation.getViewManager().log(player.getName()+" puts "+card.getLabelPrefixedWithPeriod()+" into play");
 		player.putCardInPlay(card);		
+		return true;
 	}
 	
 	public static List<PlayCard> getAllPlayableCardMoves(Player player)

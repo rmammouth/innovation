@@ -24,17 +24,17 @@ public class ChoosingAction extends SinglePlayerGameState
 		moves.addAll(PlayCard.getAllPlayableCardMoves(player));
 		moves.addAll(ActivateCard.getAllActivableCardMoves(player));
 		moves.addAll(DominatePeriod.getAllDominablePeriodMoves(player));
+		
+		for (ActionMove move : moves)
+		{
+		  move.setTurnAction(true);
+		}
+		
 		return new PlayerInteraction(player, new ArrayList<Move>(moves));
 	}
 
 	@Override
 	public void moveResolved(Move move)
-	{
-	  ActionMove actionMove=(ActionMove)move;
-	  if (actionMove.isActionCompleted())
-	  {
-	    //action completely resolved  		
-  		model.decreaseActionCount();
-	  }
+	{	  
 	}
 }
