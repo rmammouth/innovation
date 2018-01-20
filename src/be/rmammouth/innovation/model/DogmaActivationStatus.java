@@ -3,6 +3,7 @@ package be.rmammouth.innovation.model;
 import java.util.*;
 
 import be.rmammouth.innovation.*;
+import be.rmammouth.innovation.model.moves.*;
 
 public class DogmaActivationStatus
 {  
@@ -12,6 +13,7 @@ public class DogmaActivationStatus
   private Player currentlyAffectedPlayer;
   private PlayerInteraction nextInteraction;
   private int resolutionStep;
+  private Stack<Move> resolvedMoves=new Stack<>();
   
   public DogmaActivationStatus(Dogma dogma, CardActivationStatus cardActivationStatus)
   {
@@ -28,6 +30,10 @@ public class DogmaActivationStatus
   public void startResolution(CardActivationStatus cardActivationStatus)
   {
     itrPlayers=dogma.getAffectedPlayers(cardActivationStatus).iterator();
+    if (!itrPlayers.hasNext())
+    {
+      Innovation.getViewManager().log("Activating "+cardActivationStatus.getCard().getLabel()+" "+dogma.getDogmaTypeLabel()+" dogma "+dogma.getIndex()+" : no one gets affected");
+    }
   }
   
   public final PlayerInteraction getNextInteraction()
@@ -37,8 +43,7 @@ public class DogmaActivationStatus
       if (itrPlayers.hasNext())
       {
         currentlyAffectedPlayer=itrPlayers.next();
-        Innovation.getViewManager().log("Activating "+cardActivationStatus.getCard().getLabel()+" "+dogma.getDogmaTypeLabel()+" dogma "+dogma.getIndex()+" on "+currentlyAffectedPlayer.getName());
-        resolutionStep=0;
+        Innovation.getViewManager().log("Activating "+cardActivationStatus.getCard().getLabel()+" "+dogma.getDogmaTypeLabel()+" dogma "+dogma.getIndex()+" on "+currentlyAffectedPlayer.getName());        
       }
       else return null;
     }
@@ -46,7 +51,22 @@ public class DogmaActivationStatus
     nextInteraction=dogma.getNextPlayerInteraction(cardActivationStatus, this);
     if (nextInteraction==null)
     {
-      //we're done with this player, switch to the next one
+      //we're done with this player
+      //check if the activating player will get a free card draw
+      if (dogma.enablesFreeDraw() && (currentlyAffectedPlayer.getIndex()!=cardActivationStatus.getActivatingPlayer().getIndex()))
+      {
+        for (Move move : resolvedMoves)
+        {
+          if (move.modifiesGameModel())
+          {
+            cardActivationStatus.giveFreeDraw();
+            break;
+          }
+        }
+      }
+      //switch to the next player affected by this dogma 
+      resolutionStep=0;
+      resolvedMoves.clear();
       currentlyAffectedPlayer=null;
       return getNextInteraction();
     }
@@ -66,5 +86,26 @@ public class DogmaActivationStatus
   public Player getAffectedPlayer()
   {
     return currentlyAffectedPlayer;
+  }
+  
+  public void addResolvedMove(Move move)
+  {
+    resolvedMoves.push(move);
+  }
+  
+  public Move getLastResolvedMove()
+  {
+    if (resolvedMoves.isEmpty()) return null;
+    else return resolvedMoves.peek();
+  }
+  
+  public int getNumberOfResolvedMoves(Class clazz)
+  {
+    int nbr=0;
+    for (Move move : resolvedMoves)
+    {
+      if (clazz.isAssignableFrom(move.getClass())) nbr++;
+    }
+    return nbr;
   }
 }

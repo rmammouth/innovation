@@ -22,6 +22,11 @@ public class SplayPile extends Move
   {
     return "Splay "+color+" pile "+splaying;
   }
+  
+  public boolean modifiesGameModel()
+  {
+    return true;
+  }
 
   @Override
   protected void doResolve()

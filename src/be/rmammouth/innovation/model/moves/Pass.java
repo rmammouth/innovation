@@ -14,4 +14,9 @@ public class Pass extends Option
   {
     super(player,"Pass",player.getName()+" pass");
   }
+  
+  public boolean isPass()
+  {
+    return true;
+  }
 }

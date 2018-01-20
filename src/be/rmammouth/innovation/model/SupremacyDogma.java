@@ -30,4 +30,9 @@ public abstract class SupremacyDogma extends Dogma
     }
     return affectedPlayers;
   }
+  
+  public final boolean enablesFreeDraw()
+  {
+    return false;
+  }
 }

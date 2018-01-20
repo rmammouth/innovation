@@ -24,21 +24,26 @@ public class ActivateCard extends ActionMove
   protected void doResolve()
   {    
     cardActivationStatus=card.activate(player);
+    PlayerInteraction playerInteraction=cardActivationStatus.getNextInteraction();
+    if (playerInteraction!=null)
+    {
+      player.getGameModel().setCurrentState(new ActivatingCard(player.getGameModel(),cardActivationStatus));
+    }
   }
   
   @Override
-  public GameState getNewGameState()
+  public boolean isActionCompleted()
   {
     PlayerInteraction playerInteraction=cardActivationStatus.getNextInteraction();
     if (playerInteraction==null)
     {
-      //card activation completely resolved (no player interaction needed)      
-      return null;
+      //card activation completely resolved (no further player interaction needed)      
+      return true;
     }
     else
     {
-      //player interaction needed
-      return new ActivatingCard(player.getGameModel(),cardActivationStatus);
+      //player interaction still needed
+      return false;
     }
   }
 

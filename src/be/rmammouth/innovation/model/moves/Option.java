@@ -20,6 +20,11 @@ public class Option extends Move
   {
     return label;
   }
+  
+  public boolean modifiesGameModel()
+  {
+    return false;
+  }
 
   @Override
   protected void doResolve()

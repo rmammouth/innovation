@@ -8,20 +8,16 @@ import be.rmammouth.innovation.model.moves.*;
 
 public class ChoosingAction extends SinglePlayerGameState
 {
-	private Player player;
-	private int actionsLeft;
-	
 	public ChoosingAction(GameModel model)
 	{
 		super(model);
-		player=model.getCurrentTurnPlayer();
-		actionsLeft=getAvailableActionsCount();
 	}
 
 	@Override
 	public PlayerInteraction getNextInteraction()
 	{
-	  Innovation.getViewManager().log(player.getName()+" has "+actionsLeft+" action(s) left to play");
+	  Player player=model.getCurrentTurnPlayer();
+	  Innovation.getViewManager().log(player.getName()+" has "+model.getCurrentTurnActionsLeft()+" action(s) left to play");
 	  
 		List<ActionMove> moves=new ArrayList<>();
 		moves.add(new DrawCard(player));
@@ -34,44 +30,11 @@ public class ChoosingAction extends SinglePlayerGameState
 	@Override
 	public void moveResolved(Move move)
 	{
-	  actionsLeft--;
 	  ActionMove actionMove=(ActionMove)move;
-	  GameState newGameState=actionMove.getNewGameState();
-	  if (newGameState==null)
+	  if (actionMove.isActionCompleted())
 	  {
 	    //action completely resolved  		
-  		if (actionsLeft==0)
-  		{
-  		  model.nextPlayerTurn();
-  		  model.setCurrentState(new ChoosingAction(model));
-  		}
-	  }
-	  else
-	  {
-	    //some player interaction is needed, action is still being resolved
-	    newGameState.setPreviousState(this);
-	    model.setCurrentState(newGameState);
+  		model.decreaseActionCount();
 	  }
 	}
-	
-	public int getActionsLeft()
-  {
-    return actionsLeft;
-  }
-
-  private int getAvailableActionsCount()
-  {
-    //count how many actions this player can play
-    if (model.getTurnNumber()>1)
-    {
-      return 2;
-    }
-    else
-    {
-      if (player.getTurnOrderIndex()==1) return 1;
-      else if (player.getTurnOrderIndex()==2) return ((model.getPlayersCount()==4) ? 1 : 2);
-      else return 2;
-    }
-  }
-
 }

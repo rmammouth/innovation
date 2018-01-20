@@ -21,6 +21,11 @@ public class GameModel
   private Player currentTurnPlayer=null;
   
   /**
+   * Actions left to play during current turn
+   */
+  private int currentTurnActionsLeft;
+  
+  /**
    * Player who played the first turn (or null if opening)
    */
   private Player firstPlayer=null;
@@ -51,6 +56,7 @@ public class GameModel
 	public void setCurrentTurn(Player currentTurn)
 	{
 		this.currentTurnPlayer = currentTurn;
+		this.currentTurnActionsLeft=getAvailableActionsCount(currentTurnPlayer);
 	}
 
 	public Player getFirstPlayer()
@@ -159,6 +165,32 @@ public class GameModel
   {
     return turnNumber;
   }
+	
+	private int getAvailableActionsCount(Player player)
+  {
+    //count how many actions this player can play
+    if (turnNumber>1)
+    {
+      return 2;
+    }
+    else
+    {
+      if (player.getTurnOrderIndex()==1) return 1;
+      else if (player.getTurnOrderIndex()==2) return ((getPlayersCount()==4) ? 1 : 2);
+      else return 2;
+    }
+  }
+	
+	public int getCurrentTurnActionsLeft()
+  {
+    return currentTurnActionsLeft;
+  }
+
+  public void decreaseActionCount()
+	{
+	  currentTurnActionsLeft--;
+	  if (currentTurnActionsLeft==0) nextPlayerTurn();
+	}
 
   public GameState getCurrentState()
 	{
@@ -174,9 +206,11 @@ public class GameModel
   {
   	this.players=players;
   	
+  	int index=0;
   	for (Player player : players)
   	{
   	  player.setGameModel(this);
+  	  player.setIndex(index++);
   	}
   	
   	for (Period period : Period.values())
@@ -249,7 +283,7 @@ public class GameModel
     {
       turnNumber++;
     }    
-    setCurrentTurn(players[i]);    
+    setCurrentTurn(players[i]);
   }
   
   public void removeAchievement(SpecialAchievement achievement)
@@ -270,6 +304,11 @@ public class GameModel
   public boolean isPeriodAchievementAvailable(Period period)
   {
     return periodAchievements.containsKey(period);
+  }
+  
+  public boolean isSpecialAchievementAvailable(SpecialAchievement monument)
+  {
+    return specialAchievements.contains(monument);
   }
   
   public int getDominationsCountNeededToWin()
@@ -313,4 +352,6 @@ public class GameModel
     
     return clone;
   }
+
+  
 }

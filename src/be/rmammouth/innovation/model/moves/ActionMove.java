@@ -16,11 +16,11 @@ public abstract class ActionMove extends CardMove
   }
 
   /**
-   * Get new GameState once this move has been resolved (or null if no change needed).
+   * Return true if action totally completed (or false if further interaction needed)
    * @return
    */
-  public GameState getNewGameState()
+  public boolean isActionCompleted()
   {
-    return null;
+    return true;
   }
 }

@@ -29,11 +29,22 @@ public abstract class Move
 	}
 	
 	protected abstract void doResolve();	
+	
+	/**
+	 * Returns true if this move modifies the game model (for the purpose of the free draw action of cooperation dogmas)
+	 * @return
+	 */
+	public abstract boolean modifiesGameModel();
 
   @Override
   public String toString()
   {
     return getLabel();
+  }
+  
+  public boolean isPass()
+  {
+    return false;
   }
 	
 	public static void resolveAll(List<Move> moves)

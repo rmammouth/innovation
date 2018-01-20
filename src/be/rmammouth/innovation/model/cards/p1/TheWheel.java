@@ -18,6 +18,10 @@ public class TheWheel extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        for (int n=0;n<2;n++)
+        {
+          new DrawCard(das.getAffectedPlayer(), Period.ONE).resolve();
+        }
         return null;
       }
     });

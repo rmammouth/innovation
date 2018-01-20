@@ -32,4 +32,9 @@ public abstract class CooperationDogma extends Dogma
     
     return affectedPlayers;
   }
+  
+  public final boolean enablesFreeDraw()
+  {
+    return true;
+  }
 }

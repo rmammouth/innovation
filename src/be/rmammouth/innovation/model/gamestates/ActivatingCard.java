@@ -5,36 +5,31 @@ import be.rmammouth.innovation.model.moves.*;
 
 public class ActivatingCard extends SinglePlayerGameState
 {
-  private CardActivationStatus cardActivationState;
+  private CardActivationStatus cardActivationStatus;
   
   public ActivatingCard(GameModel model, CardActivationStatus cardActivationState)
   {
     super(model);
-    this.cardActivationState=cardActivationState;
+    this.cardActivationStatus=cardActivationState;
   }
 
   @Override
   public PlayerInteraction getNextInteraction()
   {
-    return cardActivationState.getNextInteraction();
+    return cardActivationStatus.getNextInteraction();
   }
 
   @Override
   public void moveResolved(Move move)
   {
-    cardActivationState.nextStep();
-    PlayerInteraction nextInteraction=cardActivationState.getNextInteraction();
+    cardActivationStatus.addResolvedMove(move);
+    cardActivationStatus.nextStep();
+    PlayerInteraction nextInteraction=cardActivationStatus.getNextInteraction();
     if (nextInteraction==null)
     {
       //card resolution over, new turn or back to previous state
-      int actionsLeft=((ChoosingAction)getPreviousState()).getActionsLeft();
-      if (actionsLeft==0)
-      {
-        model.nextPlayerTurn();
-        model.setCurrentState(new ChoosingAction(model));
-      }
-      else model.setCurrentState(getPreviousState());
+      model.decreaseActionCount();
+      model.setCurrentState(new ChoosingAction(model));
     }
   }
-
 }

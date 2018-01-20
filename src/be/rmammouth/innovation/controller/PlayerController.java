@@ -24,11 +24,4 @@ public abstract class PlayerController
 	}
   
   public abstract Move getNextMove(List<? extends Move> availableMoves);
-  
-  public final Move getAndResolveNextMove(List<? extends Move> availableMoves)
-  {
-    Move nextMove=getNextMove(availableMoves);
-    nextMove.resolve();
-    return nextMove;
-  }
 }

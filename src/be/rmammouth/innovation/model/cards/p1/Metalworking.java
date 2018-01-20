@@ -18,6 +18,18 @@ public class Metalworking extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        boolean cardHasTower;
+        do
+        {
+          DrawCard draw=new DrawCard(das.getAffectedPlayer(), Period.ONE);
+          draw.resolve();
+          cardHasTower=draw.getCard().containsResource(Resource.TOWER);
+          if (cardHasTower)
+          {
+            new ScoreCard(das.getAffectedPlayer(), draw.getCard()).resolve();            
+          }
+        }
+        while (cardHasTower);
         return null;
       }
     });

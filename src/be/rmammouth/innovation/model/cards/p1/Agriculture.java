@@ -18,7 +18,26 @@ public class Agriculture extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        return null;
+        if (das.getResolutionStep()==0)
+        {
+          if (das.getAffectedPlayer().getHand().isEmpty()) return null;
+          List<Move> moves=new ArrayList<>(RecycleCard.getAllRecycleCardMoves(das.getAffectedPlayer(), CardLocation.HAND));
+          moves.add(new Pass(das.getAffectedPlayer()));
+          das.setResolutionStep(1);
+          return new PlayerInteraction(das.getAffectedPlayer(), moves);
+        }
+        else
+        {
+          if (!das.getLastResolvedMove().isPass()) 
+          {
+            Card returnedCard=((RecycleCard)das.getLastResolvedMove()).getCard();
+            DrawCard drawCard=new DrawCard(das.getAffectedPlayer(), returnedCard.getPeriod().next());
+            drawCard.resolve();
+            ScoreCard scoreCard=new ScoreCard(das.getAffectedPlayer(), drawCard.getCard());
+            scoreCard.resolve();            
+          }
+          return null;
+        }
       }
     });
   }

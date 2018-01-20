@@ -18,7 +18,27 @@ public class Domestication extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        return null;
+        if (das.getResolutionStep()==0)
+        {
+          Period lowestPeriod=das.getAffectedPlayer().getLowestPeriod(CardLocation.HAND);
+          if (lowestPeriod==null)
+          {
+            new DrawCard(das.getAffectedPlayer(), Period.ONE).resolve();
+            return null;
+          }
+          else
+          {
+            List<Card> lowestCards=das.getAffectedPlayer().getFilteredHand(new CardPeriodFilter(lowestPeriod));
+            List<Move> playCardMoves=new ArrayList<Move>(PlayCard.getPlayCardMoves(das.getAffectedPlayer(), lowestCards));
+            das.setResolutionStep(1);
+            return new PlayerInteraction(das.getAffectedPlayer(), playCardMoves);
+          }
+        }
+        else
+        {        
+          new DrawCard(das.getAffectedPlayer(), Period.ONE).resolve();
+          return null;
+        }
       }
     });
   }

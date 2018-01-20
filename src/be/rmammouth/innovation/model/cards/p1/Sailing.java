@@ -18,6 +18,10 @@ public class Sailing extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        DrawCard draw=new DrawCard(das.getAffectedPlayer(), Period.ONE);
+        draw.resolve();
+        PlayCard play=new PlayCard(das.getAffectedPlayer(), draw.getCard());
+        play.resolve();
         return null;
       }
     });

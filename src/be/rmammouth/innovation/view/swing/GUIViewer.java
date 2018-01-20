@@ -28,7 +28,7 @@ public class GUIViewer extends JFrame implements GameViewer
     {
       PlayerPanel panel=new PlayerPanel(player);
       playersTabPane.add(player.getName(), panel);
-      playerPanels.put(player.getId(), panel);
+      playerPanels.put(player.getIndex(), panel);
     }
     setVisible(true);
   }
@@ -95,7 +95,7 @@ public class GUIViewer extends JFrame implements GameViewer
     gameModelPanel.fireDataChanged();
     for (Player player : model.getPlayers())
     {
-      PlayerPanel panel=playerPanels.get(player.getId());
+      PlayerPanel panel=playerPanels.get(player.getIndex());
       if (panel!=null) panel.fireDataChanged(player);
     }
   }

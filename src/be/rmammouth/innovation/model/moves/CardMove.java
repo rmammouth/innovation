@@ -16,4 +16,9 @@ public abstract class CardMove extends Move
   {
     return card;
   }
+  
+  public boolean modifiesGameModel()
+  {
+    return true;
+  }
 }

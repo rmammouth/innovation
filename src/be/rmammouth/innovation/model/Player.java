@@ -7,9 +7,7 @@ import be.rmammouth.innovation.model.gamestates.*;
 
 public class Player
 {
-  private static int nextPlayerId=0;
-  
-  private int id;
+  private int index;
   private String name;
   private GameModel gameModel;
   private PlayerController controller; 
@@ -25,7 +23,6 @@ public class Player
   
   public Player(String name, PlayerController controller)
 	{
-    this.id=++nextPlayerId;
 		this.name=name;
 		this.controller=controller;
 		for (Color color : Color.values())
@@ -34,10 +31,15 @@ public class Player
 		}
 	}
 
-	public int getId()
+	public int getIndex()
   {
-    return id;
+    return index;
   }
+	
+	void setIndex(int index)
+	{
+	  this.index=index;
+	}
 
   public String getName()
 	{
@@ -304,9 +306,9 @@ public class Player
   public Player cloneForPlayer(Player player)
   {
     Player clone=new Player();
-    clone.id=id;
+    clone.index=index;
     clone.name=name;
-    if (player.id==id)
+    if (player.index==index)
     {
       clone.dominations.addAll(dominations);
       clone.hand.addAll(hand);

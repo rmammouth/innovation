@@ -39,4 +39,6 @@ public abstract class Dogma
   public abstract List<Player> getAffectedPlayers(CardActivationStatus cardActivationStatus);
   
   public abstract PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das);
+  
+  public abstract boolean enablesFreeDraw();
 }

@@ -68,7 +68,7 @@ public class ScorePile
     ScorePile clone=new ScorePile(clonePlayer);
     for (Card card : cards)
     {
-      if (this.player.getId()==clonePlayer.getId())
+      if (this.player.getIndex()==clonePlayer.getIndex())
       {
         clone.cards.add(card);
         clone.score+=card.getPeriod().asInt();
