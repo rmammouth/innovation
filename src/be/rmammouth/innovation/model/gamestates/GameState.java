@@ -5,6 +5,7 @@ import be.rmammouth.innovation.model.*;
 public abstract class GameState
 {
 	protected GameModel model;
+	private GameState previousState;
 		
 	public GameState(GameModel model)
 	{
@@ -12,4 +13,16 @@ public abstract class GameState
 	}
 
 	public abstract void nextStep();
+
+  public GameState getPreviousState()
+  {
+    return previousState;
+  }
+
+  public void setPreviousState(GameState previousState)
+  {
+    this.previousState = previousState;
+  }
+	
+	
 }

@@ -16,8 +16,9 @@ public class Combustion extends Card
     addDogma(new SupremacyDogma(Resource.CROWN)
     {
       @Override
-      public void activateOnPlayer(CardActivationState cas, Player affectedPlayer)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        return null;
       }
     });
   }

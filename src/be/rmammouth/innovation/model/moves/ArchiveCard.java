@@ -20,13 +20,13 @@ public class ArchiveCard extends CardMove
   @Override
   public String getLabel()
   {
-    return "Archive "+card.getNamePrefixedWithPeriod();
+    return "Archive "+card.getLabelPrefixedWithPeriod();
   }
 
   @Override
   protected void doResolve()
   {
-    Innovation.getViewer().log(player.getName()+" has archived "+card.getNamePrefixedWithPeriod());
+    Innovation.getViewManager().log(player.getName()+" has archived "+card.getLabelPrefixedWithPeriod());
     player.removeFromHand(card);
     player.getCardsPile(card.getColor()).archive(card);
   }

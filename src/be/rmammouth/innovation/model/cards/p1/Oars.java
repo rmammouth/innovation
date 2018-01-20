@@ -10,54 +10,25 @@ public class Oars extends Card
   public Oars()
   {
     super("Oars", Period.ONE, Color.RED,
-        Resource.TOWER,
-        Resource.CROWN, null, Resource.TOWER);
-    
+          Resource.TOWER,
+          Resource.CROWN, null, Resource.TOWER);
+
     addDogma(new SupremacyDogma(Resource.TOWER)
-    {      
+    {
       @Override
-      public void activateOnPlayer(CardActivationState cas, Player affectedPlayer) 
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        List<Card> crownCards=affectedPlayer.getFilteredHand(new CardResourceFilter(Resource.CROWN));
-        if (!crownCards.isEmpty())
-        {
-          List<Move> transferMoves=TransferCard.getAllTransferCardMoves(crownCards, affectedPlayer, CardLocation.HAND, cas.getActivatingPlayer(), CardLocation.SCORE_PILE);
-          affectedPlayer.getController().getAndResolveNextMove(transferMoves);
-          new DrawCard(affectedPlayer, Period.ONE).resolve();
-          ((OarsActivationState)cas).cardTransferred=true;
-        }
+        return null;
       }
     });
-    
+
     addDogma(new CooperationDogma(Resource.TOWER)
-    {      
+    {
       @Override
-      public boolean activateOnPlayer(CardActivationState cas, Player player) 
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        if (!((OarsActivationState)cas).cardTransferred)
-        {
-          new DrawCard(player, Period.ONE).resolve();
-          return true;
-        }
-        else return false;
+        return null;
       }
     });
   }
-
-  @Override
-  protected CardActivationState buildActivationState(GameModel model, Player activatingPlayer) 
-  {
-    return new OarsActivationState(model, activatingPlayer);
-  }
 }
-
-class OarsActivationState extends CardActivationState
-{
-  boolean cardTransferred=false;
-  
-  public OarsActivationState(GameModel model, Player activatingPlayer) 
-  {
-    super(model, activatingPlayer);
-  }  
-}
-

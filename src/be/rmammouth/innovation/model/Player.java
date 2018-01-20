@@ -7,17 +7,25 @@ import be.rmammouth.innovation.model.gamestates.*;
 
 public class Player
 {
+  private static int nextPlayerId=0;
+  
+  private int id;
   private String name;
   private GameModel gameModel;
   private PlayerController controller; 
   private List<Dominable> dominations=new ArrayList<>();
   private List<Card> hand=new ArrayList<>();
-  private ScorePile scorePile=new ScorePile();
+  private ScorePile scorePile=new ScorePile(this);
   private Map<Color, CardsPile> board=new EnumMap<>(Color.class);
   private int turnOrderIndex;
   
+  private Player()
+  {    
+  }
+  
   public Player(String name, PlayerController controller)
 	{
+    this.id=++nextPlayerId;
 		this.name=name;
 		this.controller=controller;
 		for (Color color : Color.values())
@@ -26,7 +34,12 @@ public class Player
 		}
 	}
 
-	public String getName()
+	public int getId()
+  {
+    return id;
+  }
+
+  public String getName()
 	{
     return name;
   }
@@ -67,7 +80,7 @@ public class Player
     checkForDominationsWin();
   }
   
-  public void dominate(PeriodCard card)
+  public void dominate(Card card)
   {
     gameModel.removePeriodAchievement(card.getPeriod());
     dominations.add(card);
@@ -182,7 +195,7 @@ public class Player
     {
       board.get(card.getColor()).addCardOnTop(card);
     }
-    else throw new IllegalArgumentException(name+" doesn't have the card "+card.getName()+ " in his hand!");
+    else throw new IllegalArgumentException(name+" doesn't have the card "+card.getLabel()+ " in his hand!");
   }
   
   /**
@@ -230,12 +243,12 @@ public class Player
   
   public Period getHighestPeriod(CardLocation location)
   {
-    return PeriodCard.getHighestPeriod(getCards(location));
+    return Card.getHighestPeriod(getCards(location));
   }
   
   public Period getLowestPeriod(CardLocation location)
   {
-    return PeriodCard.getLowestPeriod(getCards(location));
+    return Card.getLowestPeriod(getCards(location));
   }
   
   public List<Card> getCards(CardLocation location)
@@ -286,5 +299,36 @@ public class Player
   public String toString()
   {
     return getName();
+  }  
+
+  public Player cloneForPlayer(Player player)
+  {
+    Player clone=new Player();
+    clone.id=id;
+    clone.name=name;
+    if (player.id==id)
+    {
+      clone.dominations.addAll(dominations);
+      clone.hand.addAll(hand);
+    }
+    else
+    {
+      for (Dominable domination : dominations)
+      {
+        clone.dominations.add(domination.cloneCard());
+      }
+      for (Card card : hand)
+      {
+        clone.hand.add(card.cloneCard());
+      }
+    }
+    clone.scorePile=scorePile.cloneForPlayer(clone);
+    for (Color color : board.keySet())
+    {
+      clone.board.put(color, board.get(color).clonePile());
+    }
+    clone.turnOrderIndex=turnOrderIndex;
+    
+    return clone;
   }
 }

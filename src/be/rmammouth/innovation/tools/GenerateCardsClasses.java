@@ -126,13 +126,9 @@ public class GenerateCardsClasses
     pw.write("    addDogma(new "+(supremacy?"Supremacy":"Cooperation")+"Dogma(Resource."+resource+")\n");
     pw.write("    {\n");
     pw.write("      @Override\n");
-    if (supremacy) pw.write("      public void activateOnPlayer(CardActivationState cas, Player affectedPlayer)\n");
-    else pw.write("      public boolean activateOnPlayer(CardActivationState cas, Player player)\n");
+    pw.write("      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)\n");
     pw.write("      {\n");
-    if (!supremacy)
-    {
-      pw.write("        return false;\n");
-    }
+    pw.write("        return null;\n");
     pw.write("      }\n");
     pw.write("    });\n");
     

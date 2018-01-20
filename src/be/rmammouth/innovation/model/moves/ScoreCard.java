@@ -15,15 +15,15 @@ public class ScoreCard extends CardMove
   @Override
   public String getLabel()
   {
-    return "Score "+card.getNamePrefixedWithPeriod();
+    return "Score "+card.getLabelPrefixedWithPeriod();
   }
 
   @Override
   protected void doResolve()
-  {
-    Innovation.getViewer().log(player.getName()+" scores "+card.getNamePrefixedWithPeriod());
+  {    
     player.removeFromHand(card);
     player.addToScorePile(card);
+    Innovation.getViewManager().log(player.getName()+" scores "+card.getLabelPrefixedWithPeriod()+" and has now "+player.getScorePile().getScore()+" pts");
   }
   
   public static List<Move> getAllScoreCardMoves(Player player)

@@ -4,11 +4,13 @@ import java.util.*;
 
 public class ScorePile
 {
+  private Player player;
   private List<Card> cards=new ArrayList<Card>();
   private int score=0;
   
-  public ScorePile()
+  public ScorePile(Player player)
   {    
+    this.player=player;
   }
   
   public List<Card> getCards()
@@ -59,5 +61,24 @@ public class ScorePile
         return c1.getPeriod().compareTo(c2.getPeriod());
       }
     });
+  }
+
+  public ScorePile cloneForPlayer(Player clonePlayer)
+  {
+    ScorePile clone=new ScorePile(clonePlayer);
+    for (Card card : cards)
+    {
+      if (this.player.getId()==clonePlayer.getId())
+      {
+        clone.cards.add(card);
+        clone.score+=card.getPeriod().asInt();
+      }
+      else
+      {
+        clone.cards.add(card.cloneCard());
+        clone.score+=card.getPeriod().asInt();
+      }
+    }
+    return clone;
   }
 }

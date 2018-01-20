@@ -8,22 +8,10 @@ import be.rmammouth.innovation.model.*;
  * @author Seb
  *
  */
-public class Pass extends Move
+public class Pass extends Option
 {
   public Pass(Player player)
   {
-    super(player);
-  }
-
-  @Override
-  public String getLabel()
-  {
-    return "Pass";
-  }
-
-  @Override
-  protected void doResolve()
-  {
-    Innovation.getViewer().log(player.getName()+" pass");
+    super(player,"Pass",player.getName()+" pass");
   }
 }

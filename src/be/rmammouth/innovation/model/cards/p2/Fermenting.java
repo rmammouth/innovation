@@ -16,15 +16,9 @@ public class Fermenting extends Card
     addDogma(new CooperationDogma(Resource.LEAF)
     {
       @Override
-      public boolean activateOnPlayer(CardActivationState cas, Player player)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        int cardsToDraw=cas.getResourceCount(player, Resource.LEAF)/2;
-        if (cardsToDraw==0) return false;
-        for (int i=0;i<cardsToDraw;i++)
-        {
-          new DrawCard(player, Period.TWO).resolve();
-        }
-        return true;
+        return null;
       }
     });
   }

@@ -16,18 +16,18 @@ public class Railroad extends Card
     addDogma(new CooperationDogma(Resource.CLOCK)
     {
       @Override
-      public boolean activateOnPlayer(CardActivationState cas, Player player)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        return false;
+        return null;
       }
     });
 
     addDogma(new CooperationDogma(Resource.CLOCK)
     {
       @Override
-      public boolean activateOnPlayer(CardActivationState cas, Player player)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        return false;
+        return null;
       }
     });
   }

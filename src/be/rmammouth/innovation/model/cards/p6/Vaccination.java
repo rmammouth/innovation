@@ -16,17 +16,18 @@ public class Vaccination extends Card
     addDogma(new SupremacyDogma(Resource.LEAF)
     {
       @Override
-      public void activateOnPlayer(CardActivationState cas, Player affectedPlayer)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        return null;
       }
     });
 
     addDogma(new CooperationDogma(Resource.LEAF)
     {
       @Override
-      public boolean activateOnPlayer(CardActivationState cas, Player player)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        return false;
+        return null;
       }
     });
   }

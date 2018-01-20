@@ -39,4 +39,14 @@ public class DrawPile
   {
     return cards.size();
   }
+
+  public DrawPile clonePile()
+  {
+    DrawPile clone=new DrawPile();
+    for (Card card : cards)
+    {
+      clone.cards.add(card.cloneCard());
+    }
+    return clone;
+  }
 }

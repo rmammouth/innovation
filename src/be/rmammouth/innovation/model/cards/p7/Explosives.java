@@ -16,8 +16,9 @@ public class Explosives extends Card
     addDogma(new SupremacyDogma(Resource.FACTORY)
     {
       @Override
-      public void activateOnPlayer(CardActivationState cas, Player affectedPlayer)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        return null;
       }
     });
   }

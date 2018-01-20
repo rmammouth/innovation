@@ -52,7 +52,7 @@ public class CardPanel extends JPanel
     add(cardInfoPanel, gbc_cardInfoPanel);
     cardInfoPanel.setLayout(new BorderLayout(0, 0));
     
-    JLabel cardName = new JLabel(card.getName());
+    JLabel cardName = new JLabel(card.getLabel());
     cardName.setHorizontalAlignment(SwingConstants.CENTER);
     cardInfoPanel.add(cardName, BorderLayout.NORTH);
     
@@ -102,7 +102,7 @@ public class CardPanel extends JPanel
     case YELLOW:
       return Color.YELLOW;
     default:
-      return Color.WHITE;
+      return Color.LIGHT_GRAY;
     }
   }
   

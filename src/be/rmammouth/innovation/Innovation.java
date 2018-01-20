@@ -9,6 +9,8 @@ import be.rmammouth.innovation.view.swing.*;
 
 public class Innovation
 {
+  private static ViewManager viewMgr=new ViewManager();
+  
   //private static GameViewer viewer=new ConsoleDisplay();
   private static GUIViewer viewer=new GUIViewer();
   private static GameModel model=new GameModel();
@@ -17,10 +19,12 @@ public class Innovation
 	{		
 		//Player p1=new Player("Seb", new ConsoleController());
 		Player p1=new Player("Seb", new GUIController(viewer.getInputPanel()));
-		Player p2=new Player("CPU", new AIController());
+	//  Player p1=new Player("CPU1", new AIController());
+		Player p2=new Player("CPU2", new AIController());
 		Player[] players=new Player[]{p1, p2};
 		model.startNewGame(players);
-		viewer.init(model);
+		viewMgr.registerViewer(p1, viewer);
+		viewMgr.init();
 		
 		try
 		{
@@ -35,9 +39,13 @@ public class Innovation
 		}
 	}
 	
-	public static GameViewer getViewer()
+	public static ViewManager getViewManager()
 	{
-	  return viewer;
+	  return viewMgr;
 	}
 
+  public static GameModel getModel()
+  {
+    return model;
+  }
 }

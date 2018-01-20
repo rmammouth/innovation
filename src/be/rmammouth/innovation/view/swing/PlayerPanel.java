@@ -13,7 +13,7 @@ import javax.swing.border.BevelBorder;
 
 public class PlayerPanel extends JPanel
 {
-  private static Map<Card, CardPanel> cardsPanels=new HashMap<>();
+  private static Map<String, CardPanel> cardsPanels=new HashMap<String, CardPanel>();
   
   private Player player;  
   private JTable resourcesTable;
@@ -28,7 +28,7 @@ public class PlayerPanel extends JPanel
   {
     for (Card card : Cards.getAll())
     {
-      cardsPanels.put(card, new CardPanel(card));
+      cardsPanels.put(card.getName(), new CardPanel(card));
     }
   }
   
@@ -85,11 +85,13 @@ public class PlayerPanel extends JPanel
       boardPanel.add(cardsPilePanel);
     }
     
-    fireDataChanged();
+    fireDataChanged(player);
   }
   
-  public void fireDataChanged()
+  public void fireDataChanged(Player player)
   {
+    this.player=player;
+    
     //update resource table
     resourcesTableModel.fireTableDataChanged();
     
@@ -97,7 +99,7 @@ public class PlayerPanel extends JPanel
     handPanel.removeAll();
     for (Card card : player.getHand())
     {
-      handPanel.add(cardsPanels.get(card));
+      handPanel.add(getCardPanel(card));
       handPanel.repaint();
     }
     
@@ -109,7 +111,7 @@ public class PlayerPanel extends JPanel
       for (Card card : player.getCardsPile(color).getCards())
       {
         //must add cards in reverse order so the z order is correct
-        panel.add(cardsPanels.get(card),0);
+        panel.add(getCardPanel(card),0);
       }
       panel.repaint();
     }
@@ -134,6 +136,12 @@ public class PlayerPanel extends JPanel
     
     //dominations
     dominationLabel.setText("Dominations : "+player.getDominations().size());
+  }
+  
+  private static JPanel getCardPanel(Card card)
+  {
+    if (card.isRevealed()) return cardsPanels.get(card.getName());
+    else return new BackCardPanel(card);
   }
   
   class ResourceTableModel extends AbstractTableModel

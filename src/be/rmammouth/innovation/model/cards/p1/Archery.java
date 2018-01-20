@@ -14,20 +14,21 @@ public class Archery extends Card
 				  Resource.BULB, null, Resource.TOWER);
 		
 		addDogma(new SupremacyDogma(Resource.TOWER)
-    {
+    {      
       @Override
-      public void activateOnPlayer(CardActivationState cas, Player affectedPlayer)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        new DrawCard(affectedPlayer, Period.ONE).resolve();
-        Period maxPeriodInHand=affectedPlayer.getHighestPeriod(CardLocation.HAND);
-        List<Card> maxPeriodCardsInHand=affectedPlayer.getFilteredHand(new CardPeriodFilter(maxPeriodInHand));
-        if (maxPeriodCardsInHand.isEmpty()) return;
-        else
+        if (das.getResolutionStep()==0)
         {
-          List<Move> moves=TransferCard.getAllTransferCardMoves(maxPeriodCardsInHand, affectedPlayer, CardLocation.HAND, cas.getActivatingPlayer(), CardLocation.HAND);
-          affectedPlayer.getController().getAndResolveNextMove(moves);
+          new DrawCard(das.getAffectedPlayer(), Period.ONE).resolve();
+          Period maxPeriodInHand=das.getAffectedPlayer().getHighestPeriod(CardLocation.HAND);
+          List<Card> maxPeriodCardsInHand=das.getAffectedPlayer().getFilteredHand(new CardPeriodFilter(maxPeriodInHand));
+          List<Move> moves=TransferCard.getAllTransferCardMoves(maxPeriodCardsInHand, das.getAffectedPlayer(), CardLocation.HAND, cas.getActivatingPlayer(), CardLocation.HAND);
+          das.setResolutionStep(1);
+          return new PlayerInteraction(das.getAffectedPlayer(), moves);
         }
-      }       
+        else return null;
+      }
     });
 	}  
 }

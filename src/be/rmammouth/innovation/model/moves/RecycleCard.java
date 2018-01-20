@@ -23,13 +23,13 @@ public class RecycleCard extends CardMove
   @Override
   public String getLabel()
   {
-    return "Recycle "+card.getNamePrefixedWithPeriod()+" from "+location.getLabel(player);
+    return "Recycle "+card.getLabelPrefixedWithPeriod()+" from "+location.getLabel(player);
   }
 
   @Override
   protected void doResolve()
   {
-    Innovation.getViewer().log(player.getName()+" recycles "+card.getNamePrefixedWithPeriod()+" from his "+location.getLabel());
+    Innovation.getViewManager().log(player.getName()+" recycles "+card.getLabelPrefixedWithPeriod()+" from his "+location.getLabel());
     player.returnCard(card, location);
   }
 

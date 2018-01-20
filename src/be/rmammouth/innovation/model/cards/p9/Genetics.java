@@ -16,9 +16,9 @@ public class Genetics extends Card
     addDogma(new CooperationDogma(Resource.BULB)
     {
       @Override
-      public boolean activateOnPlayer(CardActivationState cas, Player player)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        return false;
+        return null;
       }
     });
   }

@@ -25,9 +25,9 @@ public class I18N
         if (node instanceof Element)
         {
           Element elmCard=(Element) nlCards.item(i);
-          System.out.println("loading "+elmCard.getAttribute("id"));
+       //   System.out.println("loading "+elmCard.getAttribute("id"));
           Card card=Cards.get(elmCard.getAttribute("id"));
-          card.setName(elmCard.getAttribute("name"));
+          card.setLabel(elmCard.getAttribute("name"));
           NodeList nlDogmas=elmCard.getElementsByTagName("dogma");
           for (int d=0;d<nlDogmas.getLength();d++)
           {

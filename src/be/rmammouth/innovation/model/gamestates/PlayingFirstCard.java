@@ -11,15 +11,15 @@ public class PlayingFirstCard extends MultiPlayerGameState
 	{
 		super(model);
 	}
-	
-	public List<Player> getActivePlayers()
+
+	public List<PlayerInteraction> getNextInteractions()
 	{
-	  return Arrays.asList(model.getPlayers());
-	}
-	  
-	public List<Move> getAvailableMoves(Player player)
-	{
-	  return new ArrayList<>(PlayCard.getAllPlayableCardMoves(player));
+	  List<PlayerInteraction> interactions=new ArrayList<>();
+	  for (Player player : model.getPlayers())
+	  {
+	    interactions.add(new PlayerInteraction(player, new ArrayList<Move>(PlayCard.getAllPlayableCardMoves(player))));
+	  }
+	  return interactions;
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class PlayingFirstCard extends MultiPlayerGameState
 		for (Move move : moves)
 		{
 			PlayCard playCard=(PlayCard)move;
-			String playedCardName=playCard.getCard().getName();
+			String playedCardName=playCard.getCard().getLabel();
 			if ((firstCardName==null) || (playedCardName.compareToIgnoreCase(firstCardName)<0))
 		  {
 				firstPlayer=move.getPlayer();

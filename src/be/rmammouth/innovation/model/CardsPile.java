@@ -72,4 +72,15 @@ public class CardsPile
   {
     return Collections.unmodifiableList(cards);
   }
+
+  public CardsPile clonePile()
+  {
+    CardsPile clone=new CardsPile();
+    clone.splaying=splaying;
+    for (Card card : cards)
+    {
+      clone.cards.add(card);
+    }
+    return clone;
+  }
 }

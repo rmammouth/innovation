@@ -8,20 +8,16 @@ import java.awt.BorderLayout;
 
 public class GameModelPanel extends JPanel
 {
-  private GameModel model;
+  private GUIViewer viewer;
   private CardsPilesTableModel cardsPilesTableModel=new CardsPilesTableModel();
   
-  public GameModelPanel()
+  public GameModelPanel(GUIViewer viewer)
   {
+    this.viewer=viewer;
     setLayout(new BorderLayout(0, 0));
     
     JTable cardsPilesTable = new JTable(cardsPilesTableModel);
     add(cardsPilesTable, BorderLayout.CENTER);
-  }
-  
-  public void setModel(GameModel model)
-  {
-    this.model = model;
   }
 
 
@@ -50,8 +46,8 @@ public class GameModelPanel extends JPanel
     {
       Period period=Period.values()[rowIndex];
       if (columnIndex==0) return period;
-      else if (columnIndex==1) return model.getDrawPile(period).size();
-      else return model.isPeriodAchievementAvailable(period);
+      else if (columnIndex==1) return viewer.getModel().getDrawPile(period).size();
+      else return viewer.getModel().isPeriodAchievementAvailable(period);
     }
     
   }

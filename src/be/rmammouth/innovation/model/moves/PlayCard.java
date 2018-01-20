@@ -10,7 +10,7 @@ import be.rmammouth.innovation.model.*;
  * @author Seb
  *
  */
-public class PlayCard extends CardMove
+public class PlayCard extends ActionMove
 {
   public PlayCard(Player player, Card card)
   {
@@ -20,24 +20,24 @@ public class PlayCard extends CardMove
 	@Override
 	public String getLabel()
 	{
-		return "Play "+card.getNamePrefixedWithPeriod();
+		return "Play "+card.getLabelPrefixedWithPeriod();
 	}
 
 	@Override
 	protected void doResolve()
 	{
-	  Innovation.getViewer().log(player.getName()+" puts "+card.getNamePrefixedWithPeriod()+" into play");
+	  Innovation.getViewManager().log(player.getName()+" puts "+card.getLabelPrefixedWithPeriod()+" into play");
 		player.putCardInPlay(card);		
 	}
 	
-	public static List<Move> getAllPlayableCardMoves(Player player)
+	public static List<PlayCard> getAllPlayableCardMoves(Player player)
 	{
 		return getPlayCardMoves(player, player.getHand());
 	}
 	
-	public static List<Move> getPlayCardMoves(Player player, List<Card> cards)
+	public static List<PlayCard> getPlayCardMoves(Player player, List<Card> cards)
   {
-	  List<Move> moves=new ArrayList<>();
+	  List<PlayCard> moves=new ArrayList<>();
     for (Card card : cards)
     {
       moves.add(new PlayCard(player, card));  

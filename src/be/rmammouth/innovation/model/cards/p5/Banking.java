@@ -16,17 +16,18 @@ public class Banking extends Card
     addDogma(new SupremacyDogma(Resource.CROWN)
     {
       @Override
-      public void activateOnPlayer(CardActivationState cas, Player affectedPlayer)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        return null;
       }
     });
 
     addDogma(new CooperationDogma(Resource.CROWN)
     {
       @Override
-      public boolean activateOnPlayer(CardActivationState cas, Player player)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        return false;
+        return null;
       }
     });
   }

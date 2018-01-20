@@ -10,23 +10,15 @@ public class Domestication extends Card
   public Domestication()
   {
     super("Domestication", Period.ONE, Color.YELLOW,
-        Resource.TOWER,
-        Resource.CROWN, null, Resource.TOWER);
-    
+          Resource.TOWER,
+          Resource.CROWN, null, Resource.TOWER);
+
     addDogma(new CooperationDogma(Resource.TOWER)
-    {      
+    {
       @Override
-      public boolean activateOnPlayer(CardActivationState cas, Player player) 
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        Period lowestPeriod=player.getLowestPeriod(CardLocation.HAND);
-        if (lowestPeriod!=null)
-        {
-          List<Card> lowestCards=player.getFilteredHand(new CardPeriodFilter(lowestPeriod));
-          List<Move> playCardMoves=PlayCard.getPlayCardMoves(player, lowestCards);
-          player.getController().getAndResolveNextMove(playCardMoves);
-        }
-        new DrawCard(player, Period.ONE).resolve();
-        return true;
+        return null;
       }
     });
   }

@@ -26,7 +26,7 @@ public class SplayPile extends Move
   @Override
   protected void doResolve()
   {
-    Innovation.getViewer().log(player.getName()+" splays his "+color+" pile "+splaying);
+    Innovation.getViewManager().log(player.getName()+" splays his "+color+" pile "+splaying);
     player.getCardsPile(color).setSplaying(splaying);
   }
   

@@ -24,6 +24,6 @@ public class Option extends Move
   @Override
   protected void doResolve()
   {
-    Innovation.getViewer().log(resolveText);
+    Innovation.getViewManager().log(resolveText);
   }
 }

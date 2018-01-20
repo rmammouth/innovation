@@ -17,21 +17,25 @@ public class GUIViewer extends JFrame implements GameViewer
   private DefaultListModel<String> logListModel=new DefaultListModel<>();
   private JPanel inputPanel;
   private JTabbedPane playersTabPane;
-  private Map<Player, PlayerPanel> playerPanels=new HashMap<>();
+  private Map<Integer, PlayerPanel> playerPanels=new HashMap<>();
   private GameModelPanel gameModelPanel;
 
   
   public void init(GameModel model)
   {
     this.model=model;
-    gameModelPanel.setModel(model);
     for (Player player : model.getPlayers())
     {
       PlayerPanel panel=new PlayerPanel(player);
       playersTabPane.add(player.getName(), panel);
-      playerPanels.put(player, panel);
+      playerPanels.put(player.getId(), panel);
     }
     setVisible(true);
+  }
+
+  public GameModel getModel()
+  {
+    return model;
   }
 
   /**
@@ -61,7 +65,7 @@ public class GUIViewer extends JFrame implements GameViewer
     playersTabPane = new JTabbedPane(JTabbedPane.TOP);
     topSplitPane.setLeftComponent(playersTabPane);
     
-    gameModelPanel = new GameModelPanel();
+    gameModelPanel = new GameModelPanel(this);
     topSplitPane.setRightComponent(gameModelPanel);
     topSplitPane.setDividerLocation(600);
     
@@ -85,19 +89,14 @@ public class GUIViewer extends JFrame implements GameViewer
   }
 
   @Override
-  public void turnStarted(Player player)
+  public void modelChanged(GameModel model)
   {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void moveResolved(Move move)
-  {
+    this.model=model;
     gameModelPanel.fireDataChanged();
-    for (PlayerPanel panel : playerPanels.values())
+    for (Player player : model.getPlayers())
     {
-      panel.fireDataChanged();
+      PlayerPanel panel=playerPanels.get(player.getId());
+      if (panel!=null) panel.fireDataChanged(player);
     }
   }
 

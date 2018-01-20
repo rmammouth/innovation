@@ -16,8 +16,9 @@ public class Databases extends Card
     addDogma(new SupremacyDogma(Resource.CLOCK)
     {
       @Override
-      public void activateOnPlayer(CardActivationState cas, Player affectedPlayer)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        return null;
       }
     });
   }

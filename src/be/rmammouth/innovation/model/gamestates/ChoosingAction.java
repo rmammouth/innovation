@@ -9,50 +9,57 @@ import be.rmammouth.innovation.model.moves.*;
 public class ChoosingAction extends SinglePlayerGameState
 {
 	private Player player;
-	private int actionsLeft=-1;  //has to be initialized at first call of getAvailableMoves
+	private int actionsLeft;
 	
 	public ChoosingAction(GameModel model)
 	{
 		super(model);
 		player=model.getCurrentTurnPlayer();
-	}
-
-  @Override
-	public Player getActivePlayer()
-	{
-		return player;
+		actionsLeft=getAvailableActionsCount();
 	}
 
 	@Override
-	public List<Move> getAvailableMoves()
+	public PlayerInteraction getNextInteraction()
 	{
-	  if (actionsLeft==-1)
-	  {
-	    actionsLeft=getAvailableActionsCount();
-	  }
+	  Innovation.getViewManager().log(player.getName()+" has "+actionsLeft+" action(s) left to play");
 	  
-	  Innovation.getViewer().log(player.getName()+" has "+actionsLeft+" action(s) left to play");
-	  
-		List<Move> moves=new ArrayList<>();
+		List<ActionMove> moves=new ArrayList<>();
 		moves.add(new DrawCard(player));
 		moves.addAll(PlayCard.getAllPlayableCardMoves(player));
 		moves.addAll(ActivateCard.getAllActivableCardMoves(player));
 		moves.addAll(DominatePeriod.getAllDominablePeriodMoves(player));
-		return moves;
+		return new PlayerInteraction(player, new ArrayList<Move>(moves));
 	}
 
 	@Override
 	public void moveResolved(Move move)
 	{
-		actionsLeft--;
-		if (actionsLeft==0)
-		{
-		  model.nextPlayerTurn();
-		  model.setCurrentState(new ChoosingAction(model));
-		}
+	  actionsLeft--;
+	  ActionMove actionMove=(ActionMove)move;
+	  GameState newGameState=actionMove.getNewGameState();
+	  if (newGameState==null)
+	  {
+	    //action completely resolved  		
+  		if (actionsLeft==0)
+  		{
+  		  model.nextPlayerTurn();
+  		  model.setCurrentState(new ChoosingAction(model));
+  		}
+	  }
+	  else
+	  {
+	    //some player interaction is needed, action is still being resolved
+	    newGameState.setPreviousState(this);
+	    model.setCurrentState(newGameState);
+	  }
 	}
 	
-	private int getAvailableActionsCount()
+	public int getActionsLeft()
+  {
+    return actionsLeft;
+  }
+
+  private int getAvailableActionsCount()
   {
     //count how many actions this player can play
     if (model.getTurnNumber()>1)

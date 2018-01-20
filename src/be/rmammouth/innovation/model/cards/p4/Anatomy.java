@@ -16,8 +16,9 @@ public class Anatomy extends Card
     addDogma(new SupremacyDogma(Resource.LEAF)
     {
       @Override
-      public void activateOnPlayer(CardActivationState cas, Player affectedPlayer)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        return null;
       }
     });
   }

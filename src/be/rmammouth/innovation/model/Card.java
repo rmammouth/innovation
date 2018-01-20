@@ -2,45 +2,87 @@ package be.rmammouth.innovation.model;
 
 import java.util.*;
 
-import be.rmammouth.innovation.model.moves.*;
+import be.rmammouth.innovation.*;
+import be.rmammouth.innovation.model.cards.*;
 
-public abstract class Card extends PeriodCard
+/**
+ * Base class for all cards.
+ * Only "unrevealed" cards will be an instance of this class.
+ * @author Seb
+ *
+ */
+public class Card implements Dominable 
 {
-  private String id;
+  private static Random random=new Random();
+  
+  /**
+   * Id randomized at each game and used to match unrevealed cards between client and server
+   */
+  private int id;
   private String name;
+  private String label;
+  private Period period;
   private Color color;
   private Map<ResourceLocation, Resource> resources=new EnumMap<>(ResourceLocation.class);
   private List<Dogma> dogmas=new ArrayList<>();
   
-  protected Card(String id, Period period, Color color, Resource topLeft, Resource bottomLeft, Resource bottomCentre, Resource bottomRight)
+  public Card(int id, Period period)
   {
-    super(period);
-  	this.id=id;
+    this.id=id;
+    this.period=period;
+  }  
+
+  protected Card(String name, Period period, Color color, Resource topLeft, Resource bottomLeft, Resource bottomCentre, Resource bottomRight)
+  {
+    //generate a random (and unused) id
+    do
+    {
+      id=random.nextInt();
+    }
+    while (Cards.get(id)!=null);
+    
+  	this.name=name;
   	this.color=color;
+  	this.period=period;
   	resources.put(ResourceLocation.TOP_LEFT, topLeft);
   	resources.put(ResourceLocation.BOTTOM_LEFT, bottomLeft);
   	resources.put(ResourceLocation.BOTTOM_CENTER, bottomCentre);
   	resources.put(ResourceLocation.BOTTOM_RIGHT, bottomRight);
   }
   
-  public String getId()
-	{
-		return id;
-	}
+  public int getId()
+  {
+    return id;
+  }
   
   public String getName()
+	{
+		return name;
+	}
+  
+  public boolean isRevealed()
   {
-    return name;
+    return name!=null;
+  }
+  
+  public String getLabel()
+  {
+    return label;
   }
 
-  public void setName(String name)
+  public void setLabel(String label)
   {
-    this.name = name;
+    this.label = label;
   }
 
-  public String getNamePrefixedWithPeriod()
+  public String getLabelPrefixedWithPeriod()
   {
-  	return "["+period.asString()+"]"+name;
+  	return "["+period.asString()+"]"+label;
+  }
+  
+  public Period getPeriod()
+  {
+    return period;
   }
 
 	public Color getColor()
@@ -70,24 +112,17 @@ public abstract class Card extends PeriodCard
 	  return Collections.unmodifiableList(dogmas);
 	}
 
-  public void activate(GameModel model, Player activatingPlayer)
+  public CardActivationStatus activate(Player activatingPlayer)
   {
-    CardActivationState cas=buildActivationState(model, activatingPlayer);
-    boolean freeDraw=false;
-    for (Dogma dogma : dogmas)
-    {
-      freeDraw|=dogma.activate(cas);
-    }
-    
-    if (freeDraw)
-    {
-      new DrawCard(activatingPlayer).resolve();
-    }
+    Innovation.getViewManager().log(activatingPlayer.getName()+" has activated "+getLabelPrefixedWithPeriod());
+    CardActivationStatus cas=buildActivationStatus(activatingPlayer);
+    cas.nextStep();
+    return cas;
   }
   
-  protected CardActivationState buildActivationState(GameModel model, Player activatingPlayer)
+  protected CardActivationStatus buildActivationStatus(Player activatingPlayer)
   {
-    return new CardActivationState(model, activatingPlayer);
+    return new CardActivationStatus(activatingPlayer, this);
   }
   
   public void addAllResourcesToCount(ResourcesCount count)
@@ -126,11 +161,51 @@ public abstract class Card extends PeriodCard
     }
     return cards;
   }
+  
+  public static Period getHighestPeriod(List<? extends Card> cards)
+  {
+    Period highest=null;
+    for (Card card : cards)
+    {
+      if (highest==null) highest=card.getPeriod();
+      else
+      {
+        if (highest.isLower(card.getPeriod()))
+        {
+          highest=card.getPeriod();
+        }
+      }
+    }
+    return highest;
+  }
+  
+  public static Period getLowestPeriod(List<? extends Card> cards)
+  {
+    Period lowest=null;
+    for (Card card : cards)
+    {
+      if (lowest==null) lowest=card.getPeriod();
+      else
+      {
+        if (lowest.isHigher(card.getPeriod()))
+        {
+          lowest=card.getPeriod();
+        }
+      }
+    }
+    return lowest;
+  }
 
   @Override
   public String toString()
   {
-    return id;
+    return name;
+  }
+  
+  public Card cloneCard()
+  {
+    Card clone=new Card(id, period);
+    return clone;
   }
 
 }

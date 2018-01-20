@@ -7,51 +7,28 @@ import be.rmammouth.innovation.model.moves.*;
 
 public class Pottery extends Card
 {
-	public Pottery()
-	{
-		super("Pottery", Period.ONE, Color.BLUE,
-			  null,
-			  Resource.LEAF, Resource.LEAF, Resource.LEAF);
-		
-		addDogma(new CooperationDogma(Resource.LEAF)
+  public Pottery()
+  {
+    super("Pottery", Period.ONE, Color.BLUE,
+          null,
+          Resource.LEAF, Resource.LEAF, Resource.LEAF);
+
+    addDogma(new CooperationDogma(Resource.LEAF)
     {
       @Override
-      public boolean activateOnPlayer(CardActivationState cas, Player player)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        int returnedCards;
-        for (returnedCards=0;returnedCards<3;returnedCards++)
-        {
-          if (player.getHand().isEmpty()) break;
-          else
-          {
-            List<Move> moves=RecycleCard.getAllRecycleCardMoves(player, CardLocation.HAND);
-            Pass pass=new Pass(player);
-            moves.add(pass);
-            Move chosenMove=player.getController().getAndResolveNextMove(moves);
-            if (chosenMove==pass) break;
-          }
-        }
-        
-        if (returnedCards>0)
-        {
-          DrawCard draw=new DrawCard(player, Period.fromInt(returnedCards));
-          draw.resolve();
-          ScoreCard score=new ScoreCard(player, draw.getCard());
-          score.resolve();
-          return true;
-        }
-        else return false;
+        return null;
       }
     });
-		
-		addDogma(new CooperationDogma(Resource.LEAF)
+
+    addDogma(new CooperationDogma(Resource.LEAF)
     {
       @Override
-      public boolean activateOnPlayer(CardActivationState cas, Player player)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        new DrawCard(player, Period.ONE).resolve();
-        return true;
+        return null;
       }
     });
-	}
+  }
 }

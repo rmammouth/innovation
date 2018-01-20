@@ -2,19 +2,21 @@ package be.rmammouth.innovation.model;
 
 import java.util.*;
 
-import be.rmammouth.innovation.*;
-
 public abstract class CooperationDogma extends Dogma 
 {
   public CooperationDogma(Resource resource)
   {
     super(resource);
   }
-
-  @Override
-  public final boolean activate(CardActivationState cas)
-  {    
-    boolean freeDraw=false;  //if true, the activating player will get a free draw action
+  
+  public final String getDogmaTypeLabel()
+  {
+    return "cooperation";
+  }
+  
+  public final List<Player> getAffectedPlayers(CardActivationStatus cas)
+  {
+    List<Player> affectedPlayers=new ArrayList<>();
     
     //activate dogma on other players
     Iterator<Player> itr=cas.getModel().getOtherPlayersIterator(cas.getActivatingPlayer());
@@ -23,24 +25,11 @@ public abstract class CooperationDogma extends Dogma
       Player otherPlayer=itr.next();
       if (cas.getResourceCount(cas.getActivatingPlayer(),resource) <= cas.getResourceCount(otherPlayer,resource))
       {
-        Innovation.getViewer().log("Activating "+card.getName()+" cooperation dogma "+index+" on "+otherPlayer.getName());
-        freeDraw|=activateOnPlayer(cas, otherPlayer);
+        affectedPlayers.add(otherPlayer);
       }
     }
+    affectedPlayers.add(cas.getActivatingPlayer());
     
-    //activate dogma on the player who played the card
-    Innovation.getViewer().log("Activating "+card.getName()+" cooperation dogma "+index+" on "+cas.getActivatingPlayer().getName());
-    activateOnPlayer(cas, cas.getActivatingPlayer());
-    
-    //the free draw action
-    return freeDraw;    
+    return affectedPlayers;
   }
-  
-  /**
-   * 
-   * @param cas
-   * @param player
-   * @return true is state has changed (which would trigger a free draw action for the activating player)
-   */
-  public abstract boolean activateOnPlayer(CardActivationState cas, Player player);
 }

@@ -4,6 +4,7 @@ import java.util.*;
 
 import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
+import be.rmammouth.innovation.model.gamestates.*;
 
 public abstract class Move
 {
@@ -24,10 +25,10 @@ public abstract class Move
 	public final void resolve()
 	{
 	  doResolve();
-	  Innovation.getViewer().moveResolved(this);
+	  Innovation.getViewManager().modelChanged();
 	}
 	
-	protected abstract void doResolve();
+	protected abstract void doResolve();	
 
   @Override
   public String toString()

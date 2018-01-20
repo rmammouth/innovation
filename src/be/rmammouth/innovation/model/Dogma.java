@@ -1,23 +1,18 @@
 package be.rmammouth.innovation.model;
 
+import java.util.*;
+
 public abstract class Dogma
 {
   protected Resource resource;
   protected Card card;
   protected int index;
-  protected String text;
+  protected String text;  
   
 	public Dogma(Resource resource)
 	{
 		this.resource = resource;
 	}
-
-	/**
-	 * Activate the dogma
-	 * @param cas
-	 * @return True if this triggers the free draw action
-	 */
-  public abstract boolean activate(CardActivationState cas);
 
   public int getIndex()
   {
@@ -37,5 +32,11 @@ public abstract class Dogma
   public Resource getResource()
   {
     return resource;
-  }
+  }  
+  
+  public abstract String getDogmaTypeLabel();
+  
+  public abstract List<Player> getAffectedPlayers(CardActivationStatus cardActivationStatus);
+  
+  public abstract PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das);
 }

@@ -3,7 +3,7 @@ package be.rmammouth.innovation.model.moves;
 import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
-public class DrawCard extends CardMove
+public class DrawCard extends ActionMove
 {
 	private Period period;  //null if best pile available for player
 	
@@ -29,9 +29,9 @@ public class DrawCard extends CardMove
 	@Override
 	protected void doResolve()
 	{
-	  Innovation.getViewer().log(player.getName()+" draws a card from pile "+period);
+	  Innovation.getViewManager().log(player.getName()+" draws a card from pile "+period);
 		card=player.getGameModel().drawCardFromPile(period);
 		player.addToHand(card);
-		Innovation.getViewer().log(player.getName()+" has drawn "+card.getNamePrefixedWithPeriod());
+		Innovation.getViewManager().log(player.getName()+" has drawn "+card.getLabelPrefixedWithPeriod());
 	}	
 }

@@ -1,13 +1,13 @@
 package be.rmammouth.innovation.model.cards;
 
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Collection;
+import java.util.*;
 
 import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.cards.p1.*;
 import be.rmammouth.innovation.model.cards.p10.*;
 import be.rmammouth.innovation.model.cards.p2.*;
+import be.rmammouth.innovation.model.cards.p2.Calendar;
+import be.rmammouth.innovation.model.cards.p2.Currency;
 import be.rmammouth.innovation.model.cards.p3.*;
 import be.rmammouth.innovation.model.cards.p4.*;
 import be.rmammouth.innovation.model.cards.p5.*;
@@ -18,8 +18,9 @@ import be.rmammouth.innovation.model.cards.p9.*;
 import be.rmammouth.innovation.view.*;
 
 public class Cards
-{
-  private static Map<String, Card> directory=new HashMap<>();
+{  
+  private static Map<Integer, Card> directoryById=new HashMap<>();
+  private static Map<String, Card> directoryByName=new HashMap<>();
   
   static
   {
@@ -134,16 +135,22 @@ public class Cards
   
   private static void register(Card card)
   {
-  	directory.put(card.getId(), card);
+    directoryById.put(card.getId(), card);
+  	directoryByName.put(card.getName(), card);
+  }
+  
+  public static Card get(int id)
+  {
+    return directoryById.get(id);
   }
   
   public static Card get(String name)
   {
-  	return directory.get(name);
+  	return directoryByName.get(name);
   }
   
   public static Collection<Card> getAll()
   {
-  	return directory.values();
+  	return directoryByName.values();
   }
 }

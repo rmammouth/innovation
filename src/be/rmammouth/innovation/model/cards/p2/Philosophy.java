@@ -16,30 +16,18 @@ public class Philosophy extends Card
     addDogma(new CooperationDogma(Resource.BULB)
     {
       @Override
-      public boolean activateOnPlayer(CardActivationState cas, Player player)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        List<Color> splayableLeft=player.getSplayableColors(Splaying.LEFT);
-        if (splayableLeft.isEmpty()) return false;
-        List<Move> moves=SplayPile.getSplayPileMoves(player, splayableLeft, Splaying.LEFT);
-        Pass pass=new Pass(player);
-        moves.add(pass);
-        Move chosenMove=player.getController().getAndResolveNextMove(moves);
-        if (chosenMove==pass) return false;
-        else return true;
+        return null;
       }
     });
 
     addDogma(new CooperationDogma(Resource.BULB)
     {
       @Override
-      public boolean activateOnPlayer(CardActivationState cas, Player player)
+      public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        if (player.getHand().isEmpty()) return false;
-        List<Move> scoreMoves=ScoreCard.getAllScoreCardMoves(player);
-        Pass pass=new Pass(player);
-        scoreMoves.add(pass);
-        Move chosenMove=player.getController().getAndResolveNextMove(scoreMoves);
-        return (chosenMove!=pass);
+        return null;
       }
     });
   }

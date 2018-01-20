@@ -14,15 +14,13 @@ public abstract class SinglePlayerGameState extends GameState
 	
 	public final void nextStep()
   {
-    List<Move> availableMoves=getAvailableMoves();
-    Move chosenMove=getActivePlayer().getController().getNextMove(availableMoves);
+	  PlayerInteraction interaction=getNextInteraction();
+    Move chosenMove=interaction.getPlayer().getController().getNextMove(interaction.getAvailableMoves());
     chosenMove.resolve();
     moveResolved(chosenMove);
   }
 	
-  public abstract Player getActivePlayer();
-  
-  public abstract List<Move> getAvailableMoves();
+  public abstract PlayerInteraction getNextInteraction();
   
   public abstract void moveResolved(Move move);
 }

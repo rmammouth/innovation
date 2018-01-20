@@ -15,4 +15,10 @@ public abstract class SpecialAchievement implements Dominable
   }
   
   public abstract boolean isWon(GameModel model, Player player);
+
+  @Override
+  public Dominable cloneCard()
+  {
+    return this;
+  }
 }

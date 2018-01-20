@@ -14,12 +14,12 @@ public abstract class MultiPlayerGameState extends GameState
   
   public final void nextStep()
   {
-    List<Player> activePlayers=getActivePlayers();
+    List<PlayerInteraction> nextInteractions=getNextInteractions();
     List<Move> chosenMoves=new ArrayList<Move>();
-    for (Player player : activePlayers)
+    for (PlayerInteraction interaction : nextInteractions)
     {
-      List<Move> availableMoves=getAvailableMoves(player);
-      Move chosenMove=player.getController().getNextMove(availableMoves);
+      List<Move> availableMoves=interaction.getAvailableMoves();
+      Move chosenMove=interaction.getPlayer().getController().getNextMove(availableMoves);
       chosenMoves.add(chosenMove);
     }
     for (Move chosenMove : chosenMoves)
@@ -29,9 +29,7 @@ public abstract class MultiPlayerGameState extends GameState
     movesResolved(chosenMoves);
   }
   
-  public abstract List<Player> getActivePlayers();
-  
-  public abstract List<Move> getAvailableMoves(Player player);
+  public abstract List<PlayerInteraction> getNextInteractions();
   
   public abstract void movesResolved(List<Move> moves);
 

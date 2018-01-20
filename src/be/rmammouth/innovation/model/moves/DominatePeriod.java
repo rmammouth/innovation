@@ -5,13 +5,13 @@ import java.util.*;
 import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
-public class DominatePeriod extends Move
+public class DominatePeriod extends ActionMove
 {
   private Period period;  
   
   public DominatePeriod(Player player, Period period)
   {
-    super(player);
+    super(player, (Card)player.getGameModel().getPeriodAchievement(period));
     this.period = period;
   }
 
@@ -23,15 +23,14 @@ public class DominatePeriod extends Move
 
   @Override
   protected void doResolve()
-  {
-    Innovation.getViewer().log(player.getName()+" dominates period "+period.asString());
-    PeriodCard card=player.getGameModel().getPeriodAchievement(period);
+  {    
     player.dominate(card);
+    Innovation.getViewManager().log(player.getName()+" dominates period "+period.asString()+" and has now "+player.getDominations().size()+" dominations");
   }
   
-  public static List<Move> getAllDominablePeriodMoves(Player player)
+  public static List<DominatePeriod> getAllDominablePeriodMoves(Player player)
   {
-    List<Move> moves=new ArrayList<>();
+    List<DominatePeriod> moves=new ArrayList<>();
     for (Period period : Period.values())
     {
       if (player.getGameModel().isPeriodAchievementAvailable(period) && player.getScorePile().canDominate(period))

@@ -5,11 +5,6 @@ import be.rmammouth.innovation.model.moves.*;
 
 public class ConsoleDisplay implements GameViewer
 {
-  @Override
-  public void turnStarted(Player player)
-  {
-    System.out.println("It's "+player.getName()+"'s turn");    
-  }
   
   @Override
   public void init(GameModel model)
@@ -17,7 +12,7 @@ public class ConsoleDisplay implements GameViewer
   }
   
 	@Override
-	public void moveResolved(Move move)
+	public void modelChanged(GameModel model)
 	{		
 	}
 

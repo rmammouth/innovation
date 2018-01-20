@@ -12,7 +12,7 @@ public class GameModel
 {
   private Player[] players;
   private Map<Period, DrawPile> drawPiles=new EnumMap<>(Period.class);
-  private Map<Period, PeriodCard> periodAchievements=new EnumMap<>(Period.class);
+  private Map<Period, Card> periodAchievements=new EnumMap<>(Period.class);
   private Set<SpecialAchievement> specialAchievements=new HashSet<>();
   
   /**
@@ -32,6 +32,7 @@ public class GameModel
    */
   private int turnNumber;
   
+  
   public Player[] getPlayers()
 	{
 		return players;
@@ -50,7 +51,6 @@ public class GameModel
 	public void setCurrentTurn(Player currentTurn)
 	{
 		this.currentTurnPlayer = currentTurn;
-		Innovation.getViewer().turnStarted(currentTurnPlayer);
 	}
 
 	public Player getFirstPlayer()
@@ -138,8 +138,6 @@ public class GameModel
       }    
     };
 	}
-	
-	
 	
 	/**
 	 * Return player index in the players table
@@ -259,7 +257,7 @@ public class GameModel
     specialAchievements.remove(achievement);    
   }
   
-  public PeriodCard getPeriodAchievement(Period period)
+  public Card getPeriodAchievement(Period period)
   {
     return periodAchievements.get(period);
   }
@@ -277,5 +275,42 @@ public class GameModel
   public int getDominationsCountNeededToWin()
   {
     return 8-players.length;
+  }
+  
+  public GameModel cloneForPlayer(Player player)
+  {
+    GameModel clone=new GameModel();
+    
+    clone.players=new Player[players.length];
+    for (int i=0;i<players.length;i++)
+    {
+      clone.players[i]=players[i].cloneForPlayer(player);
+      clone.players[i].setGameModel(clone);
+    }
+    
+    for (Period period : Period.values())
+    {
+      clone.drawPiles.put(period, drawPiles.get(period).clonePile());
+      if (periodAchievements.get(period)!=null)
+      {
+        clone.periodAchievements.put(period, periodAchievements.get(period).cloneCard());
+      }
+    }
+        
+    clone.specialAchievements.addAll(specialAchievements);
+    
+    if (currentTurnPlayer!=null)
+    {
+      clone.currentTurnPlayer=clone.players[getPlayerIndex(currentTurnPlayer)];
+    }
+    
+    if (firstPlayer!=null)
+    {
+      clone.firstPlayer=clone.players[getPlayerIndex(firstPlayer)];
+    }
+    
+    clone.turnNumber=turnNumber;
+    
+    return clone;
   }
 }
