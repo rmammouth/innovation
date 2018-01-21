@@ -41,4 +41,10 @@ public class DominatePeriod extends ActionMove
     }
     return moves;
   }
+  
+  @Override
+  public Move cloneMove(GameModel cloneModel)
+  {
+    return new DominatePeriod(cloneModel.getPlayers()[player.getIndex()], period);
+  }
 }

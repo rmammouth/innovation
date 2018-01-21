@@ -349,6 +349,8 @@ public class GameModel
     }
     
     clone.turnNumber=turnNumber;
+    clone.currentTurnActionsLeft=currentTurnActionsLeft;
+    clone.currentState=currentState.cloneState(clone);
     
     return clone;
   }

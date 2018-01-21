@@ -61,6 +61,12 @@ public class TransferCard extends CardMove
   {
     return toLocation;
   }
+
+  @Override
+  public Move cloneMove(GameModel cloneModel)
+  {
+    return new TransferCard(card, cloneModel.getPlayers()[player.getIndex()], fromLocation, cloneModel.getPlayers()[toPlayer.getIndex()], toLocation);
+  }
   
   
 }

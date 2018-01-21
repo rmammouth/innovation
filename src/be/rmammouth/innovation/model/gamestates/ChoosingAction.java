@@ -37,4 +37,10 @@ public class ChoosingAction extends SinglePlayerGameState
 	public void moveResolved(Move move)
 	{	  
 	}
+
+  @Override
+  public GameState cloneState(GameModel cloneModel)
+  {
+    return new ChoosingAction(cloneModel);
+  }
 }

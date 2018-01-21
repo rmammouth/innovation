@@ -11,5 +11,7 @@ public abstract class GameState
 		this.model = model;
 	}
 
-	public abstract void nextStep();	
+	public abstract void nextStep();
+
+  public abstract GameState cloneState(GameModel cloneModel);
 }

@@ -35,6 +35,16 @@ public class ResourcesCount
     }
     return s;
   }
+
+  public ResourcesCount cloneCount()
+  {
+    ResourcesCount clone=new ResourcesCount();
+    for (Resource resource : Resource.values())
+    {
+      clone.count.put(resource, count.get(resource));
+    }
+    return clone;
+  }
   
   
 }

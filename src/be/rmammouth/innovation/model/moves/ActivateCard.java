@@ -45,4 +45,9 @@ public class ActivateCard extends ActionMove
     return moves;
   }
 
+  @Override
+  public Move cloneMove(GameModel cloneModel)
+  {
+    return new ActivateCard(cloneModel.getPlayers()[player.getIndex()], card);
+  }
 }

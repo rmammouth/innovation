@@ -9,11 +9,12 @@ public class DogmaActivationStatus
 {  
   private Dogma dogma;
   private CardActivationStatus cardActivationStatus;
-  private Iterator<Player> itrPlayers;
+  private List<Player> affectedPlayers;
+  private ListIterator<Player> itrPlayers;
   private Player currentlyAffectedPlayer;
   private PlayerInteraction nextInteraction;
   private int resolutionStep;
-  private Stack<Move> resolvedMoves=new Stack<>();
+  private LinkedList<Move> resolvedMoves=new LinkedList<Move>();
   
   public DogmaActivationStatus(Dogma dogma, CardActivationStatus cardActivationStatus)
   {
@@ -29,7 +30,8 @@ public class DogmaActivationStatus
   
   public void startResolution(CardActivationStatus cardActivationStatus)
   {
-    itrPlayers=dogma.getAffectedPlayers(cardActivationStatus).iterator();
+    affectedPlayers=dogma.getAffectedPlayers(cardActivationStatus);
+    itrPlayers=affectedPlayers.listIterator();
     if (!itrPlayers.hasNext())
     {
       Innovation.getViewManager().log("Activating "+cardActivationStatus.getCard().getLabel()+" "+dogma.getDogmaTypeLabel()+" dogma "+dogma.getIndex()+" : no one gets affected");
@@ -90,13 +92,12 @@ public class DogmaActivationStatus
   
   public void addResolvedMove(Move move)
   {
-    resolvedMoves.push(move);
+    resolvedMoves.addLast(move);
   }
   
   public Move getLastResolvedMove()
   {
-    if (resolvedMoves.isEmpty()) return null;
-    else return resolvedMoves.peek();
+    return resolvedMoves.peekLast();
   }
   
   public int getNumberOfResolvedMoves(Class clazz)
@@ -107,5 +108,33 @@ public class DogmaActivationStatus
       if (clazz.isAssignableFrom(move.getClass())) nbr++;
     }
     return nbr;
+  }
+
+  public DogmaActivationStatus cloneStatus(GameModel cloneModel, CardActivationStatus cloneCAS)
+  {
+    DogmaActivationStatus clone=new DogmaActivationStatus(dogma, cloneCAS);
+    if (affectedPlayers!=null)
+    {
+      clone.affectedPlayers=new ArrayList<Player>();
+      for (Player player : affectedPlayers)
+      {
+        clone.affectedPlayers.add(cloneModel.getPlayers()[player.getIndex()]);
+      }  
+      if (itrPlayers!=null)
+      {
+        clone.itrPlayers=clone.affectedPlayers.listIterator(itrPlayers.nextIndex());
+      }
+    }
+    if (currentlyAffectedPlayer!=null)
+    {
+      clone.currentlyAffectedPlayer=cloneModel.getPlayers()[currentlyAffectedPlayer.getIndex()];
+    }
+    //don't have to clone nextInteraction as it will be generated on next step
+    clone.resolutionStep=resolutionStep;
+    for (Move move : resolvedMoves)
+    {
+      clone.resolvedMoves.add(move.cloneMove(cloneModel));
+    }
+    return clone;
   }
 }

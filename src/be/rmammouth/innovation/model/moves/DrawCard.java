@@ -35,4 +35,10 @@ public class DrawCard extends ActionMove
 		Innovation.getViewManager().log(player.getName()+" has drawn "+card.getLabelPrefixedWithPeriod());
 		return true;
 	}	
+	
+	@Override
+  public Move cloneMove(GameModel cloneModel)
+  {
+    return new DrawCard(cloneModel.getPlayers()[player.getIndex()], period);
+  }
 }

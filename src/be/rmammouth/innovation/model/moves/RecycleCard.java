@@ -48,4 +48,10 @@ public class RecycleCard extends CardMove
     return moves;
   }
 
+  @Override
+  public Move cloneMove(GameModel cloneModel)
+  {
+    return new RecycleCard(cloneModel.getPlayers()[player.getIndex()], card, location);
+  }
+
 }

@@ -45,4 +45,10 @@ public class PlayCard extends ActionMove
     }
     return moves;
   }
+
+  @Override
+  public Move cloneMove(GameModel cloneModel)
+  {
+    return new PlayCard(cloneModel.getPlayers()[player.getIndex()], card);
+  }
 }

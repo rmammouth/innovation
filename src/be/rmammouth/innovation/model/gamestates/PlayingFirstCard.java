@@ -43,4 +43,10 @@ public class PlayingFirstCard extends MultiPlayerGameState
 		model.setCurrentTurn(firstPlayer);
 		model.setCurrentState(new ChoosingAction(model));
 	}
+
+  @Override
+  public GameState cloneState(GameModel cloneModel)
+  {
+    return new PlayingFirstCard(cloneModel);
+  }
 }

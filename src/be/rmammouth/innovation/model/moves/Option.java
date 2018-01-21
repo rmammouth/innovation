@@ -31,4 +31,10 @@ public class Option extends Move
   {
     Innovation.getViewManager().log(resolveText);
   }
+
+  @Override
+  public Move cloneMove(GameModel cloneModel)
+  {
+    return new Option(cloneModel.getPlayers()[player.getIndex()], label, resolveText);
+  }
 }

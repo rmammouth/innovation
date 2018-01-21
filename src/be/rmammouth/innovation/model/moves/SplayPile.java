@@ -45,4 +45,10 @@ public class SplayPile extends Move
     return moves;
   }
 
+  @Override
+  public Move cloneMove(GameModel cloneModel)
+  {
+    return new SplayPile(cloneModel.getPlayers()[player.getIndex()], color, splaying);
+  }
+
 }

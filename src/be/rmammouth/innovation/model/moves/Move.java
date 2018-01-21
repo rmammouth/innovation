@@ -54,4 +54,6 @@ public abstract class Move
 	    move.resolve();
 	  }
 	}
+
+  public abstract Move cloneMove(GameModel cloneModel);
 }

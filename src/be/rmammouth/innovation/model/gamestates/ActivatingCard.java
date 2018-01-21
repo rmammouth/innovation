@@ -7,10 +7,10 @@ public class ActivatingCard extends SinglePlayerGameState
 {
   private CardActivationStatus cardActivationStatus;
   
-  public ActivatingCard(GameModel model, CardActivationStatus cardActivationState)
+  public ActivatingCard(GameModel model, CardActivationStatus cardActivationStatus)
   {
     super(model);
-    this.cardActivationStatus=cardActivationState;
+    this.cardActivationStatus=cardActivationStatus;
   }
 
   @Override
@@ -31,5 +31,13 @@ public class ActivatingCard extends SinglePlayerGameState
       model.decreaseActionCount();
       model.setCurrentState(new ChoosingAction(model));
     }
+  }
+
+  @Override
+  public GameState cloneState(GameModel cloneModel)
+  {
+    CardActivationStatus cloneCAS=cardActivationStatus.cloneStatus(cloneModel);
+    ActivatingCard clone=new ActivatingCard(cloneModel, cloneCAS);
+    return clone;
   }
 }

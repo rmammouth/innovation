@@ -45,4 +45,10 @@ public class ArchiveCard extends CardMove
     }
     return moves;
   }
+
+  @Override
+  public Move cloneMove(GameModel cloneModel)
+  {
+    return new ArchiveCard(cloneModel.getPlayers()[player.getIndex()], card);
+  }
 }

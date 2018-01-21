@@ -11,7 +11,7 @@ public class CardActivationStatus
   protected Player activatingPlayer;
   protected Card card;
   protected PlayerInteraction nextInteraction;
-  protected Iterator<Dogma> itrDogmas;
+  protected ListIterator<Dogma> itrDogmas;
   protected DogmaActivationStatus dogmaActivationStatus;
   protected boolean freeDraw;
   
@@ -23,8 +23,12 @@ public class CardActivationStatus
     {
       counts.put(player, player.getResourcesCount());
     }
-    itrDogmas=card.getDogmas().iterator();
+    itrDogmas=card.getDogmas().listIterator();
     freeDraw=false;
+  }
+  
+  private CardActivationStatus()
+  {    
   }
   
   public int getResourceCount(Player player, Resource resource)
@@ -100,5 +104,21 @@ public class CardActivationStatus
   public void addResolvedMove(Move move)
   {
     dogmaActivationStatus.addResolvedMove(move);
+  }
+
+  public CardActivationStatus cloneStatus(GameModel cloneModel)
+  {
+    CardActivationStatus clone=new CardActivationStatus();
+    for (Player player : counts.keySet())
+    {
+      clone.counts.put(cloneModel.getPlayers()[player.getIndex()], counts.get(player).cloneCount());
+    }
+    clone.activatingPlayer=cloneModel.getPlayers()[activatingPlayer.getIndex()];
+    clone.card=card;
+    //we probably don't have to clone PlayerInteraction
+    clone.itrDogmas=card.getDogmas().listIterator(itrDogmas.nextIndex());
+    clone.dogmaActivationStatus=dogmaActivationStatus.cloneStatus(cloneModel, clone);
+    clone.freeDraw=freeDraw;
+    return clone;
   }
 }

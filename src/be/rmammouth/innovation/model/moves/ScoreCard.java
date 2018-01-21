@@ -35,4 +35,10 @@ public class ScoreCard extends CardMove
     }
     return moves;
   }
+
+  @Override
+  public Move cloneMove(GameModel cloneModel)
+  {
+    return new ScoreCard(cloneModel.getPlayers()[player.getIndex()], card);
+  }
 }
