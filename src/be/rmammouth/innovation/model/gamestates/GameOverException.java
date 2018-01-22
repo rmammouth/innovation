@@ -1,10 +1,30 @@
 package be.rmammouth.innovation.model.gamestates;
 
+import java.util.*;
+
+import be.rmammouth.innovation.model.*;
+
 public class GameOverException extends RuntimeException
 {
-  public GameOverException(String message)
+  private List<Player> winners;
+  private VictoryType victoryType;
+  
+  public GameOverException(List<Player> winners, VictoryType victoryType)
   {
-    super(message);
+    super();
+    this.winners = winners;
+    this.victoryType = victoryType;
   }
+
+  public List<Player> getWinners()
+  {
+    return winners;
+  }
+
+  public VictoryType getVictoryType()
+  {
+    return victoryType;
+  }
+  
   
 }

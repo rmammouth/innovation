@@ -3,6 +3,7 @@ package be.rmammouth.innovation.controller;
 import java.io.*;
 import java.util.*;
 
+import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.moves.*;
 
 public class ConsoleController extends PlayerController
@@ -10,7 +11,7 @@ public class ConsoleController extends PlayerController
 	private BufferedReader console=new BufferedReader(new InputStreamReader(System.in));
 
 	@Override
-	public Move getNextMove(List<? extends Move> availableMoves)
+	public Move getNextMove(GameModel model, List<? extends Move> availableMoves)
 	{
 		int n=1;
 		for (Move move : availableMoves)

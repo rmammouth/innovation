@@ -37,6 +37,14 @@ public class GameModel
    */
   private int turnNumber;
   
+  /**
+   * List with winning players (usually one, except if tie).
+   * If null, game is not over yet.
+   */
+  private List<Player> winners;
+  
+  private VictoryType victoryType;
+  
   
   public Player[] getPlayers()
 	{
@@ -258,14 +266,14 @@ public class GameModel
 	  {
 	    if (period==Period.TEN)
 	    {
-	      throw new GameOverException("no more cards left to draw");
+	      gameOverByLastPileEmpty();
 	    }
 	    return drawCardFromPile(period.next());
 	  }
 	  else return drawPiles.get(period).draw();
 	}
-	
-	public void returnCardToPile(Card card)
+
+  public void returnCardToPile(Card card)
 	{
 	  drawPiles.get(card.getPeriod()).returnCard(card);	  
 	}
@@ -316,6 +324,48 @@ public class GameModel
     return 8-players.length;
   }
   
+  private void gameOverByLastPileEmpty()
+  {
+    int maxPoints=-1;  //point = (score*10)+domination
+    List<Player> winners=new ArrayList<>();
+    for (Player player : players)
+    {
+      int playerPoints=(player.getScorePile().getScore()*10)+player.getDominations().size();
+      if (playerPoints>maxPoints)
+      {
+        winners.clear();
+        winners.add(player);
+        maxPoints=playerPoints;
+      }
+      else if (playerPoints==maxPoints)
+      {
+        winners.add(player);
+      }
+    }
+    throw new GameOverException(winners, VictoryType.BY_SCORE);    
+  }
+  
+  public List<Player> getWinners()
+  {
+    return winners;
+  }
+  
+  public VictoryType getVictoryType()
+  {
+    return victoryType;
+  }
+
+  public boolean isGameOver()
+  {
+    return winners!=null;
+  }
+  
+  public void setGameOver(List<Player> winners, VictoryType victoryType)
+  {
+    this.winners=winners;
+    this.victoryType=victoryType;
+  }
+
   public GameModel cloneForPlayer(Player player)
   {
     GameModel clone=new GameModel();
@@ -340,20 +390,28 @@ public class GameModel
     
     if (currentTurnPlayer!=null)
     {
-      clone.currentTurnPlayer=clone.players[getPlayerIndex(currentTurnPlayer)];
+      clone.currentTurnPlayer=clone.players[currentTurnPlayer.getIndex()];
     }
     
     if (firstPlayer!=null)
     {
-      clone.firstPlayer=clone.players[getPlayerIndex(firstPlayer)];
+      clone.firstPlayer=clone.players[firstPlayer.getIndex()];
     }
     
     clone.turnNumber=turnNumber;
     clone.currentTurnActionsLeft=currentTurnActionsLeft;
     clone.currentState=currentState.cloneState(clone);
     
+    if (winners!=null)
+    {
+      for (Player winner : winners)
+      {
+        clone.winners.add(clone.players[winner.getIndex()]);
+      }
+    }
+    clone.victoryType=victoryType;
+    
     return clone;
   }
-
   
 }

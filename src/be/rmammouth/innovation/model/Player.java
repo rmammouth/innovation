@@ -93,7 +93,7 @@ public class Player
   {
     if (dominations.size()>=gameModel.getDominationsCountNeededToWin())
     {
-      throw new GameOverException(name+" has won with "+dominations.size()+" dominations");
+      throw new GameOverException(Collections.singletonList(this), VictoryType.BY_DOMINATION);
     }
   }
   

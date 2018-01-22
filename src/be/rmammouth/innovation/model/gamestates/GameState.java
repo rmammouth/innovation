@@ -10,8 +10,20 @@ public abstract class GameState
 	{
 		this.model = model;
 	}
+	
+	public final void nextStep()
+	{
+	  try
+	  {
+	    doNextStep();
+	  }
+	  catch (GameOverException ex)
+	  {
+	    model.setGameOver(ex.getWinners(), ex.getVictoryType());
+	  }
+	}
 
-	public abstract void nextStep();
+	protected abstract void doNextStep();
 
   public abstract GameState cloneState(GameModel cloneModel);
 }

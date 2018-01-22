@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import be.rmammouth.innovation.controller.*;
+import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.moves.*;
 
 public class GUIController extends PlayerController
@@ -18,7 +19,7 @@ public class GUIController extends PlayerController
   }
 
   @Override
-  public Move getNextMove(java.util.List<? extends Move> availableMoves)
+  public Move getNextMove(GameModel model, java.util.List<? extends Move> availableMoves)
   {
     GUIInteraction guiInteraction=new GUIInteraction(inputPanel);
     

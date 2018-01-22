@@ -117,7 +117,10 @@ public class CardActivationStatus
     clone.card=card;
     //we probably don't have to clone PlayerInteraction
     clone.itrDogmas=card.getDogmas().listIterator(itrDogmas.nextIndex());
-    clone.dogmaActivationStatus=dogmaActivationStatus.cloneStatus(cloneModel, clone);
+    if (dogmaActivationStatus!=null)
+    {
+      clone.dogmaActivationStatus=dogmaActivationStatus.cloneStatus(cloneModel, clone);
+    }
     clone.freeDraw=freeDraw;
     return clone;
   }

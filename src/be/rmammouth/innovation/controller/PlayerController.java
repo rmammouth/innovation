@@ -23,5 +23,5 @@ public abstract class PlayerController
 		this.player = player;
 	}
   
-  public abstract Move getNextMove(List<? extends Move> availableMoves);
+  public abstract Move getNextMove(GameModel model, List<? extends Move> availableMoves);
 }

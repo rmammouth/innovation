@@ -12,15 +12,16 @@ public abstract class MultiPlayerGameState extends GameState
     super(model);
   }
   
-  public final void nextStep()
+  protected final void doNextStep()
   {
     List<PlayerInteraction> nextInteractions=getNextInteractions();
     List<Move> chosenMoves=new ArrayList<Move>();
     for (PlayerInteraction interaction : nextInteractions)
     {
-      List<Move> availableMoves=interaction.getAvailableMoves();
-      Move chosenMove=interaction.getPlayer().getController().getNextMove(availableMoves);
-      chosenMoves.add(chosenMove);
+      PlayerGameModel pgm=new PlayerGameModel(interaction.getPlayer(), model, interaction.getAvailableMoves());
+      Move cloneMove=interaction.getPlayer().getController().getNextMove(pgm.getModel(), pgm.getMoves());
+      Move originalMove=interaction.getAvailableMoves().get(pgm.getMoves().indexOf(cloneMove));
+      chosenMoves.add(originalMove);
     }
     for (Move chosenMove : chosenMoves)
     {

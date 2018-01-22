@@ -12,12 +12,14 @@ public abstract class SinglePlayerGameState extends GameState
 		super(model);
 	}
 	
-	public final void nextStep()
+	protected final void doNextStep()
   {
 	  PlayerInteraction interaction=getNextInteraction();
-    Move chosenMove=interaction.getPlayer().getController().getNextMove(interaction.getAvailableMoves());
-    chosenMove.resolve();
-    moveResolved(chosenMove);
+	  PlayerGameModel pgm=new PlayerGameModel(interaction.getPlayer(), model, interaction.getAvailableMoves());
+    Move cloneMove=interaction.getPlayer().getController().getNextMove(pgm.getModel(), pgm.getMoves());
+    Move originalMove=interaction.getAvailableMoves().get(pgm.getMoves().indexOf(cloneMove));
+    originalMove.resolve();
+    moveResolved(originalMove);
   }
 	
   public abstract PlayerInteraction getNextInteraction();
