@@ -10,6 +10,11 @@ import be.rmammouth.innovation.model.moves.*;
 
 public class GameModel
 {
+  /**
+   * True if this is the main game model, false if it's a copy used for player view or AI.
+   */
+  private boolean main;
+  
   private Player[] players;
   private Map<Period, DrawPile> drawPiles=new EnumMap<>(Period.class);
   private Map<Period, Card> periodAchievements=new EnumMap<>(Period.class);
@@ -44,8 +49,13 @@ public class GameModel
   private List<Player> winners;
   
   private VictoryType victoryType;
+   
   
-  
+  public boolean isMain()
+  {
+    return main;
+  }
+
   public Player[] getPlayers()
 	{
 		return players;
@@ -212,6 +222,7 @@ public class GameModel
 
 	public void startNewGame(Player[] players)
   {
+	  this.main=true;
   	this.players=players;
   	
   	int index=0;
@@ -370,6 +381,7 @@ public class GameModel
   {
     GameModel clone=new GameModel();
     
+    clone.main=false;
     clone.players=new Player[players.length];
     for (int i=0;i<players.length;i++)
     {

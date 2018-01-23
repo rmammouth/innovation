@@ -57,7 +57,8 @@ public class Card implements Dominable
   
   public String getName()
 	{
-		return name;
+    if (name==null) return "???";
+    else return name;
 	}
   
   public boolean isRevealed()

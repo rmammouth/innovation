@@ -15,7 +15,7 @@ public abstract class SinglePlayerGameState extends GameState
 	protected final void doNextStep()
   {
 	  PlayerInteraction interaction=getNextInteraction();
-	  PlayerGameModel pgm=new PlayerGameModel(interaction.getPlayer(), model, interaction.getAvailableMoves());
+	  GameModelClone pgm=new GameModelClone(interaction.getPlayer(), model, interaction.getAvailableMoves());
     Move cloneMove=interaction.getPlayer().getController().getNextMove(pgm.getModel(), pgm.getMoves());
     Move originalMove=interaction.getAvailableMoves().get(pgm.getMoves().indexOf(cloneMove));
     originalMove.resolve();

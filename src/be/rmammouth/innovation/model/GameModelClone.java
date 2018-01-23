@@ -9,13 +9,13 @@ import be.rmammouth.innovation.model.moves.*;
  * @author Seb
  *
  */
-public class PlayerGameModel
+public class GameModelClone
 {
   private Player player;
   private GameModel model;
   private List<Move> moves;
   
-  public PlayerGameModel(Player mainPlayer, GameModel mainModel, List<Move> mainMoves)
+  public GameModelClone(Player mainPlayer, GameModel mainModel, List<Move> mainMoves)
   {
     model=mainModel.cloneForPlayer(mainPlayer);
     player=model.getPlayers()[mainPlayer.getIndex()];

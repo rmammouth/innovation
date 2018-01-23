@@ -25,6 +25,7 @@ public class Player
 	{
 		this.name=name;
 		this.controller=controller;
+		controller.setPlayer(this);
 		for (Color color : Color.values())
 		{
 			board.put(color, new CardsPile());
@@ -195,7 +196,10 @@ public class Player
   {
     if (hand.remove(card))
     {
-      board.get(card.getColor()).addCardOnTop(card);
+      if (card.getColor()!=null)
+      {
+        board.get(card.getColor()).addCardOnTop(card);
+      }
     }
     else throw new IllegalArgumentException(name+" doesn't have the card "+card.getLabel()+ " in his hand!");
   }
@@ -302,6 +306,19 @@ public class Player
   {
     return getName();
   }  
+
+  @Override
+  public int hashCode()
+  {
+    return index;
+  }
+
+  @Override
+  public boolean equals(Object obj)
+  {
+    if (obj instanceof Player) return ((Player)obj).index==index;
+    else return false;
+  }
 
   public Player cloneForPlayer(Player player)
   {

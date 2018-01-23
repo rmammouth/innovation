@@ -16,8 +16,23 @@ public abstract class TreeExploringAIController extends PlayerController
   @Override
   public Move getNextMove(GameModel model, List<? extends Move> availableMoves)
   {
-    // TODO Auto-generated method stub
-    return null;
+    float bestEval=Float.NEGATIVE_INFINITY;
+    Move bestMove=null;
+    for (Move move : availableMoves)
+    {
+      GameModel cloneModel=model.cloneForPlayer(player);
+      Move cloneMove=move.cloneMove(cloneModel);
+      cloneMove.resolve();
+   //   cloneModel.getCurrentState().nextStep();
+      float eval=evalGameModel(cloneModel);
+      if (eval>=bestEval)
+      {
+        bestMove=move;
+        bestEval=eval;
+      }
+    }
+    return bestMove;
   }
-
+  
+  public abstract float evalGameModel(GameModel model);
 }

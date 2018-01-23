@@ -18,9 +18,9 @@ public abstract class MultiPlayerGameState extends GameState
     List<Move> chosenMoves=new ArrayList<Move>();
     for (PlayerInteraction interaction : nextInteractions)
     {
-      PlayerGameModel pgm=new PlayerGameModel(interaction.getPlayer(), model, interaction.getAvailableMoves());
-      Move cloneMove=interaction.getPlayer().getController().getNextMove(pgm.getModel(), pgm.getMoves());
-      Move originalMove=interaction.getAvailableMoves().get(pgm.getMoves().indexOf(cloneMove));
+      GameModelClone gmc=new GameModelClone(interaction.getPlayer(), model, interaction.getAvailableMoves());
+      Move cloneMove=interaction.getPlayer().getController().getNextMove(gmc.getModel(), gmc.getMoves());
+      Move originalMove=interaction.getAvailableMoves().get(gmc.getMoves().indexOf(cloneMove));
       chosenMoves.add(originalMove);
     }
     for (Move chosenMove : chosenMoves)
