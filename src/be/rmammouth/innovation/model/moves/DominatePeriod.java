@@ -23,9 +23,9 @@ public class DominatePeriod extends ActionMove
 
   @Override
   protected boolean doResolveAction()
-  {    
-    player.dominate(card);
-    Innovation.getViewManager().log(player.getName()+" dominates period "+period.asString()+" and has now "+player.getDominations().size()+" dominations");
+  {
+    Innovation.getViewManager().log(player.getName()+" dominates period "+period.asString()+" and has now "+(player.getDominations().size()+1)+" dominations");
+    player.dominate(card);    
     return true;
   }
   
