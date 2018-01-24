@@ -29,7 +29,7 @@ public class Option extends Move
   @Override
   protected void doResolve()
   {
-    Innovation.getViewManager().log(resolveText);
+    player.getGameModel().log(resolveText);
   }
 
   @Override

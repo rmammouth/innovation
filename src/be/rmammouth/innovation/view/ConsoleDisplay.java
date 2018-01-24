@@ -1,20 +1,13 @@
 package be.rmammouth.innovation.view;
 
 import be.rmammouth.innovation.model.*;
-import be.rmammouth.innovation.model.moves.*;
 
-public class ConsoleDisplay implements GameViewer
+public class ConsoleDisplay extends GameViewer
 {
-  
-  @Override
-  public void init(GameModel model)
+  public ConsoleDisplay()
   {
+    super(null);
   }
-  
-	@Override
-	public void modelChanged(GameModel model)
-	{		
-	}
 
   @Override
   public void log(String message)
@@ -22,4 +15,8 @@ public class ConsoleDisplay implements GameViewer
     System.out.println(message);
   }
 
+  @Override
+  protected void updateView(GameModel model)
+  {    
+  }
 }

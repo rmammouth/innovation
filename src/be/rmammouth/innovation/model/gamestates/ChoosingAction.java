@@ -17,7 +17,7 @@ public class ChoosingAction extends SinglePlayerGameState
 	public PlayerInteraction getNextInteraction()
 	{
 	  Player player=model.getCurrentTurnPlayer();
-	  Innovation.getViewManager().log(player.getName()+" has "+model.getCurrentTurnActionsLeft()+" action(s) left to play");
+	  model.log(player.getName()+" has "+model.getCurrentTurnActionsLeft()+" action(s) left to play");
 	  
 		List<ActionMove> moves=new ArrayList<>();
 		moves.add(new DrawCard(player));

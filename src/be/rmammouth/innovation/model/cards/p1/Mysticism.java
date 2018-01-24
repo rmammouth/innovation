@@ -18,6 +18,13 @@ public class Mysticism extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        DrawCard draw=new DrawCard(das.getAffectedPlayer(), Period.ONE);
+        draw.resolve();
+        if (das.getAffectedPlayer().getColorsOnBoard().contains(draw.getCard().getColor()))
+        {
+          new PlayCard(das.getAffectedPlayer(), draw.getCard()).resolve();
+          new DrawCard(das.getAffectedPlayer(), Period.ONE).resolve();
+        }
         return null;
       }
     });

@@ -26,7 +26,7 @@ public class ArchiveCard extends CardMove
   @Override
   protected void doResolve()
   {
-    Innovation.getViewManager().log(player.getName()+" has archived "+card.getLabelPrefixedWithPeriod());
+    player.getGameModel().log(player.getName()+" has archived "+card.getLabelPrefixedWithPeriod());
     player.removeFromHand(card);
     player.getCardsPile(card.getColor()).archive(card);
   }

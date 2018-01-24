@@ -2,12 +2,15 @@ package be.rmammouth.innovation.controller.ai;
 
 import java.util.*;
 
+import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.controller.*;
 import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.moves.*;
 
 public abstract class TreeExploringAIController extends PlayerController
 {
+  private Random random=new Random();
+  
   public TreeExploringAIController()
   {
     super();
@@ -17,7 +20,7 @@ public abstract class TreeExploringAIController extends PlayerController
   public Move getNextMove(GameModel model, List<? extends Move> availableMoves)
   {
     float bestEval=Float.NEGATIVE_INFINITY;
-    Move bestMove=null;
+    List<Move> bestMoves=new ArrayList<>();
     for (Move move : availableMoves)
     {
       GameModel cloneModel=model.cloneForPlayer(player);
@@ -25,13 +28,19 @@ public abstract class TreeExploringAIController extends PlayerController
       cloneMove.resolve();
    //   cloneModel.getCurrentState().nextStep();
       float eval=evalGameModel(cloneModel);
-      if (eval>=bestEval)
+      Innovation.getViewer().log(move.getLabel()+" : "+eval);
+      if (eval>bestEval)
       {
-        bestMove=move;
+        bestMoves.clear();
+        bestMoves.add(move);
         bestEval=eval;
       }
+      else if (eval==bestEval)
+      {
+        bestMoves.add(move);
+      }
     }
-    return bestMove;
+    return bestMoves.get(random.nextInt(bestMoves.size()));
   }
   
   public abstract float evalGameModel(GameModel model);

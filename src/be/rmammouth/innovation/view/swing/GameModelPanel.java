@@ -8,10 +8,10 @@ import java.awt.BorderLayout;
 
 public class GameModelPanel extends JPanel
 {
-  private GUIViewer viewer;
+  private GUIViewerFrame viewer;
   private CardsPilesTableModel cardsPilesTableModel=new CardsPilesTableModel();
   
-  public GameModelPanel(GUIViewer viewer)
+  public GameModelPanel(GUIViewerFrame viewer)
   {
     this.viewer=viewer;
     setLayout(new BorderLayout(0, 0));

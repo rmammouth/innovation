@@ -25,7 +25,10 @@ public abstract class Move
 	public final void resolve()
 	{
 	  doResolve();
-	  Innovation.getViewManager().modelChanged();
+	  if (player.getGameModel().isMain())
+	  {
+	    Innovation.getViewer().modelChanged(player.getGameModel());
+	  }
 	}
 	
 	protected abstract void doResolve();	

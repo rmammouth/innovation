@@ -114,8 +114,7 @@ public class Card implements Dominable
 	}
 
   public CardActivationStatus activate(Player activatingPlayer)
-  {
-    Innovation.getViewManager().log(activatingPlayer.getName()+" has activated "+getLabelPrefixedWithPeriod());
+  {    
     CardActivationStatus cas=buildActivationStatus(activatingPlayer);
     cas.nextStep();
     return cas;

@@ -7,6 +7,7 @@ import be.rmammouth.innovation.model.achievements.*;
 import be.rmammouth.innovation.model.cards.*;
 import be.rmammouth.innovation.model.gamestates.*;
 import be.rmammouth.innovation.model.moves.*;
+import be.rmammouth.innovation.view.*;
 
 public class GameModel
 {
@@ -412,7 +413,10 @@ public class GameModel
     
     clone.turnNumber=turnNumber;
     clone.currentTurnActionsLeft=currentTurnActionsLeft;
-    clone.currentState=currentState.cloneState(clone);
+    if (currentState!=null)
+    {
+      clone.currentState=currentState.cloneState(clone);
+    }
     
     if (winners!=null)
     {
@@ -424,6 +428,14 @@ public class GameModel
     clone.victoryType=victoryType;
     
     return clone;
+  }
+  
+  public void log(String message)
+  {
+    if (main)
+    {
+      Innovation.getViewer().log(message);
+    }
   }
   
 }

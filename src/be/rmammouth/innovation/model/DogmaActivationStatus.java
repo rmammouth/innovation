@@ -34,7 +34,7 @@ public class DogmaActivationStatus
     itrPlayers=affectedPlayers.listIterator();
     if (!itrPlayers.hasNext())
     {
-      Innovation.getViewManager().log("Activating "+cardActivationStatus.getCard().getLabel()+" "+dogma.getDogmaTypeLabel()+" dogma "+dogma.getIndex()+" : no one gets affected");
+      cardActivationStatus.getModel().log("Activating "+cardActivationStatus.getCard().getLabel()+" "+dogma.getDogmaTypeLabel()+" dogma "+dogma.getIndex()+" : no one gets affected");
     }
   }
   
@@ -45,7 +45,7 @@ public class DogmaActivationStatus
       if (itrPlayers.hasNext())
       {
         currentlyAffectedPlayer=itrPlayers.next();
-        Innovation.getViewManager().log("Activating "+cardActivationStatus.getCard().getLabel()+" "+dogma.getDogmaTypeLabel()+" dogma "+dogma.getIndex()+" on "+currentlyAffectedPlayer.getName());        
+        cardActivationStatus.getModel().log("Activating "+cardActivationStatus.getCard().getLabel()+" "+dogma.getDogmaTypeLabel()+" dogma "+dogma.getIndex()+" on "+currentlyAffectedPlayer.getName());        
       }
       else return null;
     }

@@ -2,6 +2,7 @@ package be.rmammouth.innovation.model.moves;
 
 import java.util.*;
 
+import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.gamestates.*;
 
@@ -20,7 +21,8 @@ public class ActivateCard extends ActionMove
 
   @Override
   protected boolean doResolveAction()
-  {    
+  {
+    player.getGameModel().log(player.getName()+" activates "+card.getLabelPrefixedWithPeriod());
     CardActivationStatus cardActivationStatus=card.activate(player);
     PlayerInteraction playerInteraction=cardActivationStatus.getNextInteraction();
     if (playerInteraction==null)

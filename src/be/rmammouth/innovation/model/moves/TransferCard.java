@@ -33,7 +33,7 @@ public class TransferCard extends CardMove
   @Override
   protected void doResolve()
   {
-    Innovation.getViewManager().log(player+" transfers "+card.getLabelPrefixedWithPeriod()+" from his "+fromLocation.getLabel()+" to "+toLocation.getLabel(toPlayer));
+    player.getGameModel().log(player+" transfers "+card.getLabelPrefixedWithPeriod()+" from his "+fromLocation.getLabel()+" to "+toLocation.getLabel(toPlayer));
     player.transferCard(card, fromLocation, toPlayer, toLocation);
   }
 

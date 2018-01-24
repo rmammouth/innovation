@@ -29,10 +29,10 @@ public class DrawCard extends ActionMove
 	@Override
 	protected boolean doResolveAction()
 	{
-	  Innovation.getViewManager().log(player.getName()+" draws a card from pile "+period);
+	  player.getGameModel().log(player.getName()+" draws a card from pile "+period);
 		card=player.getGameModel().drawCardFromPile(period);
 		player.addToHand(card);
-		Innovation.getViewManager().log(player.getName()+" has drawn "+card.getLabelPrefixedWithPeriod());
+		player.getGameModel().log(player.getName()+" has drawn "+card.getLabelPrefixedWithPeriod());
 		return true;
 	}	
 	

@@ -64,10 +64,10 @@ public class CardActivationStatus
       {
         //no dogma left, card resolution is over
         nextInteraction=null;
-        Innovation.getViewManager().log(activatingPlayer.getName()+" has finished resolving "+card.getLabelPrefixedWithPeriod());
+        activatingPlayer.getGameModel().log(activatingPlayer.getName()+" has finished resolving "+card.getLabelPrefixedWithPeriod());
         if (freeDraw)
         {
-          Innovation.getViewManager().log(activatingPlayer.getName()+" gets a free draw action");
+          activatingPlayer.getGameModel().log(activatingPlayer.getName()+" gets a free draw action");
           new DrawCard(activatingPlayer).resolve();
         }
         return;

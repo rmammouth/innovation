@@ -23,7 +23,7 @@ public class ScoreCard extends CardMove
   {    
     player.removeFromHand(card);
     player.addToScorePile(card);
-    Innovation.getViewManager().log(player.getName()+" scores "+card.getLabelPrefixedWithPeriod()+" and has now "+player.getScorePile().getScore()+" pts");
+    player.getGameModel().log(player.getName()+" scores "+card.getLabelPrefixedWithPeriod()+" and has now "+player.getScorePile().getScore()+" pts");
   }
   
   public static List<Move> getAllScoreCardMoves(Player player)

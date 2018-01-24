@@ -26,7 +26,7 @@ public class PlayCard extends ActionMove
 	@Override
 	protected boolean doResolveAction()
 	{
-	  Innovation.getViewManager().log(player.getName()+" puts "+card.getLabelPrefixedWithPeriod()+" into play");
+	  player.getGameModel().log(player.getName()+" puts "+card.getLabelPrefixedWithPeriod()+" into play");
 		player.putCardInPlay(card);		
 		return true;
 	}

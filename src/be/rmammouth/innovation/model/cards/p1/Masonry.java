@@ -28,7 +28,7 @@ public class Masonry extends Card
           SpecialAchievement monument=Achievements.get("Monument");
           if ((das.getNumberOfResolvedMoves(PlayCard.class)>=4) && das.getAffectedPlayer().getGameModel().isSpecialAchievementAvailable(monument))
           {
-            Innovation.getViewManager().log(das.getAffectedPlayer().getName()+" has put 4 or more [TOWER] cards into play and dominates the Monument achievement");
+            das.getAffectedPlayer().getGameModel().log(das.getAffectedPlayer().getName()+" has put 4 or more [TOWER] cards into play and dominates the Monument achievement");
             das.getAffectedPlayer().dominate(monument);
           }
           return null;

@@ -18,6 +18,7 @@ public class Writing extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        new DrawCard(das.getAffectedPlayer(), Period.TWO).resolve();
         return null;
       }
     });
