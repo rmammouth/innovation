@@ -24,7 +24,14 @@ public abstract class Move
 	
 	public final void resolve()
 	{
-	  doResolve();
+	  try
+	  {
+	    doResolve();
+	  }
+    catch (GameOverException ex)
+    {
+      player.getGameModel().setGameOver(ex.getWinners(), ex.getVictoryType());
+    }
 	  if (player.getGameModel().isMain())
 	  {
 	    Innovation.getViewer().modelChanged(player.getGameModel());

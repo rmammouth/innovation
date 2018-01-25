@@ -278,6 +278,7 @@ public class GameModel
 	  {
 	    if (period==Period.TEN)
 	    {
+	      log("Can't draw from the last empty pile : game over");
 	      gameOverByLastPileEmpty();
 	    }
 	    return drawCardFromPile(period.next());
