@@ -5,6 +5,7 @@ import java.util.*;
 import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.gamestates.*;
+import be.rmammouth.innovation.view.*;
 
 public abstract class Move
 {
@@ -34,7 +35,7 @@ public abstract class Move
     }
 	  if (player.getGameModel().isMain())
 	  {
-	    Innovation.getViewer().modelChanged(player.getGameModel());
+	    GameViewer.getViewer().modelChanged(player.getGameModel());
 	  }
 	}
 	

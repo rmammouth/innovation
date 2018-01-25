@@ -6,6 +6,7 @@ import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.controller.*;
 import be.rmammouth.innovation.model.*;
 import be.rmammouth.innovation.model.moves.*;
+import be.rmammouth.innovation.view.*;
 
 public abstract class TreeExploringAIController extends PlayerController
 {
@@ -28,7 +29,7 @@ public abstract class TreeExploringAIController extends PlayerController
       cloneMove.resolve();
    //   cloneModel.getCurrentState().nextStep();
       float eval=evalGameModel(cloneModel);
-      Innovation.getViewer().log(move.getLabel()+" : "+eval);
+      GameViewer.getViewer().log(move.getLabel()+" : "+eval);
       if (eval>bestEval)
       {
         bestMoves.clear();

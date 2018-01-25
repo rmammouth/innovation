@@ -7,6 +7,8 @@ import be.rmammouth.innovation.model.moves.*;
 
 public class CardActivationStatus 
 {
+  private static boolean AUTO_RESOLVE_SINGLE_CHOICE=false;
+  
   protected Map<Player, ResourcesCount> counts=new HashMap<>();
   protected Player activatingPlayer;
   protected Card card;
@@ -81,7 +83,7 @@ public class CardActivationStatus
       dogmaActivationStatus=null;
       nextStep();
     }
-    else if (nextInteraction.getAvailableMoves().size()==1)
+    else if (AUTO_RESOLVE_SINGLE_CHOICE && nextInteraction.getAvailableMoves().size()==1)
     {
       //if there's only one option available to the player, resolve it immediately
       Move onlyMove=nextInteraction.getAvailableMoves().get(0);

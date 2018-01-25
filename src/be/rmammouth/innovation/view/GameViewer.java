@@ -1,9 +1,12 @@
 package be.rmammouth.innovation.view;
 
+import be.rmammouth.innovation.*;
 import be.rmammouth.innovation.model.*;
 
 public abstract class GameViewer
 {
+  private static GameViewer viewer;
+  
   protected Player pointOfView;
   
   protected GameViewer(Player pointOfView)
@@ -29,5 +32,15 @@ public abstract class GameViewer
   public final void setPointOfView(Player pointOfView)
   {
     this.pointOfView = pointOfView;
+  }
+
+  public static final GameViewer getViewer()
+  {
+    return viewer;
+  }
+
+  public static final void setViewer(GameViewer viewer)
+  {
+    GameViewer.viewer = viewer;
   }
 }

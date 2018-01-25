@@ -18,6 +18,11 @@ public class Fermenting extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        int cardsToDraw=cas.getResourceCount(das.getAffectedPlayer(), Resource.LEAF)/2;
+        for (int i=0;i<cardsToDraw;i++)
+        {
+          new DrawCard(das.getAffectedPlayer(), Period.TWO).resolve();
+        }
         return null;
       }
     });

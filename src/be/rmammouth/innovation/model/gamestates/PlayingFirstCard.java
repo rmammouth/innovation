@@ -39,6 +39,7 @@ public class PlayingFirstCard extends MultiPlayerGameState
 		  }
 		}
 		
+		model.log(firstPlayer.getName()+" will play the first turn as he played the first card in alphabetical order");
 		model.setFirstPlayer(firstPlayer);
 		model.setCurrentTurn(firstPlayer);
 		model.setCurrentState(new ChoosingAction(model));

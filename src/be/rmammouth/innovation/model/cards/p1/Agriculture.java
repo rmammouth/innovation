@@ -31,6 +31,7 @@ public class Agriculture extends Card
           if (!das.getLastResolvedMove().isPass()) 
           {
             Card returnedCard=((RecycleCard)das.getLastResolvedMove()).getCard();
+            if (returnedCard.getPeriod()==Period.TEN) cas.getModel().gameOverByLastPileEmpty();
             DrawCard drawCard=new DrawCard(das.getAffectedPlayer(), returnedCard.getPeriod().next());
             drawCard.resolve();
             ScoreCard scoreCard=new ScoreCard(das.getAffectedPlayer(), drawCard.getCard());

@@ -31,14 +31,14 @@ public class PlayCard extends ActionMove
 		return true;
 	}
 	
-	public static List<PlayCard> getAllPlayableCardMoves(Player player)
+	public static List<Move> getAllPlayableCardMoves(Player player)
 	{
 		return getPlayCardMoves(player, player.getHand());
 	}
 	
-	public static List<PlayCard> getPlayCardMoves(Player player, List<Card> cards)
+	public static List<Move> getPlayCardMoves(Player player, List<Card> cards)
   {
-	  List<PlayCard> moves=new ArrayList<>();
+	  List<Move> moves=new ArrayList<>();
     for (Card card : cards)
     {
       moves.add(new PlayCard(player, card));  

@@ -2,9 +2,9 @@ package be.rmammouth.innovation.view;
 
 import be.rmammouth.innovation.model.*;
 
-public class ConsoleDisplay extends GameViewer
+public class ConsoleViewer extends GameViewer
 {
-  public ConsoleDisplay()
+  public ConsoleViewer()
   {
     super(null);
   }

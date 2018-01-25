@@ -115,7 +115,7 @@ public class CardPanel extends JPanel
   
   private String buildToolTipText()
   {
-    String text="<html>";
+    String text="<html><i>"+card.getLabelPrefixedWithPeriod()+"</i><br/>";
     for (Dogma dogma : card.getDogmas())
     {
       text+="<b>"+dogma.getResource()+"</b> : "+dogma.getText()+"<br/>";

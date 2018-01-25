@@ -337,7 +337,7 @@ public class GameModel
     return 8-players.length;
   }
   
-  private void gameOverByLastPileEmpty()
+  public void gameOverByLastPileEmpty()
   {
     int maxPoints=-1;  //point = (score*10)+domination
     List<Player> winners=new ArrayList<>();
@@ -435,7 +435,7 @@ public class GameModel
   {
     if (main)
     {
-      Innovation.getViewer().log(message);
+      GameViewer.getViewer().log(message);
     }
   }
   

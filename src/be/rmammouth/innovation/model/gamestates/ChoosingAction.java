@@ -19,15 +19,15 @@ public class ChoosingAction extends SinglePlayerGameState
 	  Player player=model.getCurrentTurnPlayer();
 	  model.log(player.getName()+" has "+model.getCurrentTurnActionsLeft()+" action(s) left to play");
 	  
-		List<ActionMove> moves=new ArrayList<>();
+		List<Move> moves=new ArrayList<>();
 		moves.add(new DrawCard(player));
 		moves.addAll(PlayCard.getAllPlayableCardMoves(player));
 		moves.addAll(ActivateCard.getAllActivableCardMoves(player));
 		moves.addAll(DominatePeriod.getAllDominablePeriodMoves(player));
 		
-		for (ActionMove move : moves)
+		for (Move move : moves)
 		{
-		  move.setTurnAction(true);
+		  ((ActionMove)move).setTurnAction(true);
 		}
 		
 		return new PlayerInteraction(player, new ArrayList<Move>(moves));
