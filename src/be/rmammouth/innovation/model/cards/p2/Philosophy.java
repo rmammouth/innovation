@@ -18,7 +18,14 @@ public class Philosophy extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        return null;
+        if (das.getNumberOfResolvedMoves()==0)
+        {
+          List<Move> moves=SplayPile.getAllSplayablePileMoves(das.getAffectedPlayer(), Splaying.LEFT);
+          if (moves.isEmpty()) return null;
+          moves.add(new Pass(das.getAffectedPlayer()));
+          return new PlayerInteraction(das.getAffectedPlayer(), moves);
+        }
+        else return null;
       }
     });
 
@@ -27,7 +34,14 @@ public class Philosophy extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        return null;
+        if (das.getNumberOfResolvedMoves()==0)
+        {
+          List<Move> moves=ScoreCard.getAllScoreFromHandCardMoves(das.getAffectedPlayer());
+          if (moves.isEmpty()) return null;
+          moves.add(new Pass(das.getAffectedPlayer()));
+          return new PlayerInteraction(das.getAffectedPlayer(), moves);
+        }
+        else return null;
       }
     });
   }

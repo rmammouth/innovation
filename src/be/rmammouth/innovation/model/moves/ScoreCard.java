@@ -26,7 +26,7 @@ public class ScoreCard extends CardMove
     player.getGameModel().log(player.getName()+" scores "+card.getLabelPrefixedWithPeriod()+" and has now "+player.getScorePile().getScore()+" pts");
   }
   
-  public static List<Move> getAllScoreCardMoves(Player player)
+  public static List<Move> getAllScoreFromHandCardMoves(Player player)
   {
     List<Move> moves=new ArrayList<>();
     for (Card card : player.getHand())

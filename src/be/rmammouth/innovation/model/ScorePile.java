@@ -34,6 +34,10 @@ public class ScorePile
   {
     cards.remove(card);
     score-=card.getPeriod().asInt();
+    if (score<0)
+    {
+      throw new IllegalArgumentException("negative score???");      
+    }
   }
   
   public boolean canDominate(Period period)

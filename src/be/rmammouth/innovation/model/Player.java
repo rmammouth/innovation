@@ -133,6 +133,11 @@ public class Player
     return board.get(color);
   }
   
+  public boolean hasColorOnBoard(Color color)
+  {
+    return !board.get(color).isEmpty();
+  }
+  
   public List<Color> getSplayableColors(Splaying splaying)
   {
     List<Color> colors=new ArrayList<>();
@@ -280,6 +285,7 @@ public class Player
       break;
     case BOARD:
       getCardsPile(card.getColor()).addCardOnTop(card);
+      break;
     case SCORE_PILE:
       getScorePile().addCard(card);
       break;
@@ -295,6 +301,7 @@ public class Player
       break;
     case BOARD:
       getCardsPile(card.getColor()).remove(card);
+      break;
     case SCORE_PILE:
       getScorePile().removeCard(card);
       break;

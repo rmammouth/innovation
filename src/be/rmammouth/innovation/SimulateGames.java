@@ -26,7 +26,7 @@ public class SimulateGames
         model.getCurrentState().nextStep();
       }
       
-      System.err.println("Game over at turn "+model.getTurnNumber());
+      System.out.println("Game over at turn "+model.getTurnNumber());
       String winners="";
       for (Player winner : model.getWinners())
       {
@@ -34,8 +34,8 @@ public class SimulateGames
         winners+=winner.getName();
         wins[winner.getIndex()]++;
       }
-      System.err.println("Winner(s) "+model.getVictoryType()+" : "+winners);
-      System.err.println(p1.getName()+" "+wins[0]+"-"+wins[1]+" "+p2.getName());
+      System.out.println("Winner(s) "+model.getVictoryType()+" : "+winners);
+      System.out.println(p1.getName()+" "+wins[0]+"-"+wins[1]+" "+p2.getName());
     }
   }
 

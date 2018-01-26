@@ -25,14 +25,14 @@ public abstract class Move
 	
 	public final void resolve()
 	{
-	  try
-	  {
+	/*  try
+	  {*/
 	    doResolve();
-	  }
+	/*  }
     catch (GameOverException ex)
     {
       player.getGameModel().setGameOver(ex.getWinners(), ex.getVictoryType());
-    }
+    }*/
 	  if (player.getGameModel().isMain())
 	  {
 	    GameViewer.getViewer().modelChanged(player.getGameModel());

@@ -18,7 +18,15 @@ public class Mapmaking extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        return null;
+        if (das.getNumberOfResolvedMoves()>0)
+        {
+          ((MapMakingActivationStatus)cas).cardTransferred=true;
+          return null;
+        }
+        List<Card> p1cards=das.getAffectedPlayer().getFilteredCards(CardLocation.SCORE_PILE, new CardPeriodFilter(Period.ONE));
+        if (p1cards.isEmpty()) return null;
+        else return new PlayerInteraction(das.getAffectedPlayer(), 
+                                          TransferCard.getAllTransferCardMoves(p1cards, das.getAffectedPlayer(), CardLocation.SCORE_PILE, cas.getActivatingPlayer(), CardLocation.SCORE_PILE));
       }
     });
 
@@ -27,8 +35,32 @@ public class Mapmaking extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        if (((MapMakingActivationStatus)cas).cardTransferred)
+        {
+          DrawCard draw=new DrawCard(das.getAffectedPlayer(), Period.ONE);
+          draw.resolve();
+          new ScoreCard(das.getAffectedPlayer(), draw.getCard()).resolve();
+        }
         return null;
       }
     });
   }
+
+  @Override
+  protected CardActivationStatus buildActivationStatus(Player activatingPlayer)
+  {
+    return new MapMakingActivationStatus(activatingPlayer, this);
+  }
+  
+  
+}
+
+class MapMakingActivationStatus extends CardActivationStatus
+{
+  boolean cardTransferred=false;
+  
+  public MapMakingActivationStatus(Player activatingPlayer, Card card)
+  {
+    super(activatingPlayer, card);
+  }  
 }

@@ -18,7 +18,28 @@ public class Currency extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        return null;
+        if (!das.getAffectedPlayer().getHand().isEmpty() && ((das.getLastResolvedMove()==null) || !das.getLastResolvedMove().isPass()))
+        {
+          List<Move> moves=RecycleCard.getAllRecycleCardMoves(das.getAffectedPlayer(), CardLocation.HAND);
+          moves.add(new Pass(das.getAffectedPlayer()));
+          return new PlayerInteraction(das.getAffectedPlayer(), moves);
+        }
+        else
+        {
+          List<Move> recycles=das.getAllResolvedMoves(RecycleCard.class);
+          Set<Period> periods=new HashSet<>();
+          for (Move move : recycles)
+          {
+            periods.add(((RecycleCard)move).getCard().getPeriod());
+          }
+          for (int i=0;i<periods.size();i++)
+          {
+            DrawCard draw=new DrawCard(das.getAffectedPlayer(), Period.TWO);
+            draw.resolve();
+            new ScoreCard(das.getAffectedPlayer(), draw.getCard()).resolve();
+          }
+          return null;
+        }
       }
     });
   }

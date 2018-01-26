@@ -31,21 +31,25 @@ public class CanalBuilding extends Card
         else
         {
           if (das.getLastResolvedMove().isPass()) return null;
+          
           Period highestInHand=das.getAffectedPlayer().getHighestPeriod(CardLocation.HAND);
+          List<Move> moveToScore=new ArrayList<>();
           if (highestInHand!=null)
           {
-            List<Move> moveToScore=TransferCard.getAllTransferCardMoves(das.getAffectedPlayer().getFilteredCards(CardLocation.HAND, new CardPeriodFilter(highestInHand)), 
+            moveToScore=TransferCard.getAllTransferCardMoves(das.getAffectedPlayer().getFilteredCards(CardLocation.HAND, new CardPeriodFilter(highestInHand)), 
                                                                         das.getAffectedPlayer(), CardLocation.HAND, das.getAffectedPlayer(), CardLocation.SCORE_PILE);
-            Move.resolveAll(moveToScore);
-          }
+          }          
           
           Period highestInScore=das.getAffectedPlayer().getHighestPeriod(CardLocation.SCORE_PILE);
+          List<Move> moveToHand=new ArrayList<>();
           if (highestInScore!=null)
           {
-            List<Move> moveToHand=TransferCard.getAllTransferCardMoves(das.getAffectedPlayer().getFilteredCards(CardLocation.SCORE_PILE, new CardPeriodFilter(highestInHand)), 
-                                                                       das.getAffectedPlayer(), CardLocation.SCORE_PILE, das.getAffectedPlayer(), CardLocation.HAND);
-            Move.resolveAll(moveToHand);
+            moveToHand=TransferCard.getAllTransferCardMoves(das.getAffectedPlayer().getFilteredCards(CardLocation.SCORE_PILE, new CardPeriodFilter(highestInHand)), 
+                                                                       das.getAffectedPlayer(), CardLocation.SCORE_PILE, das.getAffectedPlayer(), CardLocation.HAND);            
           }
+          
+          Move.resolveAll(moveToScore);
+          Move.resolveAll(moveToHand);
           return null;
         }      
       }

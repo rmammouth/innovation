@@ -100,6 +100,11 @@ public class DogmaActivationStatus
     return resolvedMoves.peekLast();
   }
   
+  public int getNumberOfResolvedMoves()
+  {
+    return resolvedMoves.size();
+  }
+  
   public int getNumberOfResolvedMoves(Class clazz)
   {
     int nbr=0;
@@ -108,6 +113,19 @@ public class DogmaActivationStatus
       if (clazz.isAssignableFrom(move.getClass())) nbr++;
     }
     return nbr;
+  }
+  
+  public List<Move> getAllResolvedMoves(Class clazz)
+  {
+    List<Move> moves=new ArrayList<>();
+    for (Move move : resolvedMoves)
+    {
+      if (clazz.isAssignableFrom(move.getClass()))
+      {
+        moves.add(move);
+      }
+    }
+    return moves;
   }
 
   public DogmaActivationStatus cloneStatus(GameModel cloneModel, CardActivationStatus cloneCAS)

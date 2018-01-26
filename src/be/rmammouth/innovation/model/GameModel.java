@@ -337,7 +337,7 @@ public class GameModel
     return 8-players.length;
   }
   
-  public void gameOverByLastPileEmpty()
+  public void gameOverByLastPileEmpty() throws GameOverException
   {
     int maxPoints=-1;  //point = (score*10)+domination
     List<Player> winners=new ArrayList<>();

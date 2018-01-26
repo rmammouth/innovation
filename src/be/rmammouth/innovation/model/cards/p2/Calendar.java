@@ -18,6 +18,13 @@ public class Calendar extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        if (das.getAffectedPlayer().getScorePile().getSize()>das.getAffectedPlayer().getHand().size())
+        {
+          for (int i=0;i<2;i++)
+          {
+            new DrawCard(das.getAffectedPlayer(), Period.THREE).resolve();
+          }
+        }
         return null;
       }
     });

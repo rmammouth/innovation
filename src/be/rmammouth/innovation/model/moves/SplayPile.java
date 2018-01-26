@@ -35,6 +35,11 @@ public class SplayPile extends Move
     player.getCardsPile(color).setSplaying(splaying);
   }
   
+  public static List<Move> getAllSplayablePileMoves(Player player, Splaying splaying)
+  {
+    return getSplayPileMoves(player, player.getSplayableColors(splaying), splaying);
+  }
+  
   public static List<Move> getSplayPileMoves(Player player, List<Color> colors, Splaying splaying)
   {
     List<Move> moves=new ArrayList<>();

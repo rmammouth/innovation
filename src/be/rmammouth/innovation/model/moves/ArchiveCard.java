@@ -28,7 +28,10 @@ public class ArchiveCard extends CardMove
   {
     player.getGameModel().log(player.getName()+" has archived "+card.getLabelPrefixedWithPeriod());
     player.removeFromHand(card);
-    player.getCardsPile(card.getColor()).archive(card);
+    if (card.getColor()!=null)
+    {
+      player.getCardsPile(card.getColor()).archive(card);
+    }
   }
   
   public static List<Move> getAllArchiveCardMoves(Player player)
