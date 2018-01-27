@@ -18,6 +18,9 @@ public class Engineering extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        List<Card> topTowerCards=das.getAffectedPlayer().getFilteredCards(CardLocation.BOARD, new CardResourceFilter(Resource.TOWER));
+        List<Move> moves=TransferCard.getAllTransferCardMoves(topTowerCards, das.getAffectedPlayer(), CardLocation.BOARD, cas.getActivatingPlayer(), CardLocation.SCORE_PILE);
+        Move.resolveAll(moves);
         return null;
       }
     });
@@ -27,7 +30,13 @@ public class Engineering extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
-        return null;
+        if (das.getNumberOfResolvedMoves()==0)
+        {
+          if (das.getAffectedPlayer().getCardsPile(Color.RED).getSplaying()==Splaying.LEFT) return null;        
+          else return new PlayerInteraction(das.getAffectedPlayer(), new SplayPile(das.getAffectedPlayer(), Color.RED, Splaying.LEFT),
+                                                                     new Pass(das.getAffectedPlayer()));
+        }
+        else return null;
       }
     });
   }

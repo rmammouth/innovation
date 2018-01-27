@@ -12,6 +12,7 @@ public class Achievements
   { 
     register(new Empire());
     register(new Monument());
+    register(new World());
   }
   
   private static void register(SpecialAchievement specialAchievement)

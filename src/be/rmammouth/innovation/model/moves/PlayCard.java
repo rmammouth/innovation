@@ -12,9 +12,17 @@ import be.rmammouth.innovation.model.*;
  */
 public class PlayCard extends ActionMove
 {
+  private CardLocation location=CardLocation.HAND;
+  
   public PlayCard(Player player, Card card)
   {
   	super(player,card);
+  }
+  
+  public PlayCard(Player player, Card card, CardLocation location)
+  {
+    super(player,card);
+    this.location=location;
   }
   
 	@Override
@@ -26,22 +34,32 @@ public class PlayCard extends ActionMove
 	@Override
 	protected boolean doResolveAction()
 	{
-	  player.getGameModel().log(player.getName()+" puts "+card.getLabelPrefixedWithPeriod()+" into play");
-		player.putCardInPlay(card);		
+	  player.getGameModel().log(player.getName()+" puts "+card.getLabelPrefixedWithPeriod()+" into play from his "+location);
+		player.putCardInPlay(card, location);
 		return true;
 	}
 	
 	public static List<Move> getAllPlayableCardMoves(Player player)
 	{
-		return getPlayCardMoves(player, player.getHand());
+		return getAllPlayableCardMoves(player, CardLocation.HAND);
 	}
+	
+	public static List<Move> getAllPlayableCardMoves(Player player, CardLocation location)
+  {
+    return getPlayCardMoves(player, player.getCards(location), location);
+  }
 	
 	public static List<Move> getPlayCardMoves(Player player, List<Card> cards)
   {
-	  List<Move> moves=new ArrayList<>();
+	  return getPlayCardMoves(player, cards, CardLocation.HAND);
+  }
+	
+	public static List<Move> getPlayCardMoves(Player player, List<Card> cards, CardLocation location)
+  {
+    List<Move> moves=new ArrayList<>();
     for (Card card : cards)
     {
-      moves.add(new PlayCard(player, card));  
+      moves.add(new PlayCard(player, card, location));  
     }
     return moves;
   }
@@ -49,6 +67,6 @@ public class PlayCard extends ActionMove
   @Override
   public Move cloneMove(GameModel cloneModel)
   {
-    return new PlayCard(cloneModel.getPlayers()[player.getIndex()], card);
+    return new PlayCard(cloneModel.getPlayers()[player.getIndex()], card, location);
   }
 }

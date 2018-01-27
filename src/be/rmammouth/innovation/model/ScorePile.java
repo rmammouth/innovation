@@ -55,6 +55,11 @@ public class ScorePile
     return cards.size();
   }
   
+  public boolean isCardPresent(Card card)
+  {
+    return cards.contains(card);
+  }
+  
   private void sortCards()
   {
     Collections.sort(cards, new Comparator<Card>()

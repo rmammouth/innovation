@@ -37,6 +37,17 @@ public class SimpleEvalAIController extends TreeExploringAIController
 
   private float evalGameModelForPlayer(GameModel model, Player player)
   {
-    return (player.getDominations().size()*100)+player.getScorePile().getScore();
+    int eval=0;
+    eval+=player.getDominations().size()*100;
+    eval+=player.getScorePile().getScore();
+  /*  eval+=periodAsFloat(player.getHighestActivePeriod()) * periodAsFloat(player.getHighestActivePeriod());
+    eval+=periodAsFloat(player.getHighestPeriod(CardLocation.HAND));*/
+    return eval;
+  }
+  
+  private static float periodAsFloat(Period period)
+  {
+    if (period==null) return 0;
+    else return period.asInt();
   }
 }

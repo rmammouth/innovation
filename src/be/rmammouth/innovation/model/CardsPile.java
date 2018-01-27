@@ -83,4 +83,9 @@ public class CardsPile
     }
     return clone;
   }
+
+  public boolean isCardPresent(Card card)
+  {
+    return cards.contains(card);
+  }
 }

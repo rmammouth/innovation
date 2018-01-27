@@ -18,6 +18,20 @@ public class Alchemy extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        int cardsToDraw=cas.getResourceCount(das.getAffectedPlayer(), Resource.TOWER) / 3;
+        boolean redCardDrawn=false;
+        for (int i=0;i<cardsToDraw;i++)
+        {
+          DrawCard draw=new DrawCard(das.getAffectedPlayer(), Period.FOUR);
+          draw.resolve();
+          Color colorDrawn=draw.getCard().getColor();
+          if ((colorDrawn!=null) && (colorDrawn==Color.RED)) redCardDrawn=true;
+        }
+        if (redCardDrawn)
+        {
+          //return everything
+          Move.resolveAll(RecycleCard.getAllRecycleCardMoves(das.getAffectedPlayer(), CardLocation.HAND));
+        }
         return null;
       }
     });
@@ -27,6 +41,22 @@ public class Alchemy extends Card
       @Override
       public PlayerInteraction getNextPlayerInteraction(CardActivationStatus cas, DogmaActivationStatus das)
       {
+        if (das.getResolutionStep()==0)
+        {
+          das.setResolutionStep(1);
+          if (!das.getAffectedPlayer().getHand().isEmpty())
+          {
+            return new PlayerInteraction(das.getAffectedPlayer(), PlayCard.getAllPlayableCardMoves(das.getAffectedPlayer()));
+          }
+        }
+        if (das.getResolutionStep()==1)
+        {
+          das.setResolutionStep(2);
+          if (!das.getAffectedPlayer().getHand().isEmpty())
+          {
+            return new PlayerInteraction(das.getAffectedPlayer(), ScoreCard.getAllScoreFromHandCardMoves(das.getAffectedPlayer()));
+          }
+        }
         return null;
       }
     });

@@ -28,8 +28,13 @@ public class ScoreCard extends CardMove
   
   public static List<Move> getAllScoreFromHandCardMoves(Player player)
   {
+    return getAllScoreCardMoves(player, player.getHand());
+  }
+  
+  public static List<Move> getAllScoreCardMoves(Player player, List<Card> cards)
+  {
     List<Move> moves=new ArrayList<>();
-    for (Card card : player.getHand())
+    for (Card card : cards)
     {
       moves.add(new ScoreCard(player, card));  
     }

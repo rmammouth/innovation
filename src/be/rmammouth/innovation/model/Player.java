@@ -199,14 +199,21 @@ public class Player
   
   public void putCardInPlay(Card card)
   {
-    if (hand.remove(card))
+    putCardInPlay(card, CardLocation.HAND);
+  }
+  
+  public void putCardInPlay(Card card, CardLocation location)
+  {
+    if (isCardPresent(card, location))
     {
+      removeCard(card, location);
       if (card.getColor()!=null)
       {
         board.get(card.getColor()).addCardOnTop(card);
       }
     }
-    else throw new IllegalArgumentException(name+" doesn't have the card "+card.getLabel()+ " in his hand!");
+    else throw new IllegalArgumentException(name+" doesn't have the card "+card.getLabel()+ " in his "+location.getLabel());
+    
   }
   
   /**
@@ -306,6 +313,20 @@ public class Player
       getScorePile().removeCard(card);
       break;
     }    
+  }
+  
+  public boolean isCardPresent(Card card, CardLocation location)
+  {
+    switch (location)
+    {
+    case HAND:
+      return hand.contains(card);
+    case BOARD:
+      return getCardsPile(card.getColor()).isCardPresent(card);
+    case SCORE_PILE:
+      return getScorePile().isCardPresent(card);
+    }
+    return false;
   }
 
   @Override
