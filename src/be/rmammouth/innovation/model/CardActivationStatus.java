@@ -21,10 +21,7 @@ public class CardActivationStatus
   {
     this.activatingPlayer=activatingPlayer;
     this.card=card;
-    for (Player player : activatingPlayer.getGameModel().getPlayers())
-    {
-      counts.put(player, player.getResourcesCount());
-    }
+    this.counts=activatingPlayer.getGameModel().getResourcesCounts();
     itrDogmas=card.getDogmas().listIterator();
     freeDraw=false;
   }

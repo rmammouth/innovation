@@ -74,6 +74,12 @@ public class GameModel
 
 	public void setCurrentTurn(Player currentTurn)
 	{
+	//notify controllers that turn is over (for AI learning)
+    for (Player player : players)
+    {
+      player.getController().turnOver();
+    }
+    
 		this.currentTurnPlayer = currentTurn;
 		this.currentTurnActionsLeft=getAvailableActionsCount(currentTurnPlayer);
 	}
@@ -220,11 +226,22 @@ public class GameModel
 	{
 		this.currentState = currentState;
 	}
+	
+	public Map<Player, ResourcesCount> getResourcesCounts()
+	{
+	  Map<Player, ResourcesCount> counts=new HashMap<>();
+	  for (Player player : players)
+    {
+      counts.put(player, player.getResourcesCount());
+    }
+	  return counts;
+	}
 
 	public void startNewGame(Player[] players)
   {
 	  this.main=true;
   	this.players=players;
+  	Cards.randomizeGameIds();
   	
   	int index=0;
   	for (Player player : players)
@@ -257,6 +274,12 @@ public class GameModel
   	
   	//special achievements
   	specialAchievements.addAll(Achievements.getAll());
+  	
+    //notify controllers that game is starting
+    for (Player player : players)
+    {
+      player.getController().gameStarting();
+    }
   	
   	//deal first hand
   	for (Player player : players)
@@ -304,7 +327,7 @@ public class GameModel
     {
       turnNumber++;
     }    
-    setCurrentTurn(players[i]);
+    setCurrentTurn(players[i]);    
   }
   
   public void removeAchievement(SpecialAchievement achievement)
@@ -377,6 +400,12 @@ public class GameModel
   {
     this.winners=winners;
     this.victoryType=victoryType;
+    
+    //notify controllers that game is over (for AI learning)
+    for (Player player : players)
+    {
+      player.getController().gameOver();
+    }
   }
 
   public GameModel cloneForPlayer(Player player)

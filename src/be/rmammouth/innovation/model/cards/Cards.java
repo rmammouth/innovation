@@ -19,7 +19,9 @@ import be.rmammouth.innovation.view.*;
 
 public class Cards
 {  
-  private static Map<Integer, Card> directoryById=new HashMap<>();
+  private static Random random=new Random();
+  private static List<Card> list=new ArrayList<>();
+  private static Map<Integer, Card> directoryByGameId=new HashMap<>();
   private static Map<String, Card> directoryByName=new HashMap<>();
   
   static
@@ -135,13 +137,29 @@ public class Cards
   
   private static void register(Card card)
   {
-    directoryById.put(card.getId(), card);
+    list.add(card);
   	directoryByName.put(card.getName(), card);
   }
   
-  public static Card get(int id)
+  public static void randomizeGameIds()
   {
-    return directoryById.get(id);
+    directoryByGameId.clear();
+    for (Card card : directoryByName.values())
+    {
+      int gameId;
+      do
+      {
+        gameId=random.nextInt();
+      }
+      while (directoryByGameId.get(gameId)!=null);
+      directoryByGameId.put(gameId, card);
+      card.setGameId(gameId);
+    }
+  }
+  
+  public static Card getByGameId(int id)
+  {
+    return directoryByGameId.get(id);
   }
   
   public static Card get(String name)
@@ -149,8 +167,8 @@ public class Cards
   	return directoryByName.get(name);
   }
   
-  public static Collection<Card> getAll()
+  public static List<Card> getAll()
   {
-  	return directoryByName.values();
+  	return Collections.unmodifiableList(list);
   }
 }

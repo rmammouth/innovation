@@ -1,4 +1,6 @@
-package be.rmammouth.innovation.model;
+package be.rmammouth.innovation.model.achievements;
+
+import be.rmammouth.innovation.model.*;
 
 public class World extends SpecialAchievement
 {

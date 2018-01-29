@@ -12,11 +12,14 @@ public class SimulateGames
     
     while(true)
     {
+//      GameViewer.setViewer(new ConsoleViewer());
       GameViewer.setViewer(new NullViewer());
       GameModel model=new GameModel();
   
-      Player p1=new Player("RandomCPU", new RandomAIController());
-      Player p2=new Player("SimpleEvalCPU", new SimpleEvalAIController());
+//      Player p1=new Player("RandomAI", new RandomAIController());
+      Player p1=new Player("NeuralNetworkAI", new NeuralNetworkAIController());
+    //  Player p2=new Player("SimpleEvalAI", new SimpleEvalAIController());
+      Player p2=new Player("RandomAI", new RandomAIController());
   
       Player[] players=new Player[]{p1, p2};
       model.startNewGame(players);

@@ -24,4 +24,16 @@ public abstract class PlayerController
 	}
   
   public abstract Move getNextMove(GameModel model, List<? extends Move> availableMoves);
+  
+  public void gameStarting()
+  {  
+  }
+  
+  public void turnOver()
+  {    
+  }
+  
+  public void gameOver()
+  {    
+  }
 }

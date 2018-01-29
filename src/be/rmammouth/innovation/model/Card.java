@@ -12,13 +12,18 @@ import be.rmammouth.innovation.model.cards.*;
  *
  */
 public class Card implements Dominable 
-{
-  private static Random random=new Random();
+{  
+  private static int nextCardId=0;
+  
+  /**
+   * Id that stays the same for each different game (null for unrevealed card)
+   */
+  private Integer cardId;
   
   /**
    * Id randomized at each game and used to match unrevealed cards between client and server
    */
-  private int id;
+  private int gameId;
   private String name;
   private String label;
   private Period period;
@@ -26,21 +31,15 @@ public class Card implements Dominable
   private Map<ResourceLocation, Resource> resources=new EnumMap<>(ResourceLocation.class);
   private List<Dogma> dogmas=new ArrayList<>();
   
-  public Card(int id, Period period)
+  public Card(int gameId, Period period)
   {
-    this.id=id;
+    this.gameId=gameId;
     this.period=period;
   }  
 
   protected Card(String name, Period period, Color color, Resource topLeft, Resource bottomLeft, Resource bottomCentre, Resource bottomRight)
   {
-    //generate a random (and unused) id
-    do
-    {
-      id=random.nextInt();
-    }
-    while (Cards.get(id)!=null);
-    
+    this.cardId=nextCardId++;
   	this.name=name;
   	this.color=color;
   	this.period=period;
@@ -50,11 +49,21 @@ public class Card implements Dominable
   	resources.put(ResourceLocation.BOTTOM_RIGHT, bottomRight);
   }
   
-  public int getId()
+  public Integer getCardId()
   {
-    return id;
+    return cardId;
+  }
+
+  public int getGameId()
+  {
+    return gameId;
   }
   
+  public void setGameId(int gameId)
+  {
+    this.gameId = gameId;
+  }
+
   public String getName()
 	{
     if (name==null) return "???";
@@ -204,7 +213,7 @@ public class Card implements Dominable
   
   public Card cloneCard()
   {
-    Card clone=new Card(id, period);
+    Card clone=new Card(gameId, period);
     return clone;
   }
 
