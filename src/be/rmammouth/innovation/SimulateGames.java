@@ -10,9 +10,9 @@ public class SimulateGames
   { 
     int[] wins=new int[]{0,0};
     
-    while(true)
+    for (int i=0;i<1000;i++)
     {
-//      GameViewer.setViewer(new ConsoleViewer());
+ //     GameViewer.setViewer(new ConsoleViewer());
       GameViewer.setViewer(new NullViewer());
       GameModel model=new GameModel();
   
@@ -40,6 +40,7 @@ public class SimulateGames
       System.out.println("Winner(s) "+model.getVictoryType()+" : "+winners);
       System.out.println(p1.getName()+" "+wins[0]+"-"+wins[1]+" "+p2.getName());
     }
+    NeuralNetworkAIController.saveNetwork();
   }
 
 }

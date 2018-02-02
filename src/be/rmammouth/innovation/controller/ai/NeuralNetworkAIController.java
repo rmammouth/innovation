@@ -36,10 +36,10 @@ public class NeuralNetworkAIController extends TreeExploringAIController
     }
     else
     {
-      mlp=new MultiLayerPerceptron(TransferFunctionType.TANH, 4, 2, 2);
-      mlp.setLearningRule(new TDLearningRule(0.95));
+      mlp=new MultiLayerPerceptron(TransferFunctionType.TANH, 8, 1);
+      mlp.setLearningRule(new TDLearningRule(0.7));
       ((IterativeLearning)mlp.getLearningRule()).setMaxIterations(1);
-      ((IterativeLearning)mlp.getLearningRule()).setLearningRate(1);
+      ((IterativeLearning)mlp.getLearningRule()).setLearningRate(0.1);
       ((SupervisedLearning)mlp.getLearningRule()).setBatchMode(true);
    /*   MomentumBackpropagation lr=new MomentumBackpropagation();
      lr.setLearningRate(0.5);
@@ -57,24 +57,34 @@ public class NeuralNetworkAIController extends TreeExploringAIController
   public void gameStarting()
   {
     dataSet.clear();
-    double[] output=new double[player.getGameModel().getPlayers().length];
-    for (int i=0;i<output.length;i++) output[i]=1.0/output.length;
-   // double[] output=new double[]{0.5};
-    teachNetwork(player.getGameModel(), output);
+ //   double[] output=new double[player.getGameModel().getPlayers().length];
+   // for (int i=0;i<output.length;i++) output[i]=1.0/output.length;
+    double[] output=new double[]{0.5};
+    teachNetwork(player.getGameModel(), output, true);
   }
 
   @Override
   public void turnOver()
   {
-    teachNetwork(player.getGameModel(), null);
+    teachNetwork(player.getGameModel(), null, true);
   }
 
   @Override
   public void gameOver()
   {
     double[] output=getGameOverData(player.getGameModel());
-    teachNetwork(player.getGameModel(), output);    
+    teachNetwork(player.getGameModel(), output, true);    
   }
+  
+  private void teachNetwork(GameModel model, double[] expectedOutput, boolean learn)
+  {
+    double[] input=getNetworkInput(model);    
+    if (expectedOutput==null) expectedOutput=mlp.getOutput();
+
+    DataSetRow row=new DataSetRow(input, expectedOutput);
+    dataSet.add(0, row);
+    if (learn) mlp.learn(dataSet);
+  }  
   
   @Override
   public float evalGameModel(GameModel model)
@@ -83,9 +93,10 @@ public class NeuralNetworkAIController extends TreeExploringAIController
     mlp.setInput(input);
     mlp.calculate();
     double[] output=mlp.getOutput();
-    double sum=0;
+    return (float)output[0];
+  /*  double sum=0;
     for (int i=0;i<output.length;i++) sum+=output[i];
-    return (float)(output[0]/sum);
+    return (float)(output[0]/sum);*/
   }
   
   private double[] getNetworkInput(GameModel model)
@@ -93,9 +104,9 @@ public class NeuralNetworkAIController extends TreeExploringAIController
     double[] input=new double[mlp.getInputsCount()];
     int p=0;
     Map<Player, ResourcesCount> resourceCounts=model.getResourcesCounts();    
-/*
+
     //game over?
-    input[p++]=normalize(model.isGameOver());
+/*    input[p++]=normalize(model.isGameOver());
     
     //period domination available
     for (Period period : Period.values())
@@ -110,13 +121,14 @@ public class NeuralNetworkAIController extends TreeExploringAIController
     for (SpecialAchievement sa : Achievements.getAll())
     {
       input[p++]=normalize(model.isSpecialAchievementAvailable(sa));
-    }
-    */
+    }*/
+    
     //this player
-    p=fillWithPlayer(input, p, player, resourceCounts);
+    Player playerModel=model.getPlayers()[player.getIndex()];
+    p=fillWithPlayer(input, p, playerModel, resourceCounts);
     
     //opponents
-    Iterator<Player> opponents=player.getGameModel().getOtherPlayersIterator(player);
+    Iterator<Player> opponents=playerModel.getGameModel().getOtherPlayersIterator(playerModel);
     while (opponents.hasNext())
     {
       p=fillWithOpponent(input, p, opponents.next());
@@ -126,20 +138,10 @@ public class NeuralNetworkAIController extends TreeExploringAIController
     
     return input;
   }
-  
-  private void teachNetwork(GameModel model, double[] expectedOutput)
-  {
-    double[] input=getNetworkInput(model);    
-    if (expectedOutput==null) expectedOutput=mlp.getOutput();
-
-    DataSetRow row=new DataSetRow(input, expectedOutput);
-    dataSet.add(0, row);
-    mlp.learn(dataSet);
-  }  
 
   private int fillWithPlayer(double[] input, int p, Player player, Map<Player, ResourcesCount> resourceCounts)
   {
-   /* List<Card> activeCards=player.getActiveCardsOnBoard();
+ /*   List<Card> activeCards=player.getActiveCardsOnBoard();
     for (Card card : Cards.getAll())
     {
       input[p++]=normalize(player.getHand().contains(card));
@@ -148,9 +150,9 @@ public class NeuralNetworkAIController extends TreeExploringAIController
     }*/
     input[p++]=normalize(player.getDominations().size(), 0,  player.getGameModel().getDominationsCountNeededToWin());
     input[p++]=normalize(player.getScorePile().getScore(), 0, 50.0);
- /*   input[p++]=normalize(player.getHighestPeriod(CardLocation.HAND));
-    input[p++]=normalize(player.getHighestPeriod(CardLocation.BOARD));*/
-    /*
+    input[p++]=normalize(player.getHighestPeriod(CardLocation.HAND));
+    input[p++]=normalize(player.getHighestPeriod(CardLocation.BOARD));
+  /*  
     for (Resource resource : Resource.values())
     {
       int bestCount=0;
@@ -183,15 +185,15 @@ public class NeuralNetworkAIController extends TreeExploringAIController
     }*/
     input[p++]=normalize(player.getDominations().size(), 0,  player.getGameModel().getDominationsCountNeededToWin());
     input[p++]=normalize(player.getScorePile().getScore(), 0, 50.0);
-  /*  input[p++]=normalize(player.getHighestPeriod(CardLocation.HAND));
-    input[p++]=normalize(player.getHighestPeriod(CardLocation.BOARD));*/
+    input[p++]=normalize(player.getHighestPeriod(CardLocation.HAND));
+    input[p++]=normalize(player.getHighestPeriod(CardLocation.BOARD));
     
     return p;
   }
   
   private double[] getGameOverData(GameModel model)
   {
-    double[] output=new double[player.getGameModel().getPlayers().length];
+ /*   double[] output=new double[player.getGameModel().getPlayers().length];
     List<Player> winners=model.getWinners();
     if (winners.contains(player)) output[0]=1.0/winners.size();
     else output[0]=0;
@@ -205,12 +207,21 @@ public class NeuralNetworkAIController extends TreeExploringAIController
       else output[idx]=0;
       idx++;
     }  
-    return output;
+    return output;*/
+    
+    List<Player> winners=model.getWinners();
+    if (winners.contains(player)) return new double[]{1};
+    else return new double[]{0};
   }
   
   static private File getFile()
   {
     return new File("data/nnet/eval2.nnet");
+  }
+  
+  public static void saveNetwork()
+  {
+    mlp.save(getFile().getAbsolutePath());
   }
   
   static private double normalize(boolean b)

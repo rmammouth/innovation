@@ -15,7 +15,8 @@ public class Innovation
 	  
 		Player p1=new Player("Seb", new GUIController(((GUIViewer)GameViewer.getViewer()).getInputPanel()));
 //	  Player p1=new Player("RandomCPU", new RandomAIController());
-	  Player p2=new Player("SimpleEvalCPU", new SimpleEvalAIController());
+//	  Player p2=new Player("SimpleEvalCPU", new SimpleEvalAIController());
+		Player p2=new Player("NeuralNetCPU", new NeuralNetworkAIController());
 
 //		((GUIViewer)GameViewer.getViewer()).setPointOfView(p1);
 		Player[] players=new Player[]{p1, p2};
